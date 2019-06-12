@@ -1,14 +1,14 @@
-# hackathon-starter
+# hackathon-red-jaguars
 create-react-app + expressjs + mongodb + docker-compose!!
 
 [![Node.JS Version](https://img.shields.io/badge/node.js-12.4.0-00ADD8.svg?style=flat)](https://nodejs.org/en/) 
-[![Code Coverage](https://img.shields.io/codecov/c/github/homedepot/hackathon-starter.svg?style=flat)](https://codecov.io/gh/homedepot/hackathon-starter)
-[![Build Status](https://travis-ci.org/homedepot/hackathon-starter.svg?branch=master)](https://travis-ci.org/homedepot/hackathon-starter)
+[![Code Coverage](https://img.shields.io/codecov/c/github/homedepot/hackathon-red-jaguars.svg?style=flat)](https://codecov.io/gh/homedepot/hackathon-red-jaguars)
+[![Build Status](https://travis-ci.org/homedepot/hackathon-red-jaguars.svg?branch=master)](https://travis-ci.org/homedepot/hackathon-red-jaguars)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat)](LICENSE)
 
 ## Quick Setup
 
-This starter application uses docker-compose to get the entire environment setup off of the ground.
+This red-jaguars application uses docker-compose to get the entire environment setup off of the ground.
 
 The tech stack is: 
 

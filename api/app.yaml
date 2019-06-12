@@ -1,4 +1,4 @@
-service: starter-api
+service: red-jaguars-api
 runtime: custom
 env: flex
 
