@@ -14,7 +14,8 @@ let ChildWish = mongoose.Schema({
   audio: String,
   video: String,
   photo: String,
-  date: String
+  date: String,
+  gender: String
 })
 
 let Wish = mongoose.model('Wish', ChildWish, 'wish')

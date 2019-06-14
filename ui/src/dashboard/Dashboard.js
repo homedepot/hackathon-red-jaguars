@@ -41,7 +41,6 @@ const Dashboard = () => {
     setIsLoading(true)
     Axios.get(`${expressDomain}/wish/findAll`, {})
       .then(response => {
-        debugger
         setApiData(response.data)
         setIsLoading(false)
       })
@@ -50,6 +49,8 @@ const Dashboard = () => {
         console.log(error)
       })
   }, [])
+
+  
 
   return (
     <div className="container-fluid" style={{ paddingLeft: '10rem' }}>
@@ -84,7 +85,20 @@ const Dashboard = () => {
                 className="form-check-input"
                 type="checkbox"
                 id="inlineCheckbox1"
-                value="option1"
+                key={x.value}
+                value={x.value}
+                checked={x.checked}
+                onChange={(x)=>{
+                  setCheckBoxes( checkBoxes.map(z=> 
+                    {
+                      if(z.value===x.currentTarget.value)
+                      {
+                        z.checked = !z.checked; 
+                      }
+                      return z;
+                    }))
+                  }
+                }
               />
               <label className="form-check-label" htmlFor="inlineCheckbox1">
                 {x.label}
@@ -109,7 +123,7 @@ const Dashboard = () => {
           <div className="container-fluid">
             {apiData.map(x => (
               <div className="row" style={{padding:"10px 0px 10px 0px", borderBottom:"1px solid black"}}>
-                <div className="col-1" style={{backgroundImage:'url('+icn_male+')',height:"90px",backgroundSize:"cover"}}>
+                <div className="col-1" style={{backgroundImage:'url('+(x.gender ==='male' ? icn_male : icn_female)+')',height:"90px",backgroundSize:"cover"}}>
 
                 <label style={{padding:"5px 0px 0px 5px", fontWeight:"bold",color:"white"}}>{moment(x.date).format('dddd')}</label><br/>
                   <div style={{ padding: '5px 5px 10px 20px' }}>
