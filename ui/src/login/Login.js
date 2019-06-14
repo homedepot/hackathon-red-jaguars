@@ -132,6 +132,7 @@ class Login extends Component {
             </form>
           </div>
         </div>
+        <a href= './dashboard'><p>GO HERE</p></a>
       </div>
     )
   }
