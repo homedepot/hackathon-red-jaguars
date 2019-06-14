@@ -57,47 +57,25 @@ router.get('/findAll', function(req, res, next) {
 })
 
 
-router.get('/findOneById/', function(req, res) {
+router.get('/findbyid/:id', function(req, res) {
   console.log('finding one by ID');
-  Wish.findOne(req.params.id)
+  Wish.findById(req.params.id)
     .then(wish => {
-      if(!wish) {
-        return res.status(404).send({
-          message: "wish not found with id " + req.params.id
-        });
-      }
-      res.send(wish);
+      if(!wish) { return res.status(404).end();}
+      return res.status(200)
     }).catch(err => {
-    if(err.kind === 'ObjectId') {
-      return res.status(404).send({
-        message: "wish not found with id " + req.params.id
-      });
-    }
-    return res.status(500).send({
-      message: "Error retrieving wish with id " + req.params.id
-    });
+    console.log(err)
   });
 });
 
-router.delete('/delete/', function(req, res) {
-  console.log('Deleting a wish by Id');
-  Wish.findOneAndDelete(req.params.id)
-    .then(wish => {
-      if(!wish) {
-        return res.status(404).send({
-          message: "wish not found with id " + req.params.id
-        });
-      }
-      res.send({message: "Wish successfully deleted"})
-    }).catch(err => {
-    if(err.kind === 'ObjectId' || err.name === 'NotFound') {
-      return res.status(404).send({
-        message: "Note not found with id " + req.params.noteId
-      });
+router.delete('/delete/:id', function(req, res) {
+  let id = req.params.id;
+  Wish.findOneAndRemove({_id: id}, function(err) {
+    if(err) {
+      console.log(err)
+      return res.status(500).send();
     }
-    return res.status(500).send({
-      message: "Error deleting wish with id " + req.params.id
-    });
+    return res.status(200).send();
   })
 })
 
