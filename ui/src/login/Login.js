@@ -60,79 +60,48 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <h1>Welcome to the Make-A-Wish Hackathon starter!!</h1>
-        <div className={'login-container'}>
-          <div>
-            <h2>Register</h2>
-            <form
-              className="registration-form"
-              onSubmit={this.createUser}
-              data-register-form
-            >
-              First Name:
-              <input
-                type="text"
-                data-register-first-name
-                onChange={event =>
-                  this.handleFormFieldChange('firstName', event)
-                }
-              />
-              Last Name:
-              <input
-                type="text"
-                data-register-last-name
-                onChange={event =>
-                  this.handleFormFieldChange('lastName', event)
-                }
-              />
-              Username:
-              <input
-                type="text"
-                data-register-username
-                onChange={event =>
-                  this.handleFormFieldChange('username', event)
-                }
-              />
-              Password:
-              <input
-                type="password"
-                data-register-password
-                onChange={event =>
-                  this.handleFormFieldChange('password', event)
-                }
-              />
-              <input type="submit" value="Submit!" />
+        <div class = "container">
+          <div class = "row">
+            <div class = "col-6">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">First Name</label>
+                <input type="string" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Last Name</label>
+                <input type="string" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="string" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></input>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-          </div>
-
-          <div>
-            <h2>Login</h2>
-            <form
-              className="login-form"
-              onSubmit={this.loginUser}
-              data-login-form
-            >
-              Username:{' '}
-              <input
-                type="text"
-                data-login-username
-                onChange={event =>
-                  this.handleFormFieldChange('username', event)
-                }
-              />
-              Password:{' '}
-              <input
-                type="password"
-                data-login-password
-                onChange={event =>
-                  this.handleFormFieldChange('password', event)
-                }
-              />
-              <input type="submit" value="Submit!" />
+            </div>
+            <div class = "col-6">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="string" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></input>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            </div>
           </div>
         </div>
-        <a href= './dashboard'><p>GO HERE</p></a>
       </div>
     )
   }
