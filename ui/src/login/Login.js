@@ -73,47 +73,47 @@ class Login extends Component {
                 <label for="exampleInputEmail1">First Name</label>
                 <input type="string" class="form-control"                 
                   onChange={event => this.handleFormFieldChange('firstName', event)
-                } id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                } data-register-first-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Last Name</label>
                 <input type="string" class="form-control"
                   onChange={event => this.handleFormFieldChange('lastName', event)
-                } id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                } data-register-last-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input type="string" class="form-control" id="exampleInputEmail1"                 
                   onChange={event => this.handleFormFieldChange('username', event)
-                }aria-describedby="emailHelp" placeholder="Enter email"></input>
+                } data-register-username aria-describedby="emailHelp" placeholder="Enter email"></input>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" 
                   onChange={event => this.handleFormFieldChange('password', event)
-                }id="exampleInputPassword1" placeholder="Password"></input>
+                } data-register-password id="exampleInputPassword1" placeholder="Password"></input>
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             </div>
             <div class = "col-6">
             <h3>Login</h3>
-            <form onSubmit={this.loginUser} data-register-form>
+            <form onSubmit={this.loginUser} data-login-form>
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input type="string" class="form-control"                 
                   onChange={event => this.handleFormFieldChange('username', event)
-                }id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                } data-login-username id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" 
                   onChange={event => this.handleFormFieldChange('password', event)
-                }id="exampleInputPassword1" placeholder="Password"></input>
+                } data-login-password id="exampleInputPassword1" placeholder="Password"></input>
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
