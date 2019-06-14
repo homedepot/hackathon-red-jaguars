@@ -7,26 +7,28 @@ let ChildWish = mongoose.Schema({
   age: String,
   homeTown: String,
   wishType: String,
+  gender: String,
   wishDate: String,
   illness: String,
   wishDetail: String,
   orgId: String,
   userId: String,
-  audio: String,
-  video: String,
-  photo: String
+  audio: Object,
+  video: Object,
+  photo: Object
 })
 
 let Wish = mongoose.model('Wish', ChildWish, 'wish')
 
 router.post('/create', function(req, res, next) {
   console.log('creating wish')
-  const { age, firstName, homeTown, wishType, wishDate, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
+  const { age, firstName, homeTown, wishType, gender, wishDate, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
   let newWish = new Wish({
     firstName: firstName,
     age: age,
     homeTown: homeTown,
     wishType: wishType,
+    gender: gender,
     wishDate: wishDate,
     illness: illness,
     wishDetail: wishDetail,
@@ -119,6 +121,7 @@ router.put('/update/', function(req, res) {
     homeTown: req.body.homeTown,
     wishType: req.body.wishType,
     wishDate: req.body.wishDate,
+    gender: req.body.gender,
     illness: req.body.illness,
     wishDetail: req.body.wishDetail,
     orgId: req.body.orgId,

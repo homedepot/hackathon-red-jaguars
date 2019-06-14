@@ -7,6 +7,7 @@ import WatchAuth from '../auth/WatchAuth'
 import Dashboard from '../dashboard/Dashboard';
 import NotFound from '../common/NotFound';
 import CreateWish from './wish/CreateWish'
+import PostCreate from './wish/PostCreate'
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
           <Route exact path="/landing" component={Landing} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/createWish" component={CreateWish} />
+          <Route exact path="/postWish" component={PostCreate} />
           <Route exact path="/" component={Login} />
+
           <Route path="/not-found" component={NotFound} />
           <Redirect to="/not-found"> </Redirect>
         </Switch>

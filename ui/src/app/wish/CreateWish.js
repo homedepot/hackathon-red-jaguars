@@ -4,6 +4,7 @@ import Astronaut from '../../images/Astronaut_Icon.png';
 import Telescope from '../../images/Telescope_Icon.png';
 import Alien from '../../images/Alien_Icon.png';
 import Rocket from '../../images/Rocket_Icon.png';
+import Galaxy from '../../images/Galaxy_Color.png';
 
 import Axios from "axios";
 
@@ -13,12 +14,16 @@ class CreateCampaign extends Component {
     this.state = {
       wishType:'',
       firstName: '',
+      photo: '',
+      audio: '',
+      video: '',
       age: '',
       wish: {
       "firstName": "",
       "age": "",
       "homeTown": "",
       "wishType": "",
+      "gender": "",
       "wishDate": "",
       "illness": "",
       "wishDetail": "",
@@ -51,6 +56,28 @@ class CreateCampaign extends Component {
     })
   }
 
+  onhandleChange = (e) => {
+    this.setState ({
+      photo: URL.createObjectURL(e.target.files[0])
+    })
+  }
+
+  onAudioUpload = (e) => {
+    this.setState ({
+      audio: URL.createObjectURL(e.target.files[0])
+    })
+  }
+
+  onVideoUpload = (e) => {
+    this.setState ({
+      video: URL.createObjectURL(e.target.files[0])
+    })
+  }
+
+  resetFile = e => {
+    e.target.value = null;
+  };
+
   saveWish = () => {
     let wish = this.state.wish;
     Axios.post('http://localhost:3002/wish/create', {
@@ -59,19 +86,21 @@ class CreateCampaign extends Component {
       homeTown: this.state.wish.homeTown,
       wishType: this.state.wish.wishType,
       wishDate: new Date(),
+      gender: 'boy',
       illness: this.state.wish.illness,
       wishDetail: this.state.wish.wishDetail,
       orgId: this.state.wish.orgId,
       userId: this.state.wish.userId,
-      audio: this.state.wish.audio,
-      video: this.state.wish.video,
-      photo: this.state.wish.photo
+      audio: this.state.audio,
+      video: this.state.video,
+      photo: this.state.photo
     })
       .then( () => {
           this.setState({
             wish: wish,
           })
         console.log(this.state.wish)
+        this.props.history.push('/postWish');
         }
       )
       .catch(function(error) {
@@ -86,19 +115,19 @@ class CreateCampaign extends Component {
           <tbody>
           <tr>
             <td>
-            <div>
-              <p>Hello!</p>
-              <p>Make A Wish</p>
+            <div className="sameLine">
+              <p className="head">Hello!  Make A Wish</p>
             </div>
             </td>
+            <span className="sameLine pullRight"><img className="imageBanner" src={Galaxy} alt="MEET Someone!"/></span>
           </tr>
           
           <tr>
             <td>
-              <p className="sameLine">My name is</p>
-              <input className="sameLine" type="text" name="firstName" placeholder="enter your name" value={this.state.wish.firstName}  onChange={ this.onChange }/>
-              <p className="sameLine"> and I am </p>
-              <input className="sameLine" type="text" name="age" placeholder="your age" value={this.state.wish.age}  onChange={ this.onChange }/>
+              <p className="sameLine pullLeft">My name is</p>
+              <input className="sameLine surroundSpace" type="text" name="firstName" placeholder="enter your name" value={this.state.wish.firstName}  onChange={ this.onChange }/>
+              <p className="sameLine pullLeft"> and I am </p>
+              <input className="sameLine surroundSpace" type="text" name="age" placeholder="your age" value={this.state.wish.age}  onChange={ this.onChange }/>
               <p className="sameLine"> years old!</p>
             </td>
           </tr>
@@ -109,16 +138,16 @@ class CreateCampaign extends Component {
                 <p>I wish to:</p>
                 <div>
                   <span className="spacing">
-                    <button name="GoSomewhere"><img src={Rocket} alt="GO Somewhere!" onClick={this.onClick} /></button>
+                    <button className="spacing bgYellow" name="GoSomewhere"><img src={Rocket} alt="GO Somewhere!" onClick={this.onClick} /></button>
                   </span>
                   <span className="spacing">
-                    <button><img src={Alien} alt="MEET Someone!" onClick={this.onClick} /></button>
+                    <button className="spacing bgYellow"><img  src={Alien} alt="MEET Someone!" onClick={this.onClick} /></button>
                   </span>
                   <span className="spacing">
-                    <button><img src={Astronaut} alt="BE Someone!" onClick={this.onClick} /></button>
+                    <button className="spacing bgYellow"><img src={Astronaut} alt="BE Someone!" onClick={this.onClick} /></button>
                   </span>
                   <span className="spacing">
-                    <button><img src={Telescope} alt="SEE Something!" onClick={this.onClick} /></button>
+                    <button className="spacing bgYellow"><img src={Telescope} alt="SEE Something!" onClick={this.onClick} /></button>
                   </span>
                 </div>
               </div>
@@ -127,12 +156,13 @@ class CreateCampaign extends Component {
           <tr>
             <td>
               <p>Your Home Town: </p>
-              <input className="sameLine" type="text" name="homeTown" placeholder="your home town" value={this.state.wish.homeTown}  onChange={ this.onChange }/>
+              <input className="sameLine wideWidth" type="text" name="homeTown" placeholder="your home town" value={this.state.wish.homeTown}  onChange={ this.onChange }/>
               <p>I'm Suffering from</p>
-              <input className="sameLine" type="text" name="illness" placeholder="my illness" value={this.state.wish.illness}  onChange={ this.onChange }/>
+              <input className="sameLine wideWidth" type="text" name="illness" placeholder="my illness" value={this.state.wish.illness}  onChange={ this.onChange }/>
               <p>My Wish Details</p>
               <textarea
                 name="wishDetail"
+                className="wideWidth"
                 placeholder="My wish details are.."
                 value={this.state.wish.wishDetail}
                 onChange={this.onChange}
@@ -140,8 +170,43 @@ class CreateCampaign extends Component {
             </td>
           </tr>
           <tr>
-            <td><button  onClick={this.goBack}>Go Back</button></td>
-              <td><button onClick={this.saveWish}>Submit My Wish</button></td>
+            <td>
+              <p>Upload your Favourite photo .!!</p>
+              <input className="inputFile"  id="file" type="file" onChange={this.onhandleChange} onClick={this.resetFile}/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img className="imageDim" src={this.state.photo} alt="My Photo"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>Record an audio testimonial .!!</p>
+              <input className="inputFile"  id="file" type="file" onChange={this.onAudioUpload} onClick={this.resetFile}/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src={this.state.audio} alt="My Audio"/>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <p>Upload supporting videos .!!</p>
+              <input className="inputFile"  id="file" type="file" onChange={this.onVideoUpload} onClick={this.resetFile}/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src={this.state.video} alt="My Audio"/>
+            </td>
+          </tr>
+
+          <tr>
+            <td><button className="sameLine fancyButtons" onClick={this.saveWish}>Submit My Wish</button></td>
+            <td className="sameLine"><button className="fancyButtons"  onClick={this.goBack}>Go Back</button></td>
           </tr>
           </tbody>
         </table>
