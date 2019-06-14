@@ -4,6 +4,7 @@ import './App.css'
 import Login from '../login/Login'
 import Landing from '../landing/Landing'
 import WatchAuth from '../auth/WatchAuth'
+import Dashboard from '../dashboard/Dashboard';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <WatchAuth>
         <Switch>
           <Route exact path="/landing" component={Landing} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/" component={Login} />
         </Switch>
       </WatchAuth>
