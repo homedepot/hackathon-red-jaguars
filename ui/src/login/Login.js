@@ -52,9 +52,7 @@ class Login extends Component {
           username,
           password
         })
-
-      console.log(`User profile is: ${response.body}`)
-      if (response.data) this.props.history.push('/landing')
+      if (response.data.role ==="user") this.props.history.push('/landing')
       else this.props.history.push('/dashboard')
     } catch (e) {}
   }
