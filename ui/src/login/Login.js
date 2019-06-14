@@ -105,7 +105,7 @@ class Login extends Component {
                   this.handleFormFieldChange('password', event)
                 }
               />
-              <input type="submit" value="Submit!" />
+              <input class="btn btn-success" type="submit" value="Submit!" />
             </form>
           </div>
 
@@ -132,7 +132,7 @@ class Login extends Component {
                   this.handleFormFieldChange('password', event)
                 }
               />
-              <input type="submit" value="Submit!" />
+              <input class="btn btn-success" type="submit" value="Submit!" />
             </form>
           </div>
         </div>
