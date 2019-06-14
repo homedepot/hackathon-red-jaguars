@@ -7,6 +7,7 @@ let ChildWish = mongoose.Schema({
   age: String,
   homeTown: String,
   wishType: String,
+  wishDate: String,
   illness: String,
   wishDetail: String,
   orgId: String,
@@ -20,12 +21,13 @@ let Wish = mongoose.model('Wish', ChildWish, 'wish')
 
 router.post('/create', function(req, res, next) {
   console.log('creating wish')
-  const { age, firstName, homeTown, wishType, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
+  const { age, firstName, homeTown, wishType, wishDate, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
   let newWish = new Wish({
     firstName: firstName,
     age: age,
     homeTown: homeTown,
     wishType: wishType,
+    wishDate: wishDate,
     illness: illness,
     wishDetail: wishDetail,
     orgId: orgId,
@@ -36,6 +38,7 @@ router.post('/create', function(req, res, next) {
   })
   newWish.save()
     .then(data => {
+      console.log('creating')
       res.send(data);
     }).catch(err => {
       res.status(500).send({
@@ -58,8 +61,8 @@ router.get('/findAll', function(req, res, next) {
 
 
 router.get('/findOneById/', function(req, res) {
-  console.log('finding one by ID');
-  Wish.findOne(req.params.id)
+  console.log('finding one by ID', req.params.id)
+  Wish.findById (req.params.id)
     .then(wish => {
       if(!wish) {
         return res.status(404).send({
@@ -92,11 +95,11 @@ router.delete('/delete/', function(req, res) {
     }).catch(err => {
     if(err.kind === 'ObjectId' || err.name === 'NotFound') {
       return res.status(404).send({
-        message: "Note not found with id " + req.params.noteId
+        message: "Note not found with id " + req.params._ic
       });
     }
     return res.status(500).send({
-      message: "Error deleting wish with id " + req.params.id
+      message: "Error deleting wish with id " + req.params._id
     });
   })
 })
@@ -115,6 +118,7 @@ router.put('/update/', function(req, res) {
     age: req.body.age,
     homeTown: req.body.homeTown,
     wishType: req.body.wishType,
+    wishDate: req.body.wishDate,
     illness: req.body.illness,
     wishDetail: req.body.wishDetail,
     orgId: req.body.orgId,
@@ -122,7 +126,6 @@ router.put('/update/', function(req, res) {
     audio: req.body.audio,
     video: req.body.video,
     photo: req.body.photo
-
 
   }, {new: true})
     .then(wish => {

@@ -1,0 +1,81 @@
+.wishBackground {
+    padding: 50px;
+    background-color: #568078;
+}
+
+#goSomewhere {
+    background-image: url("/ui/src/images/Rocket_Icon.png");
+}
+
+.wishBackground button {
+    cursor: pointer;
+}
+
+.spacing {
+    padding-left: 30px;
+    padding-right: 50px;
+}
+
+.wishBackground p {
+    font-size: xx-large;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.sameLine {
+    display: inline-block;
+}
+
+.wishBackground input {
+    width: 200px;
+    height: 30px;
+    margin: 20px 20px;
+    border: 3px solid #090d90;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #ee29da;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #ee29da;
+    opacity:  1;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #ee29da;
+    opacity:  1;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #ee29da;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+    color:    #ee29da;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+    color:    #ee29da;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
