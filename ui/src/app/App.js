@@ -4,6 +4,7 @@ import './App.css'
 import Login from '../login/Login'
 import Landing from '../landing/Landing'
 import WatchAuth from '../auth/WatchAuth'
+import ChildList from '../dashboard/childList'
 import Dashboard from '../dashboard/Dashboard';
 
 function App() {
