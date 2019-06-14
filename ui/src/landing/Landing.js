@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Logo_MakeWish from '../img/Logo_MakeWish.png'
-import Logo_MakeWish_Dark_Blue from '../img/Logo_MakeWish_Dark_Blue.png'
-import Logo_Galaxy_Colour from '../img/Logo_Galaxy_Colour.png'
+import Logo_MakeWish from '../images/Logo_MakeWish.png'
+import Logo_MakeWish_Dark_Blue from '../images/Logo_MakeWish_Dark_Blue.png'
+import Logo_Galaxy_Colour from '../images/Logo_Galaxy_Colour.png'
 
 export default class Landing extends Component {
   render() {
