@@ -10,8 +10,8 @@ function App() {
     <Router>
       <WatchAuth>
         <Switch>
-          <Route exact path="/landing" component={Landing} />
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </WatchAuth>
     </Router>
