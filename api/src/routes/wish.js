@@ -13,7 +13,8 @@ let ChildWish = mongoose.Schema({
   userId: String,
   audio: String,
   video: String,
-  photo: String
+  photo: String,
+  date: String
 })
 
 let Wish = mongoose.model('Wish', ChildWish, 'wish')
@@ -32,7 +33,8 @@ router.post('/create', function(req, res, next) {
     userId: userId,
     audio: audio,
     video: video,
-    photo: photo
+    photo: photo,
+    date: new Date().toLocaleDateString()
   })
   newWish.save()
     .then(data => {
@@ -122,7 +124,6 @@ router.put('/update/', function(req, res) {
     audio: req.body.audio,
     video: req.body.video,
     photo: req.body.photo
-
 
   }, {new: true})
     .then(wish => {
