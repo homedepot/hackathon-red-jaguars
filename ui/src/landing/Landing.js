@@ -7,14 +7,7 @@ export default class Landing extends Component {
       <div>
         <nav class="navbar navbar-light bg-light">
           <a class="navbar-brand" href="/">
-          <div class="container">
-            <div class="row">
-              <div class = ".col-3">
-                <img src={Logo_MakeWish} class="d-inline-block align-top" alt=""></img>
-                </div>
-                <div class = ".col-9"></div>
-              </div>
-            </div>
+            <img src={Logo_MakeWish} width= "20%" height= "auto" class = "img-responsive" alt=""></img>
           </a>
           <a href = '/login'><p>Login/Register here</p></a>
         </nav>
