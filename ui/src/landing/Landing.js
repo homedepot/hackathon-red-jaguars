@@ -17,6 +17,7 @@ export default class Landing extends Component {
             <div class="inline-block">
               <img src={GalaxyLogo} alt="Galaxy" width="500px" height="250px"/>
             </div>
+            <button title="LargeButton"> <a href="./login">Large Button</a></button>
           </div>
         </body>
       </div>
