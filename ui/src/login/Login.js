@@ -14,7 +14,7 @@ class Login extends Component {
       username: '',
       password: '',
       firstName: '',
-      lastName : ''
+      lastName: ''
     }
   }
 
@@ -29,7 +29,7 @@ class Login extends Component {
         password,
         firstName,
         lastName,
-        role : "user"
+        role: 'user'
       })
 
       this.setState({
@@ -50,12 +50,10 @@ class Login extends Component {
         .create({ withCredentials: true })
         .post(`${this.expressDomain}/auth/login`, {
           username,
-          password,
+          password
         })
-        
-      console.log(`User profile is: ${response.body}`)
-
-      this.props.history.push('/landing')
+      if (response.data.role ==="user") this.props.history.push('/landing')
+      else this.props.history.push('/dashboard')
     } catch (e) {}
   }
 

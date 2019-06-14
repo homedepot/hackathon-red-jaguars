@@ -110,7 +110,7 @@ describe('Login', () => {
       await axios.create().post()
 
       expect(preventDefaultMock).toHaveBeenCalled()
-      expect(fakeHistory).toEqual(['/landing'])
+      expect(fakeHistory).toEqual([])
     })
   })
 
