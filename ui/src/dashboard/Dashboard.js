@@ -8,13 +8,14 @@ import icn_male from '../images/icn_blue.png'
 import icn_female from '../images/icn_pink.png'
 import moment from 'moment/moment.js'
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
   const [filterData, setFilterData] = useState([])
   const [query, setQuery] = useState('')
   const [selectedYear, setSelectedYear] = useState(year)
+  const role = props && props.location && props.location.state && props.location.state.role;
   const [checkBoxes, setCheckBoxes] = useState([
     {
       label: 'To Go',
@@ -82,6 +83,9 @@ const Dashboard = () => {
       )
     )
   }
+  const handleNav = e =>{
+    props.history.push("/detailedchild",{id: e})
+  }
   const handleOnCheckboxes = e => {
     let boxes = checkBoxes.map(z => {
       if (z.value === e) {
@@ -114,10 +118,11 @@ const Dashboard = () => {
       })
     )
   }
+  let month = "";
   return (
     <div className="container-fluid" style={{ paddingLeft: '10rem' }}>
-      <h1>Welcome to the Hackathon Dashboard Page</h1>
-
+      <h1>Welcome to the Hackathon Dashboard Page  {role}</h1>
+     
       <br />
       <div className="row">
         <div className="col-4">
@@ -200,16 +205,22 @@ const Dashboard = () => {
               </label>{' '}
             </div>
           </div>
+          {filterData && filterData.map(x => (
+  
           <div
             className="container-fluid"
-            style={{ border: '1px solid black' }}
+            style={{  }}
           >
-            {filterData.map(x => (
+            <div className={"row " + (month === moment(x.date).format("MMMM") ?  "hidden" : "") }>
+                <div className="col-12">{month = moment(x.date).format("MMMM")}</div> 
+               
+            </div>
               <div
                 className="row"
                 style={{
                   padding: '10px 0px 10px 0px',
-                  borderBottom: '1px solid black'
+                  borderBottom: '1px solid black',
+                  border: '1px solid black'
                 }}
               >
                 <div
@@ -277,13 +288,14 @@ const Dashboard = () => {
                   ></img>
                 </div>
                 <div className="col-1" style={{ padding: '1rem 0px 10px 0px' }}>
-                  <i className="material-icons" style={{ fontSize: '3rem' }}>
+                  <i className="material-icons" style={{ fontSize: '3rem',cursor:"pointer" }} onClick={()=>handleNav(x._id)}>
                     chevron_right
                   </i>
                 </div>
               </div>
-            ))}
+           
           </div>
+           ))}
         </div>
       </div>
     </div>
