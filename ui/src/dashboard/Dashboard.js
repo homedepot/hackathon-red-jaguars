@@ -9,7 +9,7 @@ import icn_female from '../images/icn_pink.png'
 import moment from 'moment/moment.js'
 
 const Dashboard = (props) => {
-  const role = props.location.state.role;
+  const role = props.location.state && props.location.state.role;
   const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
