@@ -14,14 +14,15 @@ class Login extends Component {
       username: '',
       password: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      role: 'user'
     }
   }
 
   createUser = async e => {
     e.preventDefault()
 
-    const { username, password, firstName, lastName } = this.state
+    const { username, password, firstName, lastName,role } = this.state
 
     try {
       await axios.post(`${this.expressDomain}/auth/register`, {
@@ -29,13 +30,13 @@ class Login extends Component {
         password,
         firstName,
         lastName,
-        role: 'user'
+        role
       })
 
       this.setState({
         username: '',
         password: '',
-        role: 'user'
+        role: ''
       })
     } catch (e) {}
   }
@@ -53,12 +54,15 @@ class Login extends Component {
           password
         })
       if (response.data.role ==="user") this.props.history.push('/createWish')
-      else this.props.history.push('/dashboard')
+      else if(response.data.role ==="curator") this.props.history.push('/dashboard')
     } catch (e) {}
   }
 
   handleFormFieldChange = (key, { target: { value } }) => {
     this.setState({ [key]: value })
+  }
+  handleChecked =(e)=>{
+    this.setState({ role: e.currentTarget.checked ? "curator" : "user" })
   }
 
   render() {
@@ -83,6 +87,7 @@ class Login extends Component {
                 } data-register-last-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
+              
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input type="string" class="form-control" id="exampleInputEmail1"                 
@@ -95,6 +100,14 @@ class Login extends Component {
                 <input type="password" class="form-control" 
                   onChange={event => this.handleFormFieldChange('password', event)
                 } data-register-password id="exampleInputPassword1" placeholder="Password"></input>
+              </div>
+              <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="curator" id="role" data-register-role  onChange={event => this.handleChecked( event)} />
+                <label class="form-check-label" for="role">
+                Please check if you are a curator
+                </label>
+              </div>
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>

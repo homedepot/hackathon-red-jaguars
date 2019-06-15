@@ -65,9 +65,10 @@ router.get('/findAll', function(req, res, next) {
 })
 
 
-router.get('/findOneById/', function(req, res) {
+router.get('/findOneById/:id', function(req, res) {
   console.log('finding one by ID', req.params.id)
-  Wish.findById (req.params.id)
+  let id = req.params.id;
+  Wish.findById ({_id: id })
     .then(wish => {
       if(!wish) {
         return res.status(404).send({
@@ -87,9 +88,10 @@ router.get('/findOneById/', function(req, res) {
   });
 });
 
-router.delete('/delete/', function(req, res) {
+router.delete('/delete/:id', function(req, res) {
   console.log('Deleting a wish by Id');
-  Wish.findOneAndDelete(req.params.id)
+  let id = req.params.id;
+  Wish.findOneAndRemove({_id: id})
     .then(wish => {
       if(!wish) {
         return res.status(404).send({
@@ -108,6 +110,15 @@ router.delete('/delete/', function(req, res) {
     });
   })
 })
+// router.delete('/delete/:id', function(req, res) {
+//   let id = req.params.id;
+//   Wish.findOneAndRemove({_id: id}, function(err) {
+//     if(err) {
+//       console.log(err)
+//       return res.status(500).send();
+//     }
+//     return res.status(200).send();
+//   })
 
 router.put('/update/', function(req, res) {
   console.log('Updating a wish');

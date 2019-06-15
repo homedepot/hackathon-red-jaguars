@@ -6,8 +6,8 @@ export default class Landing extends Component {
       <div>
         <div class = "container">
           <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top" id="mainNav" padding = "400">
-            <img src="MakeAWishLogo.png" width= "12%" height= "auto" class = "img-responsive" alt=""></img>
-            <img src="Galaxy_Color.png" width= "12%" height= "auto" class = "img-responsive" alt=""></img>
+            <img src="images/MakeAWishLogo.png" width= "12%" height= "auto" class = "img-responsive" alt=""></img>
+            <img src="images/Galaxy_Color.png" width= "12%" height= "auto" class = "img-responsive" alt=""></img>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
                 <a class="btn btn-primary" href="/login" role="button">Login/Register</a>
@@ -26,13 +26,13 @@ export default class Landing extends Component {
                 </ol>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img class="d-block w-100" src="Galaxy_Color.png" alt="First slide"></img>
+                    <img class="d-block w-100" src="images/Galaxy_Color.png" alt="First slide"></img>
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="Galaxy.png" alt="Second slide"></img>
+                    <img class="d-block w-100" src="images/Galaxy.png" alt="Second slide"></img>
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="MakeAWishLogo.png" alt="Third slide"></img>
+                    <img class="d-block w-100" src="images/MakeAWishLogo.png" alt="Third slide"></img>
                   </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
