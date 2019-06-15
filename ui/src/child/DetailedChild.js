@@ -8,32 +8,26 @@ import BigPic2 from './bigpic2.jpg'
 import ShortVid from './shortvid.mp4'
 import Wish from '../images/Alien_Icon.png'
 
-class DetailedChild extends Component {
-    constructor(props) {
-        super(props)
-
-        this.expressDomain = process.env.REACT_APP_expressDomain || 'http://localhost:3002'
-    }
-
-    goBack = (e) => {
+const DetailedChild = (props)=>{
+    const wish= props.location.state.wish;
+    const role = props.location.state.role;
+    const goBack = (e) => {
         e.preventDefault();
-        this.props.history.push("/dashboard");
+        props.history.pop();
     }
 
-    getChild = () => {
-        const {match} = this.props
-        const id = match.location.state.id
-        axios.get(`${this.expressDomain}/wish/findOneById/${id}`).then(res => {
-            this.setState({wish: res.data});
-            this.props.history.push("/detailedChild",{id: res.data.id})
-        })
-    }
+    // const getChild = () => {
+    //     const {match} = props
+    //     const id = match.location.state.id
+    //     axios.get(`${expressDomain}/wish/findOneById/${id}`).then(res => {
+    //         setState({wish: res.data});
+    //         props.history.push("/detailedChild",{id: res.data.id})
+    //     })
+    // }
 
-    render() {
-        console.log("child",this.props.userId)
         return (
             <div>
-                <button className="fancyButtons"  onClick={this.goBack}>Go Back To Dashboard</button>
+                <button className="fancyButtons"  onClick={goBack}>Go Back To Dashboard</button>
                 <div className="row">
                     <div className="col">
                     <div className="container">
@@ -54,7 +48,7 @@ class DetailedChild extends Component {
                     <div className="col-6">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Name</h5>
+                                <h5 className="card-title">Name</h5> {wish.firstName}
                             </div>
                         </div>
                         <div className="card">
@@ -133,7 +127,6 @@ class DetailedChild extends Component {
             </div>
         )
 
-    }
 }
  
 export default withRouter(DetailedChild)

@@ -84,7 +84,7 @@ const Dashboard = (props) => {
     )
   }
   const handleNav = e =>{
-    props.history.push("/detailedchild",{id: e})
+    props.history.push("/detailedChild",{wish: e,role:role})
   }
   const handleOnCheckboxes = e => {
     let boxes = checkBoxes.map(z => {
@@ -288,7 +288,7 @@ const Dashboard = (props) => {
                   ></img>
                 </div>
                 <div className="col-1" style={{ padding: '1rem 0px 10px 0px' }}>
-                  <i className="material-icons" style={{ fontSize: '3rem',cursor:"pointer" }} onClick={()=>handleNav(x._id)}>
+                  <i className="material-icons" style={{ fontSize: '3rem',cursor:"pointer" }} onClick={()=>handleNav(x)}>
                     chevron_right
                   </i>
                 </div>
