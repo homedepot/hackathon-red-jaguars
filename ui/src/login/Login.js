@@ -18,7 +18,7 @@ class Login extends Component {
       role: 'user'
     }
   }
-
+  
   createUser = async e => {
     e.preventDefault()
 
@@ -53,8 +53,11 @@ class Login extends Component {
           username,
           password
         })
-      if (response.data.role ==="user") this.props.history.push('/createWish')
-      else if(response.data.role ==="curator") this.props.history.push('/dashboard')
+      if (response.data.role ==="user") 
+        this.props.history.push('/createWish')
+      else 
+      if(response.data.role ==="curator") 
+        this.props.history.push('/dashboard',{role: response.data.role})
     } catch (e) {}
   }
 
