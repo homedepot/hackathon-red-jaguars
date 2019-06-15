@@ -15,9 +15,7 @@ let ChildWish = mongoose.Schema({
   userId: String,
   audio: Object,
   video: Object,
-  photo: Object,
-  date: String,
-  gender: String
+  photo: Object
 })
 
 let Wish = mongoose.model('Wish', ChildWish, 'wish')
@@ -38,8 +36,7 @@ router.post('/create', function(req, res, next) {
     userId: userId,
     audio: audio,
     video: video,
-    photo: photo,
-    date: new Date().toLocaleDateString()
+    photo: photo
   })
   newWish.save()
     .then(data => {
@@ -110,15 +107,6 @@ router.delete('/delete/:id', function(req, res) {
     });
   })
 })
-// router.delete('/delete/:id', function(req, res) {
-//   let id = req.params.id;
-//   Wish.findOneAndRemove({_id: id}, function(err) {
-//     if(err) {
-//       console.log(err)
-//       return res.status(500).send();
-//     }
-//     return res.status(200).send();
-//   })
 
 router.put('/update/', function(req, res) {
   console.log('Updating a wish');
@@ -129,39 +117,15 @@ router.put('/update/', function(req, res) {
     });
   }
 
-  Wish.findOneAndUpdate(req.body._id, {
-    firstName: req.body.firstName,
-    age: req.body.age,
-    homeTown: req.body.homeTown,
-    wishType: req.body.wishType,
-    wishDate: req.body.wishDate,
-    gender: req.body.gender,
-    illness: req.body.illness,
-    wishDetail: req.body.wishDetail,
-    orgId: req.body.orgId,
-    userId: req.body.userId,
-    audio: req.body.audio,
-    video: req.body.video,
-    photo: req.body.photo
-
-  }, {new: true})
-    .then(wish => {
-      if (!wish) {
-        return res.status(400).send({
-          message: "Wish not found with id " + req.body._id
-        });
-      }
-      res.send(wish);
-    }).catch(err => {
-    if(err.kind === 'ObjectId' || err.name === 'NotFound') {
-      return res.status(404).send({
-        message: "Wish not found with id " + req.body._id
-      });
-    }
-    return res.status(500).send({
-      message: "Error Updating wish with id " + req.body._id
-    });
-  });
+router.put('/update/', function(req, res, next) {
+  console.log('updating', req.params.id)
+  Wish.findOneAndUpdate(req.body).then(function(wish) {
+      res.status(201).send(wish);
+  }).catch( function(err) {
+      res.status(400).send({
+        message: "Error updating the wish with id: " + id
+      })
+  })
 })
 
 
