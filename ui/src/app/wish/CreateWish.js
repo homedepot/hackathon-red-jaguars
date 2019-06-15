@@ -167,7 +167,7 @@ class CreateWish extends Component {
               <input className="sameLine wideWidth" type="text" name="homeTown" placeholder="your home town" value={this.state.wish.homeTown}  onChange={ this.onChange }/>
               <p>Are you a Boy or a Girl ?</p>
               <ul>
-                <li>
+                <li key="1">
                   <label>
                     <input
                       name="check"
@@ -180,7 +180,7 @@ class CreateWish extends Component {
                 </li>
 
                 <li>
-                  <label>
+                  <label key="2">
                     <input
                       name="check"
                       type="radio"
@@ -211,7 +211,7 @@ class CreateWish extends Component {
           </tr>
           <tr>
             <td>
-              <img className={this.state.photo ? "imageDim": "hidden"} alt="imageDim" src={this.state.photo} />
+              <img className={this.state.photo ? "imageDim": "hidden"} src={this.state.photo} alt="MyPic"/>
             </td>
           </tr>
           <tr>
@@ -222,7 +222,7 @@ class CreateWish extends Component {
           </tr>
           <tr>
             <td>
-              <img src={this.state.audio} alt="audio"/>
+              {/*<img src={this.state.audio} alt=""/>*/}
             </td>
           </tr>
 
@@ -234,7 +234,7 @@ class CreateWish extends Component {
           </tr>
           <tr>
             <td>
-              <img src={this.state.video} alt="vid"/>
+              {/*<img src={this.state.video} alt=""/>*/}
             </td>
           </tr>
 

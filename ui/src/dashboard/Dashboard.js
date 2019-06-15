@@ -6,12 +6,15 @@ import tomeet from '../images/Alien_Icon.png'
 import togo from '../images/Rocket_Icon.png'
 import icn_male from '../images/icn_blue.png'
 import icn_female from '../images/icn_pink.png'
-import moment from "moment/moment.js";
-
+import moment from 'moment/moment.js'
 
 const Dashboard = () => {
+  const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
+  const [filterData, setFilterData] = useState([])
+  const [query, setQuery] = useState('')
+  const [selectedYear, setSelectedYear] = useState(year)
   const [checkBoxes, setCheckBoxes] = useState([
     {
       label: 'To Go',
@@ -40,6 +43,7 @@ const Dashboard = () => {
     Axios.get(`http://localhost:3002/wish/findAll`, {})
       .then(response => {
         setApiData(response.data)
+        setFilterData(response.data)
         setIsLoading(false)
       })
       .catch(error => {
@@ -48,11 +52,70 @@ const Dashboard = () => {
       })
   }, [])
 
-  
+  useEffect(() => {}, [checkBoxes])
 
+  const handleOnChangeSearch = (query,yr) => {
+    setQuery(query);
+    let passedYear = yr ? yr : selectedYear;
+    setSelectedYear(passedYear);
+    let boxes = checkBoxes;
+    setFilterData(
+      apiData.filter(
+        x =>
+          (query.includes(' ')
+            ? query
+                .split(' ')
+                .reduce(
+                  (r, z) =>
+                    r &&
+                    (x.firstName + x.sponsor + x.homeTown + x.date).includes(z),
+                  true
+                )
+            : (x.firstName + x.sponsor + x.homeTown + x.date).includes(
+                query
+              )) &&
+              boxes.filter(
+            r =>
+              r.value.toLowerCase() ===
+              x.wishType.replace(' ', '').toLowerCase()
+          )[0].checked && x.date.includes(passedYear)
+      )
+    )
+  }
+  const handleOnCheckboxes = e => {
+    let boxes = checkBoxes.map(z => {
+      if (z.value === e) {
+        z.checked = !z.checked
+      }
+      return z
+    })
+    setCheckBoxes(boxes)
+    setFilterData(
+      apiData.filter(x => {
+        return (
+          (query.includes(' ')
+            ? query
+                .split(' ')
+                .reduce(
+                  (r, z) =>
+                    r &&
+                    (x.firstName + x.sponsor + x.homeTown + x.date).includes(z),
+                  true
+                )
+            : (x.firstName + x.sponsor + x.homeTown + x.date).includes(
+                query
+              )) &&
+          boxes.filter(
+            r =>
+              r.value.toLowerCase() ===
+              x.wishType.replace(' ', '').toLowerCase()
+          )[0].checked && x.date.includes(selectedYear)
+        )
+      })
+    )
+  }
   return (
     <div className="container-fluid" style={{ paddingLeft: '10rem' }}>
-      
       <h1>Welcome to the Hackathon Dashboard Page</h1>
 
       <br />
@@ -65,7 +128,9 @@ const Dashboard = () => {
               placeholder="Search by Name, Sponsor, Location and/or Date"
               aria-label="Search by Name, Sponsor, Location and/or Date"
               aria-describedby="btnGroupSearch"
-              
+              onChange={e => {
+                handleOnChangeSearch(e.currentTarget.value,null)
+              }}
             />
             <div className="input-group-prepend">
               <div className="input-group-text" id="btnGroupAddon">
@@ -86,17 +151,7 @@ const Dashboard = () => {
                 key={x.value}
                 value={x.value}
                 checked={x.checked}
-                onChange={(x)=>{
-                  setCheckBoxes( checkBoxes.map(z=> 
-                    {
-                      if(z.value===x.currentTarget.value)
-                      {
-                        z.checked = !z.checked; 
-                      }
-                      return z;
-                    }))
-                  }
-                }
+                onChange={e => handleOnCheckboxes(x.value)}
               />
               <label className="form-check-label" htmlFor="inlineCheckbox1">
                 {x.label}
@@ -117,38 +172,94 @@ const Dashboard = () => {
       </div>
       <br />
       <div className="row">
-        <div className="col-8" style={{ border: '1px solid black' }}>
-          <div className="container-fluid">
-            {apiData.map(x => (
-              <div className="row" style={{padding:"10px 0px 10px 0px", borderBottom:"1px solid black"}}>
-                <div className="col-1" style={{backgroundImage:'url('+(x.gender ==='male' ? icn_male : icn_female)+')',height:"90px",backgroundSize:"cover"}}>
-
-                <label style={{padding:"5px 0px 0px 5px", fontWeight:"bold",color:"white"}}>{moment(x.date).format('dddd')}</label><br/>
-                  <div style={{ padding: '5px 5px 10px 20px' }}>
+        <div className="col-9">
+          <div className="row">
+            {' '}
+            <div className="col-10"></div>
+            <div className="col-2">
+              <label
+                style={{ color: 'blue', cursor: 'pointer' }}
+                className={selectedYear === year - 2 ? 'selectedYear' : ''}
+                onClick={() => {setSelectedYear(year - 2);handleOnChangeSearch(query,year-2)}}
+              >
+                {year - 2}
+              </label>{' '}
+              <label
+                style={{ color: 'blue', cursor: 'pointer' }}
+                className={selectedYear === year - 1 ? 'selectedYear' : ''}
+                onClick={() => {setSelectedYear(year - 1);handleOnChangeSearch(query,year-1)}}
+              >
+                {year - 1}
+              </label>{' '}
+              <label
+                style={{ color: 'blue', cursor: 'pointer' }}
+                className={selectedYear === year ? 'selectedYear' : ''}
+                onClick={() => {setSelectedYear(year);handleOnChangeSearch(query,year)}}
+              >
+                {year}
+              </label>{' '}
+            </div>
+          </div>
+          <div
+            className="container-fluid"
+            style={{ border: '1px solid black' }}
+          >
+            {filterData.map(x => (
+              <div
+                className="row"
+                style={{
+                  padding: '10px 0px 10px 0px',
+                  borderBottom: '1px solid black'
+                }}
+              >
+                <div
+                  className="col-1"
+                  style={{
+                    backgroundImage:
+                      'url(' +
+                      (x.gender === 'male' ? icn_male : icn_female) +
+                      ')',
+                    height: '100px',
+                    backgroundSize: 'cover'
+                  }}
+                >
+                  <label
+                    style={{
+                      padding: '5px 0px 0px 0px',
+                      fontWeight: 'bold',
+                      color: 'white'
+                    }}
+                  >
+                    {moment(x.date).format('dddd')}
+                  </label>
+                  <br />
+                  <div style={{ padding: '5px 5px 10px 25px' }}>
                     {moment(x.date).format('D')}
-                  {/* {x.date} */}
-                  
+                    {/* {x.date} */}
                   </div>
                 </div>
-                <div className="col-1" style={{padding:"1rem 0px 10px 1rem"}} >
+                <div
+                  className="col-1"
+                  style={{ padding: '1rem 0px 10px 1rem' }}
+                >
                   <img
                     src="https://picsum.photos/50/50"
                     alt="{x.firstName}"
                     key={x._id}
                   ></img>
                 </div>
-                <div className="col-7" style={{padding:"1rem 0px 10px 0px"}}>
+                <div className="col-7" style={{ padding: '1rem 0px 10px 0px' }}>
                   {x.firstName} - Age {x.age} from {x.homeTown}, GA <br />{' '}
                   {x.firstName} wishes {x.wishType} {x.wishDetail}
                 </div>
-                <div className="col-1" style={{padding:"1rem 0px 10px 0px"}}>
+                <div className="col-1" style={{ padding: '1rem 0px 10px 0px' }}>
                   <img
                     src="https://picsum.photos/51/50"
                     alt={x.firstName}
                     key={x._id + 'logo'}
                   ></img>
                 </div>
-                <div className="col-1" style={{padding:"1rem 0px 10px 0px"}}>
+                <div className="col-1" style={{ padding: '1rem 0px 10px 0px' }}>
                   <img
                     src={
                       x.wishType === 'tobe'
@@ -165,9 +276,10 @@ const Dashboard = () => {
                     key={x._id + 'logo'}
                   ></img>
                 </div>
-                <div className="col-1" style={{padding:"1rem 0px 10px 0px"}}>
-                  
-                  <button href="/detailedChild"><i className="material-icons" style={{fontSize:"3rem"}}>chevron_right</i></button>
+                <div className="col-1" style={{ padding: '1rem 0px 10px 0px' }}>
+                  <i className="material-icons" style={{ fontSize: '3rem' }}>
+                    chevron_right
+                  </i>
                 </div>
               </div>
             ))}
