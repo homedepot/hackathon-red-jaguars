@@ -5,8 +5,21 @@ class DetailedChild extends Component {
     constructor(props) {
         super(props)
 
+      this.state= {
+        wish : {}
+      };
+
         this.expressDomain = process.env.REACT_APP_expressDomain || 'http://localhost:3002'
     }
+
+  componentWillMount() {
+    this.setState({
+      wish: this.props.location.wish
+    });
+
+    console.log(this.state.wish)
+  }
+
     goBack = (e) => {
         e.preventDefault();
         this.props.history.push("/dashboard");
