@@ -6,7 +6,7 @@ import Alien from '../../images/Alien_Icon.png';
 import Rocket from '../../images/Rocket_Icon.png';
 
 import Axios from "axios";
-import uuid from "uuid";
+//import uuid from "uuid";
 
 class CreateCampaign extends Component {
   constructor() {
