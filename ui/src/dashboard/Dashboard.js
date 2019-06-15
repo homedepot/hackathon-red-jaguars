@@ -7,8 +7,11 @@ import togo from '../images/Rocket_Icon.png'
 import icn_male from '../images/icn_blue.png'
 import icn_female from '../images/icn_pink.png'
 import moment from 'moment/moment.js'
+import { CSVLink } from "react-csv"
+
 
 const Dashboard = (props) => {
+  const expressDomain = process.env.REACT_APP_expressDomain || 'http://localhost:3002'
   const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
@@ -54,6 +57,22 @@ const Dashboard = (props) => {
   }, [])
 
   useEffect(() => {}, [checkBoxes])
+
+  const deleteUser = (id) => {
+    Axios.delete(`http://localhost:3002/wish/delete/${id}`)
+    .then((res) => {
+        Axios.get(`${expressDomain}/wish/findall`)
+        .then((res) => {
+            setApiData(res.data);
+        })
+        .catch((err) => {
+          err.send("something went wrong");
+        })
+    })
+    .catch((err) => {
+        err.send("something went wrong");
+    })
+}
 
   const handleOnChangeSearch = (query,yr) => {
     setQuery(query);
@@ -259,7 +278,7 @@ const Dashboard = (props) => {
                     key={x._id}
                   ></img>
                 </div>
-                <div className="col-7" style={{ padding: '1rem 0px 10px 0px' }}>
+                <div className="col-6" style={{ padding: '1rem 0px 10px 0px' }}>
                   {x.firstName} - Age {x.age} from {x.homeTown}, GA <br />{' '}
                   {x.firstName} wishes {x.wishType} {x.wishDetail}
                 </div>
@@ -291,13 +310,18 @@ const Dashboard = (props) => {
                   <i className="material-icons" style={{ fontSize: '3rem',cursor:"pointer" }} onClick={()=>handleNav(x._id)}>
                     chevron_right
                   </i>
+                <button onClick={() => deleteUser(x._id)} type="button" class="btn btn-danger">Delete</button>
                 </div>
+
               </div>
            
           </div>
            ))}
         </div>
       </div>
+      <CSVLink data={apiData} separator={";"}>
+            Download me
+        </CSVLink>
     </div>
   )
 }
