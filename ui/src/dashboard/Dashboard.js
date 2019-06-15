@@ -9,13 +9,13 @@ import icn_female from '../images/icn_pink.png'
 import moment from 'moment/moment.js'
 
 const Dashboard = (props) => {
-  const role = props.location.state && props.location.state.role;
   const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
   const [filterData, setFilterData] = useState([])
   const [query, setQuery] = useState('')
   const [selectedYear, setSelectedYear] = useState(year)
+  const role = props && props.location && props.location.state && props.location.state.role;
   const [checkBoxes, setCheckBoxes] = useState([
     {
       label: 'To Go',
@@ -118,6 +118,7 @@ const Dashboard = (props) => {
       })
     )
   }
+  let month = 0;
   return (
     <div className="container-fluid" style={{ paddingLeft: '10rem' }}>
       <h1>Welcome to the Hackathon Dashboard Page  {role}</h1>
@@ -211,8 +212,9 @@ const Dashboard = (props) => {
             style={{  }}
           >
             
-            <div className="row">
+            <div className={'row ' + (month ===0 ? "" : "hidden") }>
                 <div className="col-12">{moment(x.date).format("MMMM")}</div> 
+                {month=0}
             </div>
               <div
                 className="row"
