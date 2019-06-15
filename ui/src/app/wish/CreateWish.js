@@ -226,25 +226,23 @@ class CreateWish extends Component {
             </td>
           </tr>
 
-          <tr>
+          <tr className="bottomSpace">
             <td>
               <p>Upload supporting videos .!!</p>
               <input className="inputFile"  id="file" type="file" onChange={this.onVideoUpload} onClick={this.resetFile}/>
             </td>
           </tr>
-          <tr>
-            <td>
-              {/*<img src={this.state.video} alt=""/>*/}
-            </td>
-          </tr>
 
-          <tr>
-            <td><button className="sameLine fancyButtons" onClick={this.saveWish}>Submit My Wish</button></td>
-            <td className="sameLine"><button className="fancyButtons"  onClick={this.goBack}>Go Back</button></td>
+          <tr className="topSpace">
+            <td>
+              <button className="sameLine fancyButtons largeButton" onClick={this.saveWish}>Submit My Wish</button>
+            </td>
+            <td className="sameLine">
+              <button className="fancyButtons"  onClick={this.goBack}>Go Back</button>
+            </td>
           </tr>
           </tbody>
         </table>
-
       </div>
     )
   }

@@ -68,7 +68,7 @@ router.get('/findAll', function(req, res, next) {
 router.get('/findOneById/:id', function(req, res) {
   console.log('finding one by ID', req.params.id)
   let id = req.params.id;
-  Wish.findById ({_id: id })
+  Wish.findOne({_id: id })
     .then(wish => {
       if(!wish) {
         return res.status(404).send({
@@ -110,26 +110,19 @@ router.delete('/delete/:id', function(req, res) {
     });
   })
 })
-// router.delete('/delete/:id', function(req, res) {
-//   let id = req.params.id;
-//   Wish.findOneAndRemove({_id: id}, function(err) {
-//     if(err) {
-//       console.log(err)
-//       return res.status(500).send();
-//     }
-//     return res.status(200).send();
-//   })
 
-router.put('/update/', function(req, res) {
+
+router.put('/update/:id', function(req, res) {
   console.log('Updating a wish');
   console.log(req.body)
+  let id = req.params.id;
   if (!req.body) {
     return res.status(400).send({
       message: "Wish content can not be empty"
     });
   }
 
-  Wish.findOneAndUpdate(req.body._id, {
+  Wish.findOneAndUpdate({_id: id }, { $set:{
     firstName: req.body.firstName,
     age: req.body.age,
     homeTown: req.body.homeTown,
@@ -144,7 +137,7 @@ router.put('/update/', function(req, res) {
     video: req.body.video,
     photo: req.body.photo
 
-  }, {new: true})
+  }}, {new: true})
     .then(wish => {
       if (!wish) {
         return res.status(400).send({
@@ -163,6 +156,5 @@ router.put('/update/', function(req, res) {
     });
   });
 })
-
 
 module.exports = router

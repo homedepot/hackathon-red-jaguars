@@ -143,3 +143,16 @@
 .hidden {
     display: none;
 }
+
+.topSpace  {
+    padding-top: 30px;
+}
+
+.bottomSpace {
+    padding-bottom: 50px;
+}
+
+.largeButton {
+    width:350px;
+    height: 50px
+}
