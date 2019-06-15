@@ -7,18 +7,17 @@ import togo from '../images/Rocket_Icon.png'
 import icn_male from '../images/icn_blue.png'
 import icn_female from '../images/icn_pink.png'
 import moment from 'moment/moment.js'
-import { CSVLink } from "react-csv"
+import { CSVLink } from 'react-csv'
 
-
-const Dashboard = (props) => {
-  const expressDomain = process.env.REACT_APP_expressDomain || 'http://localhost:3002'
+const Dashboard = props => {
   const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
   const [filterData, setFilterData] = useState([])
   const [query, setQuery] = useState('')
   const [selectedYear, setSelectedYear] = useState(year)
-  const role = props && props.location && props.location.state && props.location.state.role;
+  const role =
+    props && props.location && props.location.state && props.location.state.role
   const [checkBoxes, setCheckBoxes] = useState([
     {
       label: 'To Go',
@@ -58,27 +57,27 @@ const Dashboard = (props) => {
 
   useEffect(() => {}, [checkBoxes])
 
-  const deleteUser = (id) => {
+  const deleteUser = id => {
+    let backupData = apiData;
+    let filteredData = apiData.filter(x=>x._id!==id);
+    
+    setApiData(filteredData)
+      setFilterData(filteredData)
     Axios.delete(`http://localhost:3002/wish/delete/${id}`)
-    .then((res) => {
-        Axios.get(`${expressDomain}/wish/findall`)
-        .then((res) => {
-            setApiData(res.data);
-        })
-        .catch((err) => {
-          err.send("something went wrong");
-        })
-    })
-    .catch((err) => {
-        err.send("something went wrong");
-    })
-}
+      .then(res => {
+        
+      })
+      .catch(err => {
+        setApiData(backupData);
+        err.send('something went wrong')
+      })
+  }
 
-  const handleOnChangeSearch = (query,yr) => {
-    setQuery(query);
-    let passedYear = yr ? yr : selectedYear;
-    setSelectedYear(passedYear);
-    let boxes = checkBoxes;
+  const handleOnChangeSearch = (query, yr) => {
+    setQuery(query)
+    let passedYear = yr ? yr : selectedYear
+    setSelectedYear(passedYear)
+    let boxes = checkBoxes
     setFilterData(
       apiData.filter(
         x =>
@@ -94,25 +93,17 @@ const Dashboard = (props) => {
             : (x.firstName + x.sponsor + x.homeTown + x.date).includes(
                 query
               )) &&
-              boxes.filter(
+          boxes.filter(
             r =>
               r.value.toLowerCase() ===
               x.wishType.replace(' ', '').toLowerCase()
-          )[0].checked && x.date.includes(passedYear)
+          )[0].checked &&
+          x.date.includes(passedYear)
       )
     )
   }
-  const handleNav = e =>{
-    props.history.push("/detailedchild",{id: e})
-  }
-
-  const viewDetail = (wish) => {
-    console.log('detail, ', wish)
-    debugger;
-    this.props.history.push({
-      pathname: "/DetailedChild",
-      wish: wish
-    });
+  const handleNavToDetailedChild = e => {
+    props.history.push('/detailedchild', { wish: e })
   }
 
   const handleOnCheckboxes = e => {
@@ -142,15 +133,16 @@ const Dashboard = (props) => {
             r =>
               r.value.toLowerCase() ===
               x.wishType.replace(' ', '').toLowerCase()
-          )[0].checked && x.date.includes(selectedYear)
+          )[0].checked &&
+          x.date.includes(selectedYear)
         )
       })
     )
   }
-  let month = "";
+  let month = ''
   return (
     <div className="container-fluid" style={{ paddingLeft: '10rem' }}>
-      <h1>Welcome to the Hackathon Dashboard Page  {role}</h1>
+      <h1>Welcome to the Hackathon Dashboard Page {role}</h1>
 
       <br />
       <div className="row">
@@ -163,7 +155,7 @@ const Dashboard = (props) => {
               aria-label="Search by Name, Sponsor, Location and/or Date"
               aria-describedby="btnGroupSearch"
               onChange={e => {
-                handleOnChangeSearch(e.currentTarget.value,null)
+                handleOnChangeSearch(e.currentTarget.value, null)
               }}
             />
             <div className="input-group-prepend">
@@ -209,129 +201,173 @@ const Dashboard = (props) => {
         <div className="col-9">
           <div className="row">
             {' '}
-            <div className="col-10"></div>
-            <div className="col-2">
+            <div className="col-8"></div>
+            <div className="col-2" style={{ textAlign: 'right' }}><CSVLink data={apiData} separator={';'}>
+          Download me
+        </CSVLink></div>
+            <div className="col-2" style={{ textAlign: 'right' }}>
               <label
                 style={{ color: 'blue', cursor: 'pointer' }}
                 className={selectedYear === year - 2 ? 'selectedYear' : ''}
-                onClick={() => {setSelectedYear(year - 2);handleOnChangeSearch(query,year-2)}}
+                onClick={() => {
+                  setSelectedYear(year - 2)
+                  handleOnChangeSearch(query, year - 2)
+                }}
               >
                 {year - 2}
               </label>{' '}
               <label
                 style={{ color: 'blue', cursor: 'pointer' }}
                 className={selectedYear === year - 1 ? 'selectedYear' : ''}
-                onClick={() => {setSelectedYear(year - 1);handleOnChangeSearch(query,year-1)}}
+                onClick={() => {
+                  setSelectedYear(year - 1)
+                  handleOnChangeSearch(query, year - 1)
+                }}
               >
                 {year - 1}
               </label>{' '}
               <label
                 style={{ color: 'blue', cursor: 'pointer' }}
                 className={selectedYear === year ? 'selectedYear' : ''}
-                onClick={() => {setSelectedYear(year);handleOnChangeSearch(query,year)}}
+                onClick={() => {
+                  setSelectedYear(year)
+                  handleOnChangeSearch(query, year)
+                }}
               >
                 {year}
               </label>{' '}
             </div>
           </div>
-          {filterData && filterData.map(x => (
-
-          <div
-            className="container-fluid"
-            style={{  }}
-          >
-            <div className={"row " + (month === moment(x.date).format("MMMM") ?  "hidden" : "") }>
-                <div className="col-12">{month = moment(x.date).format("MMMM")}</div>
-
+          <div className="row" style={{ textAlign: 'center' }}>
+            <div className="col-5"></div>
+            <div className="col-2">
+              {filterData.length === 0 ? <label>No data available</label> : ''}
             </div>
-              <div
-                className="row"
-                style={{
-                  padding: '10px 0px 10px 0px',
-                  borderBottom: '1px solid black',
-                  border: '1px solid black'
-                }}
-              >
+          </div>
+          {filterData &&
+            filterData.map(x => (
+              <div className="container-fluid" style={{}}>
                 <div
-                  className="col-1"
-                  style={{
-                    backgroundImage:
-                      'url(' +
-                      (x.gender === 'male' ? icn_male : icn_female) +
-                      ')',
-                    height: '100px',
-                    backgroundSize: 'cover'
-                  }}
+                  className={
+                    'row ' +
+                    (month === moment(x.date).format('MMMM') ? 'hidden' : '')
+                  }
+                  style={{ backgroundColor: '#b5b5b5' }}
                 >
-                  <label
-                    style={{
-                      padding: '5px 0px 0px 0px',
-                      fontWeight: 'bold',
-                      color: 'white'
-                    }}
-                  >
-                    {moment(x.date).format('dddd')}
-                  </label>
-                  <br />
-                  <div style={{ padding: '5px 5px 10px 25px' }}>
-                    {moment(x.date).format('D')}
-                    {/* {x.date} */}
+                  <div className="col-12">
+                    {(month = moment(x.date).format('MMMM'))}
                   </div>
                 </div>
                 <div
-                  className="col-1"
-                  style={{ padding: '1rem 0px 10px 1rem' }}
+                  className="row"
+                  style={{
+                    padding: '10px 0px 10px 0px',
+                    border: '1px solid black'
+                  }}
                 >
-                  <img
-                    src="https://picsum.photos/50/50"
-                    alt="{x.firstName}"
-                    key={x._id}
-                  ></img>
+                  <div
+                    className="col-1"
+                    style={{
+                      backgroundImage:
+                        'url(' +
+                        (x.gender === 'male' ? icn_male : icn_female) +
+                        ')',
+                      height: '100px',
+                      backgroundSize: 'cover'
+                    }}
+                  >
+                    <label
+                      style={{
+                        padding: '5px 0px 0px 0px',
+                        fontWeight: 'bold',
+                        color: 'white'
+                      }}
+                    >
+                      {moment(x.date).format('dddd')}
+                    </label>
+                    <br />
+                    <div style={{ padding: '5px 5px 10px 25px' }}>
+                      {moment(x.date).format('D')}
+                      {/* {x.date} */}
+                    </div>
+                  </div>
+                  <div
+                    className="col-1"
+                    style={{ padding: '1rem 0px 10px 1rem' }}
+                  >
+                    <img
+                      src="https://picsum.photos/50/50"
+                      alt="{x.firstName}"
+                      key={x._id}
+                    ></img>
+                  </div>
+                  <div
+                    className="col-6"
+                    style={{ padding: '1rem 0px 10px 0px' }}
+                  >
+                    {x.firstName} - Age {x.age} from {x.homeTown}, GA <br />{' '}
+                    {x.firstName} wishes {x.wishType} {x.wishDetail}
+                  </div>
+                  <div
+                    className="col-1"
+                    style={{ padding: '1rem 0px 10px 0px' }}
+                  >
+                    <img
+                      src="https://picsum.photos/51/50"
+                      alt={x.firstName}
+                      key={x._id + 'logo'}
+                    ></img>
+                  </div>
+                  <div
+                    className="col-1"
+                    style={{ padding: '1rem 0px 10px 0px' }}
+                  >
+                    <img
+                      src={
+                        x.wishType === 'tobe'
+                          ? tobe
+                          : x.wishType === 'tosee'
+                          ? tosee
+                          : x.wishType === 'tomeet'
+                          ? tomeet
+                          : togo
+                      }
+                      height="50"
+                      width="50"
+                      alt={x.firstName + '_logo'}
+                      key={x._id + 'logo'}
+                    ></img>
+                  </div>
+                  <div
+                    className="col-1"
+                    style={{ padding: '1rem 0px 10px 0px' }}
+                  >
+                    <i
+                      className="material-icons"
+                      style={{ fontSize: '3rem', cursor: 'pointer' ,color:"red"}}
+                      onClick={() => deleteUser(x._id)}
+                    >
+                      close
+                    </i>
+                  </div>
+                  <div
+                    className="col-1"
+                    style={{ padding: '1rem 0px 10px 0px' }}
+                  >
+                    <i
+                      className="material-icons"
+                      style={{ fontSize: '3rem', cursor: 'pointer' }}
+                      onClick={() => handleNavToDetailedChild(x)}
+                    >
+                      chevron_right
+                    </i>
+                  </div>
                 </div>
-                <div className="col-6" style={{ padding: '1rem 0px 10px 0px' }}>
-                  {x.firstName} - Age {x.age} from {x.homeTown}, GA <br />{' '}
-                  {x.firstName} wishes {x.wishType} {x.wishDetail}
-                </div>
-                <div className="col-1" style={{ padding: '1rem 0px 10px 0px' }}>
-                  <img
-                    src="https://picsum.photos/51/50"
-                    alt={x.firstName}
-                    key={x._id + 'logo'}
-                  ></img>
-                </div>
-                <div className="col-1" style={{ padding: '1rem 0px 10px 0px' }}>
-                  <img
-                    src={
-                      x.wishType === 'tobe'
-                        ? tobe
-                        : x.wishType === 'tosee'
-                        ? tosee
-                        : x.wishType === 'tomeet'
-                        ? tomeet
-                        : togo
-                    }
-                    height="50"
-                    width="50"
-                    alt={x.firstName + '_logo'}
-                    key={x._id + 'logo'}
-                  ></img>
-                </div>
-                <div className="col-1" style={{ padding: '1rem 0px 10px 0px' }}>
-                  <button onClick={() => viewDetail(x)}>
-                  <i className="material-icons" style={{ fontSize: '3rem',cursor:"pointer" }} onClick={()=>handleNav(x._id)}>
-                    chevron_right
-                  </i>
-                  </button>
-                <button onClick={() => deleteUser(x._id)} type="button" class="btn btn-danger">Delete</button>
-                </div>
-
-          </div>
-           ))}
+              </div>
+            ))}
         </div>
+        
       </div>
-      <CSVLink data={apiData} separator={";"}>
-            Download me
-        </CSVLink>
     </div>
   )
 }
