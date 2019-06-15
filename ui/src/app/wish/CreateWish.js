@@ -8,13 +8,14 @@ import Galaxy from '../../images/Galaxy_Color.png';
 
 import Axios from "axios";
 
-class CreateCampaign extends Component {
+class CreateWish extends Component {
   constructor() {
     super();
     this.state = {
       wishType:'',
       firstName: '',
       photo: '',
+      gender: '',
       audio: '',
       video: '',
       age: '',
@@ -34,6 +35,7 @@ class CreateCampaign extends Component {
       "photo": ""
       },
     };
+    this.toggleGender = this.toggleGender.bind(this);
   }
 
   onChange = (e) => {
@@ -54,6 +56,12 @@ class CreateCampaign extends Component {
     this.setState({
       wishType: e.target.alt
     })
+  }
+
+  toggleGender = (e) => {
+    this.setState ({gender : e.target.value },
+      () =>
+    console.log(this.state.gender))
   }
 
   onhandleChange = (e) => {
@@ -83,10 +91,10 @@ class CreateCampaign extends Component {
     Axios.post('http://localhost:3002/wish/create', {
       firstName: this.state.wish.firstName,
       age: this.state.wish.age,
-      homeTown: this.state.wish.homeTown,
-      wishType: this.state.wish.wishType,
+      homeTown: this.state.homeTown,
+      wishType: this.state.wishType,
       wishDate: new Date(),
-      gender: 'boy',
+      gender: this.state.gender,
       illness: this.state.wish.illness,
       wishDetail: this.state.wish.wishDetail,
       orgId: this.state.wish.orgId,
@@ -116,10 +124,10 @@ class CreateCampaign extends Component {
           <tr>
             <td>
             <div className="sameLine">
-              <p className="head">Hello!  Make A Wish</p>
+              <p style={{fontSize: '45px', marginRight: '100px'}} className="head">Hello!  Make A Wish</p>
             </div>
+              <span className="sameLine pullRight"><img className="imageBanner" src={Galaxy} alt="MEET Someone!"/></span>
             </td>
-            <span className="sameLine pullRight"><img className="imageBanner" src={Galaxy} alt="MEET Someone!"/></span>
           </tr>
           
           <tr>
@@ -157,6 +165,32 @@ class CreateCampaign extends Component {
             <td>
               <p>Your Home Town: </p>
               <input className="sameLine wideWidth" type="text" name="homeTown" placeholder="your home town" value={this.state.wish.homeTown}  onChange={ this.onChange }/>
+              <p>Are you a Boy or a Girl ?</p>
+              <ul>
+                <li>
+                  <label>
+                    <input
+                      name="check"
+                      type="radio"
+                      value="Boy"
+                      onChange={this.toggleGender}
+                    />
+                    Boy
+                  </label>
+                </li>
+
+                <li>
+                  <label>
+                    <input
+                      name="check"
+                      type="radio"
+                      value="Girl"
+                      onChange={this.toggleGender}
+                    />
+                    Girl
+                  </label>
+                </li>
+              </ul>
               <p>I'm Suffering from</p>
               <input className="sameLine wideWidth" type="text" name="illness" placeholder="my illness" value={this.state.wish.illness}  onChange={ this.onChange }/>
               <p>My Wish Details</p>
@@ -177,7 +211,7 @@ class CreateCampaign extends Component {
           </tr>
           <tr>
             <td>
-              <img className="imageDim" src={this.state.photo} alt="My pic"/>
+              <img className={this.state.photo ? "imageDim": "hidden"} src={this.state.photo} />
             </td>
           </tr>
           <tr>
@@ -188,7 +222,7 @@ class CreateCampaign extends Component {
           </tr>
           <tr>
             <td>
-              <img src={this.state.audio} alt="My Audio"/>
+              <img src={this.state.audio}/>
             </td>
           </tr>
 
@@ -200,7 +234,7 @@ class CreateCampaign extends Component {
           </tr>
           <tr>
             <td>
-              <img src={this.state.video} alt="My Audio"/>
+              <img src={this.state.video}/>
             </td>
           </tr>
 
@@ -216,4 +250,4 @@ class CreateCampaign extends Component {
   }
 }
 
-export default CreateCampaign;
+export default CreateWish;
