@@ -9,6 +9,7 @@ import NotFound from '../common/NotFound'
 import CreateWish from './wish/CreateWish'
 import PostCreate from './wish/PostCreate'
 import DetailedChild from '../child/DetailedChild'
+import Admin from '../dashboard/Admin'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Switch>
         <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/dashboard/admin" component={Admin} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/detailedChild/:id" component={DetailedChild} />
           <Route exact path="/createWish" component={CreateWish} />
