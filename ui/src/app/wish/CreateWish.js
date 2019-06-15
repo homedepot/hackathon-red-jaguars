@@ -91,7 +91,7 @@ class CreateWish extends Component {
     Axios.post('http://localhost:3002/wish/create', {
       firstName: this.state.wish.firstName,
       age: this.state.wish.age,
-      homeTown: this.state.homeTown,
+      homeTown: this.state.wish.homeTown,
       wishType: this.state.wishType,
       wishDate: new Date(),
       gender: this.state.gender,
