@@ -166,7 +166,8 @@ const Dashboard = () => {
                   ></img>
                 </div>
                 <div className="col-1" style={{padding:"1rem 0px 10px 0px"}}>
-                  <i className="material-icons" style={{fontSize:"3rem"}}>chevron_right</i>
+                  
+                  <button href="/detailedChild"><i className="material-icons" style={{fontSize:"3rem"}}>chevron_right</i></button>
                 </div>
               </div>
             ))}
