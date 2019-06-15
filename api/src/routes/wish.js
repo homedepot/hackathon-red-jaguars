@@ -68,7 +68,7 @@ router.get('/findAll', function(req, res, next) {
 router.get('/findOneById/:id', function(req, res) {
   console.log('finding one by ID', req.params.id)
   let id = req.params.id;
-  Wish.findById ({_id: id })
+  Wish.findOne({_id: id })
     .then(wish => {
       if(!wish) {
         return res.status(404).send({
@@ -121,7 +121,6 @@ router.put('/update/:id', function(req, res) {
       message: "Wish content can not be empty"
     });
   }
-  // /dwee
 
   Wish.findOneAndUpdate({_id: id }, { $set:{
     firstName: req.body.firstName,
@@ -157,6 +156,5 @@ router.put('/update/:id', function(req, res) {
     });
   });
 })
-
 
 module.exports = router
