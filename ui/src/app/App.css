@@ -87,3 +87,8 @@
   .hidden{
       display: none;
   }
+
+  .selectedYear{
+    text-decoration: underline;
+    color: orange;
+  }
