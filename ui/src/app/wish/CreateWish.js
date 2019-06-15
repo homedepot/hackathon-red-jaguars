@@ -206,7 +206,7 @@ class CreateWish extends Component {
           <tr>
             <td>
               <p>Upload your Favourite photo .!!</p>
-              <input className="inputFile"  id="file" type="file" onChange={this.onhandleChange} onClick={this.resetFile}/>
+              <input className="inputFile" id="file" type="file" onChange={this.onhandleChange} onClick={this.resetFile}/>
             </td>
           </tr>
           <tr>
