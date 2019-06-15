@@ -19,20 +19,17 @@ class DetailedChild extends Component {
         this.props.history.push("/dashboard");
     }
 
-    /*getChild= function() {
+    getChild = (e) => {
+        e.preventDefault();
         var obj
         const {match} = this.props
         const id = match.params.id
         axios
         .get(`${this.expressDomain}/wish/findOneById/${id}`)
         .then(response => {
-            console.log("data", response.data)
-            obj = response.data
-            console.log("obj", obj)
-            console.log("obj name", obj.firstName)
-            console.log("obj age", obj.age)
+            this.props.history.push("/detailedChild",{id: response.data.id})
         })
-    }*/
+    }
 
     render() {
         return (
@@ -117,7 +114,7 @@ class DetailedChild extends Component {
                             <div className="card">
                                 <div className="card-body">
                                     <div align="center" className="embed-responsive embed-responsive-16by9">
-                                        <video autoPlay loop className="embed-responsive-item">
+                                        <video className="embed-responsive-item">
                                             <source src={ShortVid} type="video/mp4"></source>
                                         </video>
                                     </div>

@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/detailedChild" component={DetailedChild} />
+          <Route exact path="/detailedChild/:id" component={DetailedChild} />
           <Route exact path="/createWish" component={CreateWish} />
           <Route exact path="/postWish" component={PostCreate} />
           <Route exact path="/" component={Login} />
