@@ -121,6 +121,7 @@ router.put('/update/:id', function(req, res) {
       message: "Wish content can not be empty"
     });
   }
+  // /dwee
 
   Wish.findOneAndUpdate({_id: id }, { $set:{
     firstName: req.body.firstName,
