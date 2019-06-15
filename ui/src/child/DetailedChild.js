@@ -14,24 +14,23 @@ class DetailedChild extends Component {
 
         this.expressDomain = process.env.REACT_APP_expressDomain || 'http://localhost:3002'
     }
+
     goBack = (e) => {
         e.preventDefault();
         this.props.history.push("/dashboard");
     }
 
-    getChild = (e) => {
-        e.preventDefault();
-        var obj
+    getChild = () => {
         const {match} = this.props
-        const id = match.params.id
-        axios
-        .get(`${this.expressDomain}/wish/findOneById/${id}`)
-        .then(response => {
-            this.props.history.push("/detailedChild",{id: response.data.id})
+        const id = match.location.state.id
+        axios.get(`${this.expressDomain}/wish/findOneById/${id}`).then(res => {
+            this.setState({wish: res.data});
+            this.props.history.push("/detailedChild",{id: res.data.id})
         })
     }
 
     render() {
+        console.log("child",this.props.userId)
         return (
             <div>
                 <button className="fancyButtons"  onClick={this.goBack}>Go Back To Dashboard</button>
