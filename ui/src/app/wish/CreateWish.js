@@ -206,12 +206,12 @@ class CreateWish extends Component {
           <tr>
             <td>
               <p>Upload your Favourite photo .!!</p>
-              <input className="inputFile"  id="file" type="file" onChange={this.onhandleChange} onClick={this.resetFile}/>
+              <input className="inputFile" id="file" type="file" onChange={this.onhandleChange} onClick={this.resetFile}/>
             </td>
           </tr>
           <tr>
             <td>
-              <img className={this.state.photo ? "imageDim": "hidden"} src={this.state.photo} />
+              <img className={this.state.photo ? "imageDim": "hidden"} alt="imageDim" src={this.state.photo} />
             </td>
           </tr>
           <tr>
@@ -222,7 +222,7 @@ class CreateWish extends Component {
           </tr>
           <tr>
             <td>
-              <img src={this.state.audio}/>
+              <img src={this.state.audio} alt="audio"/>
             </td>
           </tr>
 
@@ -234,7 +234,7 @@ class CreateWish extends Component {
           </tr>
           <tr>
             <td>
-              <img src={this.state.video}/>
+              <img src={this.state.video} alt="vid"/>
             </td>
           </tr>
 
