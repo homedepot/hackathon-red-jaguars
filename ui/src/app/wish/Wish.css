@@ -1,0 +1,141 @@
+.wishBackground {
+    padding: 50px;
+    background-color: #56807d;
+}
+
+#goSomewhere {
+    background-image: url("/ui/src/images/Rocket_Icon.png");
+}
+
+.wishBackground button {
+    cursor: pointer;
+}
+
+.spacing {
+    padding-left: 30px;
+    padding-right: 50px;
+}
+
+.bgYellow {
+    background-color: #fffa2f;
+}
+
+.wishBackground p {
+    font-size: xx-large;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.sameLine {
+    display: inline-block;
+}
+
+.wishBackground input textarea {
+    width: 200px;
+    height: 50px;
+    margin: 20px 20px;
+    border: 3px solid #090d90;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #ee29da;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #ee29da;
+    opacity:  1;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #ee29da;
+    opacity:  1;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #ee29da;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+    color:    #ee29da;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+    color:    #ee29da;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0px 20px;
+    text-align: center;
+}
+
+.imageDim {
+    margin-left: 300px;
+    height:400px;
+    width: 400px;
+    background-color: #fff07f;
+}
+
+.wideWidth {
+    width: 1000px !important;
+}
+
+.fancyButtons {
+    width: 250px;
+    height: 40px;
+    border: 2px solid blue;
+    font-size: large;
+    font-weight: bold;
+    color: darkblue;
+    background-color: indianred;
+}
+
+.surroundSpace {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.centerIt {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.leftSpace {
+    width: 300px !important;
+    margin-left: 30px;
+}
+
+.imageBanner {
+    width: 300px;
+    height: 200px ;
+    float: right;
+}
+
+.pullLeft {
+    align-items: left;
+}
+
+.pullRight {
+    align-items: right;
+}
+
+.head {
+    width:500px;
+}
