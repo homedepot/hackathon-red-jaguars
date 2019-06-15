@@ -10,8 +10,6 @@ import moment from "moment/moment.js";
 
 
 const Dashboard = () => {
-  const expressDomain =
-    process.env.REACT_APP_expressDomain || 'http://localhost:3002'
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
   const [checkBoxes, setCheckBoxes] = useState([
@@ -39,7 +37,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    Axios.get(`${expressDomain}/wish/findAll`, {})
+    Axios.get(`http://localhost:3002/wish/findAll`, {})
       .then(response => {
         setApiData(response.data)
         setIsLoading(false)

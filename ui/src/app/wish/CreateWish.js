@@ -177,7 +177,7 @@ class CreateCampaign extends Component {
           </tr>
           <tr>
             <td>
-              <img className="imageDim" src={this.state.photo} alt="My Photo"/>
+              <img className="imageDim" src={this.state.photo} alt="My pic"/>
             </td>
           </tr>
           <tr>

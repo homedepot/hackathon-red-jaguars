@@ -15,7 +15,7 @@ let ChildWish = mongoose.Schema({
   userId: String,
   audio: Object,
   video: Object,
-  photo: Object
+  photo: Object,
   date: String,
   gender: String
 })
