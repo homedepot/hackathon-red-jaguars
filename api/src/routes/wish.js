@@ -65,9 +65,10 @@ router.get('/findAll', function(req, res, next) {
 })
 
 
-router.get('/findOneById/', function(req, res) {
+router.get('/findOneById/:id', function(req, res) {
   console.log('finding one by ID', req.params.id)
-  Wish.findById (req.params.id)
+  let id = req.params.id;
+  Wish.findById ({_id: id })
     .then(wish => {
       if(!wish) {
         return res.status(404).send({
