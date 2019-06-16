@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import BigPic from './bigpic.jpg'
+import HomeDepot from './homedepot.jpg'
 
 export default class Landing extends Component {
   render() {
     return (
       <div>
-        <div class = "container">
-          <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top" id="mainNav" padding = "400">
+        <body>
+        <div className = "container">
+          <nav className="navbar navbar-expand-lg navbar-dark bg-light fixed-top" id="mainNav" padding = "400">
             <img src="images/MakeAWishLogo.png" width= "12%" height= "auto" className = "img-responsive" alt=""></img>
             <img src="images/Galaxy_Color.png" width= "12%" height= "auto" className = "img-responsive" alt=""></img>
             <ul className="navbar-nav ml-auto">
@@ -15,24 +18,24 @@ export default class Landing extends Component {
             </ul>
           </nav>
         </div>
-        <div class = "container">
-          <div class = "row">
-            <div class = "col-9">
+        <div className = "container">
+          <div className = "row">
+            <div className = "col-9">
               <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <ol className="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                   <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                   <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div className="carousel-inner">
                   <div className="carousel-item active">
-                    <img className="d-block w-100" src="images/Galaxy_Color.png" alt="First slide"></img>
+                    <img className="d-block w-100" src="images/Galaxy_Color.png" height="300" width="200" alt="First slide"></img>
                   </div>
                   <div className="carousel-item">
-                    <img className="d-block w-100" src="images/Galaxy.png" alt="Second slide"></img>
+                    <img className="d-block w-100" src="images/Galaxy.png" height="300" width="200" alt="Second slide"></img>
                   </div>
                   <div className="carousel-item">
-                    <img className="d-block w-100" src="images/MakeAWishLogo.png" alt="Third slide"></img>
+                    <img className="d-block w-100" src="images/MakeAWishLogo.png" height="300" width="200" alt="Third slide"></img>
                   </div>
                 </div>
                 <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -45,58 +48,44 @@ export default class Landing extends Component {
                 </a>
               </div>
               <div className="card">
-              <img className="card-top" src="..." alt="Card cap"></img>
               <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/" className="btn btn-primary">Go somewhere</a>
+                <h1 className="card-title">Celebrations</h1>
+
+                <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+                <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
-            </div>
-            <div className="card">
-              <img className="card-top" src="..." alt="Card cap"></img>
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/" className="btn btn-primary">Go somewhere</a>
+                <div className="card-body">
+                <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+                <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
-            </div>
-            <div className="card">
-              <img className="card-top" src="..." alt="Card cap"></img>
               <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/" className="btn btn-primary">Go somewhere</a>
+              <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+                <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
             </div>
             </div>
             <div className = "col-3">
+            <div className="text-center">
             <div className="card">
-              <img className="card-top" src="..." alt="Card cap"></img>
               <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/" className="btn btn-primary">Go somewhere</a>
+              <h1 className="card-title">Sponsors</h1>
+                <img className="card-top" src={HomeDepot} height="200" width="200" alt="Card cap"></img>
+                <a href="/" className="btn btn-primary">Learn more</a>
               </div>
-            </div>
-            <div className="card">
-              <img className="card-top" src="..." alt="Card cap"></img>
               <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/" className="btn btn-primary">Go somewhere</a>
+                <img className="card-top" src={HomeDepot} height="200" width="200" alt="Card cap"></img>
+                <a href="/" className="btn btn-primary">Learn more</a>
               </div>
-            </div>
-            <div className="card">
-              <img className="card-top" src="..." alt="Card cap"></img>
               <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/" className="btn btn-primary">Go somewhere</a>
+                <img className="card-top" src={HomeDepot} height="200" width="200" alt="Card cap"></img>
+                <a href="/" className="btn btn-primary">Learn more</a>
               </div>
-            </div>
             </div>
           </div>
+          </div>
+          </div>
         </div>
+        </body>
       </div>
     )
   }
