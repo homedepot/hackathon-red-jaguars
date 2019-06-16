@@ -110,7 +110,7 @@ const Dashboard = props => {
     )
   }
   const handleNavToDetailedChild = e => {
-    props.history.push('/detailedchild', { wish: e })
+    props.history.push('/detailedchild', { wish: e,role:role })
   }
 
   const handleOnCheckboxes = e => {
