@@ -51,16 +51,16 @@ const Dashboard = props => {
         if(role==="admin")
           setYearList(listOfYears);
         else
-        setYearList(yearList.filter(x=>listOfYears.includes(x)))
+        setYearList([year-2+"",year-1+"",year+""].filter(x=>listOfYears.includes(x)))
         setApiData(wholeData)
-        setFilterData(wholeData.filter(x=>x.wishDate.includes(selectedYear)))
+        setFilterData(wholeData.filter(x=>x.wishDate.includes(year)))
         setIsLoading(false)
       })
       .catch(error => {
         setIsLoading(false)
         console.log(error)
       })
-  }, [])
+  }, [role,year])
 
   useEffect(() => {}, [checkBoxes])
 
