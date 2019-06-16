@@ -22,7 +22,7 @@ describe('Default routing behavior', () => {
       .at(0)
       .props()
 
-    expect(landingRoute.path).toEqual('/')
+    expect(landingRoute.path).toEqual('/landing')
     expect(landingRoute.component).toEqual(Landing)
   })
 })
