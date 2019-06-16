@@ -137,7 +137,7 @@ const DetailedChild = (props)=>{
                                 <div className="card-body">
                                     <h5 className="card-title">Sponsor ID</h5>
                                     <form> {/*Figure out how to save sponsor id*/}
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <input type="string" className={role==="manager" ? "form-control": "hidden"} id="SponsorID" placeholder="Enter Sponsor ID"></input>
                                     </div>
                                     </form>
