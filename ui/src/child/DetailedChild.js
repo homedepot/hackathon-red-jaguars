@@ -5,15 +5,15 @@ import { withRouter } from 'react-router-dom'
 //import BigPic from './bigpic.jpg'
 //import BigPic2 from './bigpic2.jpg'
 //import ShortVid from './shortvid.mp4'
-import Alien_Icon from '../images/Alien_Icon.png'
-import Astronaut_Icon from '../images/Astronaut_Icon.png'
-import Rocket_Icon from '../images/Rocket_Icon.png'
-import Telescope_Icon from '../images/Telescope_Icon.png'
+//import Alien_Icon from '../images/Alien_Icon.png'
+//import Astronaut_Icon from '../images/Astronaut_Icon.png'
+//import Rocket_Icon from '../images/Rocket_Icon.png'
+//import Telescope_Icon from '../images/Telescope_Icon.png'
 
 const DetailedChild = (props)=>{
     const wish= props.location.state.wish;
-    //const role = props.location.state.role;
-    const role = "manager";
+    const role = props.location.state.role;
+    //const role = "manager";
     const goBack = (e) => {
         e.preventDefault();
         this.props.history.push("/dashboard"); //Warning: does not work
@@ -135,7 +135,7 @@ const DetailedChild = (props)=>{
                         </div>
                     </div>
                     <div className="row">
-                        <h1></h1>
+                        <h1>{/*empty*/}</h1>
                     </div>
                     <div className="row">
                         <div className="col">
