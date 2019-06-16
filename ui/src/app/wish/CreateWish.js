@@ -5,6 +5,7 @@ import Telescope from '../../images/Telescope_Icon.png';
 import Alien from '../../images/Alien_Icon.png';
 import Rocket from '../../images/Rocket_Icon.png';
 import Galaxy from '../../images/Galaxy_Color.png';
+import MakeAWish from '../../images/MakeAWishLogo.png';
 
 import Axios from "axios";
 
@@ -93,7 +94,7 @@ class CreateWish extends Component {
       age: this.state.wish.age,
       homeTown: this.state.wish.homeTown,
       wishType: this.state.wishType,
-      wishDate: new Date(),
+      wishDate: new Date().toLocaleDateString(),
       gender: this.state.gender,
       illness: this.state.wish.illness,
       wishDetail: this.state.wish.wishDetail,
@@ -119,14 +120,25 @@ class CreateWish extends Component {
   render() {
     return (
       <div className="wishBackground">
-        <table>
+        <table style={{width:"100%"}}>
           <tbody>
           <tr>
-            <td>
-            <div className="sameLine">
-              <p style={{fontSize: '45px', marginRight: '100px'}} className="head">Hello!  Make A Wish</p>
+            <td colSpan="2">
+            <br/>
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-3" style={{paddingLeft:"0px"}}>
+                  <label style={{fontSize: '75px', fontWeight:"800",color:"darkblue", marginRight: '0px',lineHeight:"60px"}} className=""> &nbsp;<br/>Hello! </label>
+                </div>
+                <div className="col-4 ">
+                    <span className="sameLine " style={{ marginRight: '50px'}}><img className="" height="125" src={MakeAWish} alt="Make a wish"/></span>
+                </div>
+                <div className="col-4 ">
+                  <span className="sameLine pullRight" style={{textAlign:"right"}}><img className="" height="125" src={Galaxy} alt="Galaxy"/></span>
+                </div>
+              </div>
+              <br/><br/>
             </div>
-              <span className="sameLine pullRight"><img className="imageBanner" src={Galaxy} alt="MEET Someone!"/></span>
             </td>
           </tr>
           
@@ -146,16 +158,16 @@ class CreateWish extends Component {
                 <p>I wish to:</p>
                 <div>
                   <span className="spacing">
-                    <button className="spacing bgYellow" name="GoSomewhere"><img src={Rocket} alt="GO Somewhere!" onClick={this.onClick} /></button>
+                    <button className={'spacing bgYellow '+ (this.state.wishType==='GO Somewhere!' ? 'selectedTo': '')} ><img src={Rocket} alt="GO Somewhere!" onClick={this.onClick} /></button>
                   </span>
                   <span className="spacing">
-                    <button className="spacing bgYellow"><img  src={Alien} alt="MEET Someone!" onClick={this.onClick} /></button>
+                    <button className={"spacing bgYellow "+ (this.state.wishType==="MEET Someone!" ? "selectedTo" : "")}><img  src={Alien} alt="MEET Someone!" onClick={this.onClick} /></button>
                   </span>
                   <span className="spacing">
-                    <button className="spacing bgYellow"><img src={Astronaut} alt="BE Someone!" onClick={this.onClick} /></button>
+                    <button className={"spacing bgYellow "+ (this.state.wishType==="BE Someone!" ? "selectedTo" : "")}><img src={Astronaut} alt="BE Someone!" onClick={this.onClick} /></button>
                   </span>
                   <span className="spacing">
-                    <button className="spacing bgYellow"><img src={Telescope} alt="SEE Something!" onClick={this.onClick} /></button>
+                    <button className={"spacing bgYellow "+ (this.state.wishType==="SEE Something!" ? "selectedTo" : "")}><img  src={Telescope} alt="SEE Something!" onClick={this.onClick} /></button>
                   </span>
                 </div>
               </div>
@@ -166,8 +178,6 @@ class CreateWish extends Component {
               <p>Your Home Town: </p>
               <input className="sameLine wideWidth" type="text" name="homeTown" placeholder="your home town" value={this.state.wish.homeTown}  onChange={ this.onChange }/>
               <p>Are you a Boy or a Girl ?</p>
-              <ul>
-                <li key="1">
                   <label>
                     <input
                       name="check"
@@ -175,11 +185,9 @@ class CreateWish extends Component {
                       value="Boy"
                       onChange={this.toggleGender}
                     />
-                    Boy
-                  </label>
-                </li>
+                    <span style={{paddingLeft:"5px"}}>Boy</span>
+                  </label><br/>
 
-                <li>
                   <label key="2">
                     <input
                       name="check"
@@ -187,10 +195,8 @@ class CreateWish extends Component {
                       value="Girl"
                       onChange={this.toggleGender}
                     />
-                    Girl
+                    <span style={{paddingLeft:"5px"}}>Girl</span>
                   </label>
-                </li>
-              </ul>
               <p>I'm Suffering from</p>
               <input className="sameLine wideWidth" type="text" name="illness" placeholder="my illness" value={this.state.wish.illness}  onChange={ this.onChange }/>
               <p>My Wish Details</p>
@@ -233,11 +239,13 @@ class CreateWish extends Component {
             </td>
           </tr>
 
-          <tr className="topSpace">
+          <tr className="topSpace" >
             <td>
+            <br/>
               <button className="sameLine fancyButtons largeButton" onClick={this.saveWish}>Submit My Wish</button>
             </td>
             <td className="sameLine">
+            <br/>
               <button className="fancyButtons"  onClick={this.goBack}>Go Back</button>
             </td>
           </tr>

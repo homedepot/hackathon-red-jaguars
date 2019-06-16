@@ -16,6 +16,7 @@ const Dashboard = props => {
   const [filterData, setFilterData] = useState([])
   const [query, setQuery] = useState('')
   const [selectedYear, setSelectedYear] = useState(year)
+  const [yearList, setYearList] = useState([year-2+"",year-1+"",year+""]);
   const role =
     props && props.location && props.location.state && props.location.state.role
   const [checkBoxes, setCheckBoxes] = useState([
@@ -45,15 +46,21 @@ const Dashboard = props => {
     setIsLoading(true)
     Axios.get(`http://localhost:3002/wish/findAll`, {})
       .then(response => {
-        setApiData(response.data)
-        setFilterData(response.data)
+        let wholeData=response.data.sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1);
+        let listOfYears= [...(new Set(wholeData.map(x=>x.wishDate.slice(-4))))];
+        if(role==="admin")
+          setYearList(listOfYears);
+        else
+        setYearList([year-2+"",year-1+"",year+""].filter(x=>listOfYears.includes(x)))
+        setApiData(wholeData)
+        setFilterData(wholeData.filter(x=>x.wishDate.includes(year)))
         setIsLoading(false)
       })
       .catch(error => {
         setIsLoading(false)
         console.log(error)
       })
-  }, [])
+  }, [role,year])
 
   useEffect(() => {}, [checkBoxes])
 
@@ -61,8 +68,8 @@ const Dashboard = props => {
     let backupData = apiData;
     let filteredData = apiData.filter(x=>x._id!==id);
     
-    setApiData(filteredData)
-      setFilterData(filteredData)
+    setApiData(filteredData.sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1))
+      setFilterData(filteredData.sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1))
     Axios.delete(`http://localhost:3002/wish/delete/${id}`)
       .then(res => {
         
@@ -87,10 +94,10 @@ const Dashboard = props => {
                 .reduce(
                   (r, z) =>
                     r &&
-                    (x.firstName + x.sponsor + x.homeTown + x.date).includes(z),
+                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(z),
                   true
                 )
-            : (x.firstName + x.sponsor + x.homeTown + x.date).includes(
+            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(
                 query
               )) &&
           boxes.filter(
@@ -98,8 +105,8 @@ const Dashboard = props => {
               r.value.toLowerCase() ===
               x.wishType.replace(' ', '').toLowerCase()
           )[0].checked &&
-          x.date.includes(passedYear)
-      )
+          x.wishDate.includes(passedYear)
+      ).sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1)
     )
   }
   const handleNavToDetailedChild = e => {
@@ -123,10 +130,10 @@ const Dashboard = props => {
                 .reduce(
                   (r, z) =>
                     r &&
-                    (x.firstName + x.sponsor + x.homeTown + x.date).includes(z),
+                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(z),
                   true
                 )
-            : (x.firstName + x.sponsor + x.homeTown + x.date).includes(
+            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(
                 query
               )) &&
           boxes.filter(
@@ -134,19 +141,18 @@ const Dashboard = props => {
               r.value.toLowerCase() ===
               x.wishType.replace(' ', '').toLowerCase()
           )[0].checked &&
-          x.date.includes(selectedYear)
+          x.wishDate.includes(selectedYear)
         )
       })
     )
   }
   let month = ''
   return (
-    <div className="container-fluid" style={{ paddingLeft: '10rem' }}>
-      <h1>Welcome to the Hackathon Dashboard Page {role}</h1>
+    <div className="container-fluid" style={{ padding: '0rem 10rem 5rem 10rem',backgroundColor:"#f8f9fa" }}>
 
       <br />
       <div className="row">
-        <div className="col-4">
+        <div className="col-5">
           <div className="input-group" style={{ paddingTop: '1rem' }}>
             <input
               type="text"
@@ -165,7 +171,7 @@ const Dashboard = props => {
             </div>
           </div>
         </div>
-        <div className="col-4" style={{ paddingTop: '10px' }}>
+        <div className="col-6" style={{ paddingTop: '10px' }}>
           <div>Filter by Wish Type</div>
 
           {checkBoxes.map(x => (
@@ -198,7 +204,7 @@ const Dashboard = props => {
       </div>
       <br />
       <div className="row">
-        <div className="col-9">
+        <div className="col-12">
           <div className="row">
             {' '}
             <div className="col-8"></div>
@@ -206,36 +212,14 @@ const Dashboard = props => {
           Download me
         </CSVLink></div>
             <div className="col-2" style={{ textAlign: 'right' }}>
-              <label
-                style={{ color: 'blue', cursor: 'pointer' }}
-                className={selectedYear === year - 2 ? 'selectedYear' : ''}
+              {yearList.map(z => (
+                <label style={{ color: 'blue', cursor: 'pointer',padding:"0px 5px 0px 5px" }}
+                className={selectedYear === z ? 'selectedYear' : ''}
                 onClick={() => {
-                  setSelectedYear(year - 2)
-                  handleOnChangeSearch(query, year - 2)
-                }}
-              >
-                {year - 2}
-              </label>{' '}
-              <label
-                style={{ color: 'blue', cursor: 'pointer' }}
-                className={selectedYear === year - 1 ? 'selectedYear' : ''}
-                onClick={() => {
-                  setSelectedYear(year - 1)
-                  handleOnChangeSearch(query, year - 1)
-                }}
-              >
-                {year - 1}
-              </label>{' '}
-              <label
-                style={{ color: 'blue', cursor: 'pointer' }}
-                className={selectedYear === year ? 'selectedYear' : ''}
-                onClick={() => {
-                  setSelectedYear(year)
-                  handleOnChangeSearch(query, year)
-                }}
-              >
-                {year}
-              </label>{' '}
+                  setSelectedYear(z)
+                  handleOnChangeSearch(query, z)
+                }}> {z}
+                </label>))}
             </div>
           </div>
           <div className="row" style={{ textAlign: 'center' }}>
@@ -250,12 +234,12 @@ const Dashboard = props => {
                 <div
                   className={
                     'row ' +
-                    (month === moment(x.date).format('MMMM') ? 'hidden' : '')
+                    (month === moment(x.wishDate).format('MMMM') ? 'hidden' : '')
                   }
                   style={{ backgroundColor: '#b5b5b5' }}
                 >
                   <div className="col-12">
-                    {(month = moment(x.date).format('MMMM'))}
+                    {(month = moment(x.wishDate).format('MMMM'))}
                   </div>
                 </div>
                 <div
@@ -273,7 +257,7 @@ const Dashboard = props => {
                         (x.gender === 'male' ? icn_male : icn_female) +
                         ')',
                       height: '100px',
-                      backgroundSize: 'cover'
+                      backgroundSize: 'contain'
                     }}
                   >
                     <label
@@ -283,12 +267,11 @@ const Dashboard = props => {
                         color: 'white'
                       }}
                     >
-                      {moment(x.date).format('dddd')}
+                      {moment(x.wishDate).format('dddd')}
                     </label>
                     <br />
                     <div style={{ padding: '5px 5px 10px 25px' }}>
-                      {moment(x.date).format('D')}
-                      {/* {x.date} */}
+                      {moment(x.wishDate).format('D')}
                     </div>
                   </div>
                   <div
@@ -296,16 +279,17 @@ const Dashboard = props => {
                     style={{ padding: '1rem 0px 10px 1rem' }}
                   >
                     <img
-                      src="https://picsum.photos/50/50"
+                      style={{borderRadius:"25px"}}
+                      src="https://picsum.photos/75/75"
                       alt="{x.firstName}"
                       key={x._id}
                     ></img>
                   </div>
                   <div
-                    className="col-6"
-                    style={{ padding: '1rem 0px 10px 0px' }}
+                    className={role==="admin" ? "col-6" : "col-7"}
+                    style={{ padding: '1rem 1rem 10px 1rem' }}
                   >
-                    {x.firstName} - Age {x.age} from {x.homeTown}, GA <br />{' '}
+                    <label style={{fontSize:"1.5rem"}}>{x.firstName} - Age {x.age} from {x.homeTown}, GA </label><br />{' '}
                     {x.firstName} wishes {x.wishType} {x.wishDetail}
                   </div>
                   <div
@@ -313,7 +297,7 @@ const Dashboard = props => {
                     style={{ padding: '1rem 0px 10px 0px' }}
                   >
                     <img
-                      src="https://picsum.photos/51/50"
+                      src="https://picsum.photos/60/60"
                       alt={x.firstName}
                       key={x._id + 'logo'}
                     ></img>
@@ -332,15 +316,15 @@ const Dashboard = props => {
                           ? tomeet
                           : togo
                       }
-                      height="50"
-                      width="50"
+                      height="60"
+                      width="60"
                       alt={x.firstName + '_logo'}
                       key={x._id + 'logo'}
                     ></img>
                   </div>
                   <div
-                    className="col-1"
-                    style={{ padding: '1rem 0px 10px 0px' }}
+                    className={"col-1 " + role==="admin" ? "" : "hidden"}
+                    style={{ padding: '1.5rem 0px 10px 0px' }}
                   >
                     <i
                       className="material-icons"
@@ -352,7 +336,7 @@ const Dashboard = props => {
                   </div>
                   <div
                     className="col-1"
-                    style={{ padding: '1rem 0px 10px 0px' }}
+                    style={{ padding: '1.5rem 0px 10px 0px' }}
                   >
                     <i
                       className="material-icons"

@@ -92,3 +92,9 @@
     text-decoration: underline;
     color: orange;
   }
+
+  :placeholder{
+    text-align: left;
+  }
+
+  
