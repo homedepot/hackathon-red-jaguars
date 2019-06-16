@@ -15,6 +15,7 @@ class PostCreate extends Component {
         <h2>
           Your wish will be fulfilled soon.
         </h2>
+        <br/><br/>
         <button className="leftSpace fancyButtons"  onClick={this.goBack}>Go To Home Screen</button>
       </div>
     )

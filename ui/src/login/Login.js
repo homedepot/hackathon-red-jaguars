@@ -32,7 +32,7 @@ class Login extends Component {
         lastName,
         role
       })
-
+      alert("Thanks for registering!!!")
       this.setState({
         username: '',
         password: '',
