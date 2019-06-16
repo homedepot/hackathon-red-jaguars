@@ -39,13 +39,13 @@
     box-sizing: border-box;
 }
 
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+.wishBackground ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color: #ee29da;
     font-weight: bold;
     font-size: 16px;
     padding: 0px 20px;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+.wishBackground :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color:    #ee29da;
     opacity:  1;
     font-weight: bold;
@@ -53,7 +53,7 @@
     padding: 0px 20px;
     text-align: center;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+.wishBackground ::-moz-placeholder { /* Mozilla Firefox 19+ */
     color:    #ee29da;
     opacity:  1;
     font-weight: bold;
@@ -61,14 +61,14 @@
     padding: 0px 20px;
     text-align: center;
 }
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+.wishBackground :-ms-input-placeholder { /* Internet Explorer 10-11 */
     color:    #ee29da;
     font-weight: bold;
     font-size: 16px;
     padding: 0px 20px;
     text-align: center;
 }
-::-ms-input-placeholder { /* Microsoft Edge */
+.wishBackground ::-ms-input-placeholder { /* Microsoft Edge */
     color:    #ee29da;
     font-weight: bold;
     font-size: 16px;
@@ -76,7 +76,7 @@
     text-align: center;
 }
 
-::placeholder { /* Most modern browsers support this now. */
+.wishBackground ::placeholder { /* Most modern browsers support this now. */
     color:    #ee29da;
     font-weight: bold;
     font-size: 16px;

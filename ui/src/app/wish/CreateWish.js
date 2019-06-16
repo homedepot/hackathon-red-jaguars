@@ -93,7 +93,7 @@ class CreateWish extends Component {
       age: this.state.wish.age,
       homeTown: this.state.wish.homeTown,
       wishType: this.state.wishType,
-      wishDate: new Date(),
+      wishDate: new Date().toLocaleDateString(),
       gender: this.state.gender,
       illness: this.state.wish.illness,
       wishDetail: this.state.wish.wishDetail,
