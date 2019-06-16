@@ -21,19 +21,19 @@ class CreateWish extends Component {
       video: '',
       age: '',
       wish: {
-      "firstName": "",
-      "age": "",
-      "homeTown": "",
-      "wishType": "",
-      "gender": "",
-      "wishDate": "",
-      "illness": "",
-      "wishDetail": "",
-      "orgId": "",
-      "userId": "",
-      "audio": "",
-      "video": "",
-      "photo": ""
+        "firstName": "",
+        "age": "",
+        "homeTown": "",
+        "wishType": "",
+        "gender": "",
+        "wishDate": "",
+        "illness": "",
+        "wishDetail": "",
+        "orgId": "",
+        "userId": "",
+        "audio": "",
+        "video": "",
+        "photo": ""
       },
     };
     this.toggleGender = this.toggleGender.bind(this);
@@ -62,7 +62,7 @@ class CreateWish extends Component {
   toggleGender = (e) => {
     this.setState ({gender : e.target.value },
       () =>
-    console.log(this.state.gender))
+        console.log(this.state.gender))
   }
 
   onhandleChange = (e) => {
@@ -108,8 +108,8 @@ class CreateWish extends Component {
           this.setState({
             wish: wish,
           })
-        console.log(this.state.wish)
-        this.props.history.push('/postWish');
+          console.log(this.state.wish)
+          this.props.history.push('/postWish');
         }
       )
       .catch(function(error) {
@@ -124,24 +124,24 @@ class CreateWish extends Component {
           <tbody>
           <tr>
             <td colSpan="2">
-            <br/>
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-3" style={{paddingLeft:"0px"}}>
-                  <label style={{fontSize: '75px', fontWeight:"800",color:"darkblue", marginRight: '0px',lineHeight:"60px"}} className=""> &nbsp;<br/>Hello! </label>
-                </div>
-                <div className="col-4 ">
+              <br/>
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-3" style={{paddingLeft:"0px"}}>
+                    <label style={{fontSize: '75px', fontWeight:"800",color:"darkblue", marginRight: '0px',lineHeight:"60px"}} className=""> &nbsp;<br/>Hello! </label>
+                  </div>
+                  <div className="col-4 ">
                     <span className="sameLine " style={{ marginRight: '50px'}}><img className="" height="125" src={MakeAWish} alt="Make a wish"/></span>
+                  </div>
+                  <div className="col-4 ">
+                    <span className="sameLine pullRight" style={{textAlign:"right"}}><img className="" height="125" src={Galaxy} alt="Galaxy"/></span>
+                  </div>
                 </div>
-                <div className="col-4 ">
-                  <span className="sameLine pullRight" style={{textAlign:"right"}}><img className="" height="125" src={Galaxy} alt="Galaxy"/></span>
-                </div>
+                <br/><br/>
               </div>
-              <br/><br/>
-            </div>
             </td>
           </tr>
-          
+
           <tr>
             <td>
               <p className="sameLine pullLeft">My name is</p>
@@ -178,25 +178,25 @@ class CreateWish extends Component {
               <p>Your Home Town: </p>
               <input className="sameLine wideWidth" type="text" name="homeTown" placeholder="your home town" value={this.state.wish.homeTown}  onChange={ this.onChange }/>
               <p>Are you a Boy or a Girl ?</p>
-                  <label>
-                    <input
-                      name="check"
-                      type="radio"
-                      value="Boy"
-                      onChange={this.toggleGender}
-                    />
-                    <span style={{paddingLeft:"5px"}}>Boy</span>
-                  </label><br/>
+              <label>
+                <input
+                  name="check"
+                  type="radio"
+                  value="Boy"
+                  onChange={this.toggleGender}
+                />
+                <span style={{paddingLeft:"5px"}}>Boy</span>
+              </label><br/>
 
-                  <label key="2">
-                    <input
-                      name="check"
-                      type="radio"
-                      value="Girl"
-                      onChange={this.toggleGender}
-                    />
-                    <span style={{paddingLeft:"5px"}}>Girl</span>
-                  </label>
+              <label key="2">
+                <input
+                  name="check"
+                  type="radio"
+                  value="Girl"
+                  onChange={this.toggleGender}
+                />
+                <span style={{paddingLeft:"5px"}}>Girl</span>
+              </label>
               <p>I'm Suffering from</p>
               <input className="sameLine wideWidth" type="text" name="illness" placeholder="my illness" value={this.state.wish.illness}  onChange={ this.onChange }/>
               <p>My Wish Details</p>
@@ -241,11 +241,11 @@ class CreateWish extends Component {
 
           <tr className="topSpace" >
             <td>
-            <br/>
+              <br/>
               <button className="sameLine fancyButtons largeButton" onClick={this.saveWish}>Submit My Wish</button>
             </td>
             <td className="sameLine">
-            <br/>
+              <br/>
               <button className="fancyButtons"  onClick={this.goBack}>Go Back</button>
             </td>
           </tr>
