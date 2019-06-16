@@ -12,8 +12,8 @@ import Telescope_Icon from '../images/Telescope_Icon.png'
 
 const DetailedChild = (props)=>{
     const wish= props.location.state.wish;
-    //const role = props.location.state.role;
-    const role = "manager";
+    const role = props.location.state.role;
+    //const role = "manager";
     const goBack = (e) => {
         e.preventDefault();
         this.props.history.push("/dashboard"); //Warning: does not work
