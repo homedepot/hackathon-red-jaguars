@@ -175,7 +175,7 @@ const Dashboard = props => {
           <div>Filter by Wish Type</div>
 
           {checkBoxes.map(x => (
-            <div className="form-check form-check-inline">
+            <div key={x.value+"div"} className="form-check form-check-inline">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -185,7 +185,7 @@ const Dashboard = props => {
                 checked={x.checked}
                 onChange={e => handleOnCheckboxes(x.value)}
               />
-              <label className="form-check-label" htmlFor="inlineCheckbox1">
+              <label key={x.value+"label"} className="form-check-label" htmlFor="inlineCheckbox1">
                 {x.label}
               </label>
             </div>
@@ -208,12 +208,12 @@ const Dashboard = props => {
           <div className="row">
             {' '}
             <div className="col-8"></div>
-            <div className="col-2" style={{ textAlign: 'right' }}><CSVLink data={apiData} separator={';'}>
+            <div className={"col-2 " + role==="admin" ? "" : "hidden"} style={{ textAlign: 'right' }}><CSVLink data={apiData} separator={';'}>
           Download me
         </CSVLink></div>
             <div className="col-2" style={{ textAlign: 'right' }}>
               {yearList.map(z => (
-                <label style={{ color: 'blue', cursor: 'pointer',padding:"0px 5px 0px 5px" }}
+                <label key={z} style={{ color: 'blue', cursor: 'pointer',padding:"0px 5px 0px 5px" }}
                 className={selectedYear === z ? 'selectedYear' : ''}
                 onClick={() => {
                   setSelectedYear(z)
