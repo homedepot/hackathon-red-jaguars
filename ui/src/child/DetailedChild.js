@@ -16,7 +16,7 @@ const DetailedChild = (props)=>{
     const role = "manager";
     const goBack = (e) => {
         e.preventDefault();
-        this.props.history.push("/dashboard");
+        this.props.history.push("/dashboard"); //Warning: does not work
     }
     const onhandleChange = (e) => {
         this.setState ({
@@ -194,7 +194,7 @@ const DetailedChild = (props)=>{
                     <div className="row justify-content-end">
                         <div className="col">
                             <div className="text-right">
-                                <button type="button" className="btn btn-primary btn-large">Save Changes</button>
+                                <button type="button" className="btn btn-primary btn-large">Save Changes</button> {/*Button does not do anything atm*/}
                             </div>
                         </div>
                     </div>
