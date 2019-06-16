@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import './Wish.css';
-import Astronaut from '../../images/Astronaut_Icon.png';
-import Telescope from '../../images/Telescope_Icon.png';
-import Alien from '../../images/Alien_Icon.png';
-import Rocket from '../../images/Rocket_Icon.png';
-import Galaxy from '../../images/Galaxy_Color.png';
-import MakeAWish from '../../images/MakeAWishLogo.png';
+import Astronaut from '../images/Astronaut_Icon.png';
+import Telescope from '../images/Telescope_Icon.png';
+import Alien from '../images/Alien_Icon.png';
+import Rocket from '../images/Rocket_Icon.png';
+import Galaxy from '../images/Galaxy_Color.png';
+import MakeAWish from '../images/MakeAWishLogo.png';
 
 import Axios from "axios";
 
