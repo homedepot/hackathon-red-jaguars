@@ -48,12 +48,11 @@ export default class Landing extends Component {
                 </a>
               </div>
               <div className="card">
-              <h1 className="card-title">Celebrations</h1>
-              
               <div class="card-body">
+                <h1 className="card-title">Celebrations</h1>
+
                 <img class="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
                 <a href="/" class="btn btn-primary">Learn more information</a>
-              
               </div>
                 <div class="card-body">
                 <img class="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
@@ -71,8 +70,8 @@ export default class Landing extends Component {
             <div class = "col-3">
             <div className="text-center">
             <div className="card">
-              <h1 className="card-title">Sponsors</h1>
               <div class="card-body">
+              <h1 className="card-title">Sponsors</h1>
                 <img class="card-top" src={HomeDepot} height="200" width="200" alt="Card cap"></img>
                 <a href="/" class="btn btn-primary">Learn more</a>
               </div>
