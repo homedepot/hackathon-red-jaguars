@@ -159,9 +159,11 @@ const DetailedChild = (props)=>{
                                 <div className="card-body">
                                     <h5 className="card-title">Sponsor ID</h5>
                                     <form> {/*Figure out how to save sponsor id*/}
+
                                     <div class="form-group">
                                         {wish.orgId}
                                         <input type="string" className={((role==="manager") && wish.orgId.length===0) ? "form-control": "hidden"} id="SponsorID" placeholder="Enter Sponsor ID" onChange={(x)=>setOrgId(x.currentTarget.value)}></input>
+
                                     </div>
                                     </form>
                                 </div>
