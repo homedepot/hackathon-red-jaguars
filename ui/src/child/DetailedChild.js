@@ -1,6 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { withRouter } from 'react-router-dom'
 import Beemo from './beemo.jpg'
+
+import Axios from "axios";
 //import HomeDepot from './homedepot.jpg'
 //import BigPic from './bigpic.jpg'
 //import BigPic2 from './bigpic2.jpg'
@@ -13,36 +15,56 @@ import Telescope_Icon from '../images/Telescope_Icon.png'
 const DetailedChild = (props)=>{
     const wish= props.location.state.wish;
     const role = props.location.state.role;
-    //const role = "manager";
+
+       const [orgId ,setOrgId] = useState("")
+        const [ audio , setAudio]= useState("")
+        const [ video ,setVideo]= useState("")
+        const [ photo , setPhoto]= useState("")
+    const[companyLogo, setCompanyLogo]=useState("")
+    //const role = manager";
+
+
+    const updateWish = () => {
+        let url="http://localhost:3002/wish/update/" + wish._id;
+        debugger;
+        Axios.put(url, {
+          firstName: wish.firstName,
+          age: wish.age,
+          homeTown: wish.homeTown,
+          wishType: wish.wishType,
+          wishDate: wish.wishDate,
+          gender: wish.gender,
+          illness: wish.illness,
+          wishDetail: wish.wishDetail,
+          userId: wish.userId,
+          audio: audio,
+          video: video,
+          photo: photo,
+          orgId: orgId,
+          companyLogo:companyLogo
+        })
+          .then( () => {
+              this.setState({
+                wish: wish,
+              })
+            console.log(this.state.wish)
+            this.props.history.push('/postWish');
+            }
+          )
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+
     const goBack = (e) => {
         e.preventDefault();
-        this.props.history.push("/dashboard"); //Warning: does not work
+        props.history.push("/dashboard");
     }
-    const onhandleChange = (e) => {
-        this.setState ({
-          photo: URL.createObjectURL(e.target.files[0])
-        })
-    }
-    /*const onAudioUpload = (e) => {
-        this.setState ({
-          audio: URL.createObjectURL(e.target.files[0])
-        })
-    }*/
+
     const resetFile = e => {
         e.target.value = null;
     };
     
-    /*const handleFormFieldChange = (key, { target: { value } }) => {
-        this.setState({ [key]: value })
-    }*/
-    // const getChild = () => {
-    //     const {match} = props
-    //     const id = match.location.state.id
-    //     axios.get(`${expressDomain}/wish/findOneById/${id}`).then(res => {
-    //         setState({wish: res.data});
-    //         props.history.push("/detailedChild",{id: res.data.id})
-    //     })
-    // }
         console.log(wish)
         console.log("role",role)
         return (
@@ -70,7 +92,7 @@ const DetailedChild = (props)=>{
                             <div className="text-center">
                                     <img src={Beemo} className="img-fluid rounded-circle shadow p-0 mb-5 bg-white rounded" alt="..."></img>
                                     <h5>Child's Picture</h5>
-                                    <input className={role==="manager" ? "inputFile" : "hidden"} align="center" id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
+                                    <input className={role==="manager" ? "inputFile" : "hidden"} align="center" id="file" type="file" onChange={(x)=>setPhoto(x.currentTarget.value)} onClick={resetFile}/>
                             </div>
                             <div className="row">
                                 <h1>{/*empty*/}</h1>
@@ -130,15 +152,18 @@ const DetailedChild = (props)=>{
                                 <div className="card-body">
                                     <h5>Sponsor Logo</h5>
                                     {/*<img src={HomeDepot} className="img-fluid" alt="..."></img>*/}
-                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
+                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file" onChange={(x)=>setCompanyLogo(x.currentTarget.value)} onClick={resetFile}/>
                                 </div>
                             </div>
                             <div className="card">
                                 <div className="card-body">
                                     <h5 className="card-title">Sponsor ID</h5>
                                     <form> {/*Figure out how to save sponsor id*/}
+
                                     <div class="form-group">
-                                        <input type="string" className={role==="manager" ? "form-control": "hidden"} id="SponsorID" placeholder="Enter Sponsor ID"></input>
+                                        {wish.orgId}
+                                        <input type="string" className={((role==="manager") && wish.orgId.length===0) ? "form-control": "hidden"} id="SponsorID" placeholder="Enter Sponsor ID" onChange={(x)=>setOrgId(x.currentTarget.value)}></input>
+
                                     </div>
                                     </form>
                                 </div>
@@ -162,7 +187,7 @@ const DetailedChild = (props)=>{
                                 <div className="card-body">
                                     <h5>Picture</h5>    
                                     {/*<img src={BigPic2} className="card-img-top" alt="..."></img>*/}
-                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
+                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file"  onClick={resetFile}/>
                                 </div>
                             </div>
                         </div> 
@@ -171,7 +196,7 @@ const DetailedChild = (props)=>{
                                 <div className="card-body">
                                     <h5>Picture</h5>
                                     {/*img src={BigPic} className="img-fluid" alt="..."></img>*/}
-                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
+                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file"  onClick={resetFile}/>
                                 </div>
                             </div>
                         </div> 
@@ -184,7 +209,7 @@ const DetailedChild = (props)=>{
                                             <source src={ShortVid} type="video/mp4"></source>
                                         </video>
                                     </div>*/}
-                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
+                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file"  onChange={(x)=>setVideo(x.currentTarget.value)}  onClick={resetFile}/>
                                 </div>
                             </div>
                         </div>  
@@ -193,7 +218,7 @@ const DetailedChild = (props)=>{
                                 <div className="card-body">
                                     <h5>Audio</h5>
                                     {/*<img src="..." className="img-fluid" alt="..."></img>*/}
-                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
+                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file"  onChange={(x)=>setAudio(x.currentTarget.value)} onClick={resetFile}/>
                                     
                                 </div>
                             </div>
@@ -206,7 +231,7 @@ const DetailedChild = (props)=>{
                         <div className="col">
                             <div className="text-right">
                                 <div className={role==="manager" ? "visible" : "invisible"} >
-                                <button type="button" className="btn btn-primary btn-large">Save Changes</button> {/*Button does not do anything atm*/}
+                                <button type="button" className="btn btn-primary btn-large" onClick={updateWish}>Save Changes</button> {/*Button does not do anything atm*/}
                                 </div>
                             </div>
                         </div>
