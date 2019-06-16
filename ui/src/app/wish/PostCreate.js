@@ -4,7 +4,7 @@ import './Wish.css';
 class PostCreate extends Component {
   goBack = (e) => {
     e.preventDefault();
-    this.props.history.push("/landing");
+    this.props.history.push("/");
   }
 
   render() {
