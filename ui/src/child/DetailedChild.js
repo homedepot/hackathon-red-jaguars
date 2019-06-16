@@ -73,7 +73,7 @@ const DetailedChild = (props)=>{
                                     <input className={role==="manager" ? "inputFile" : "hidden"} align="center" id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
                             </div>
                             <div className="row">
-                                <h1></h1>
+                                <h1>{/*empty*/}</h1>
                             </div>
                             <div className="text-center">
                                 <img
