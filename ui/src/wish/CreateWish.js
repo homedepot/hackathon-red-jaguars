@@ -88,6 +88,7 @@ class CreateWish extends Component {
   };
 
   saveWish = () => {
+    if(this.state.wish.firstName && this.state.wish.age && this.state.wish.homeTown && this.state.wishType && this.state.gender && this.state.wish.illness && this.state.wish.wishDetail &&  this.state.wish.orgId &&  this.state.wish.userId) {
     let wish = this.state.wish;
     Axios.post('http://localhost:3002/wish/create', {
       firstName: this.state.wish.firstName,
@@ -115,6 +116,9 @@ class CreateWish extends Component {
       .catch(function(error) {
         console.log(error);
       });
+    } else {
+      alert("Please fill out all fields.")
+    }
   }
 
   render() {
