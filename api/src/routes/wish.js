@@ -16,8 +16,7 @@ let ChildWish = mongoose.Schema({
   audio: Object,
   video: Object,
   photo: Object,
-  date: String,
-  gender: String
+  companyLogo: Object
 })
 
 let Wish = mongoose.model('Wish', ChildWish, 'wish')
@@ -38,8 +37,7 @@ router.post('/create', function(req, res, next) {
     userId: userId,
     audio: audio,
     video: video,
-    photo: photo,
-    date: new Date().toLocaleDateString()
+    photo: photo
   })
   newWish.save()
     .then(data => {

@@ -91,7 +91,7 @@ const DetailedChild = (props)=>{
                     <div className="col">
                         <div className="card">
                             <div className="card-body">
-                            <img src={HomeDepot} className="img-fluid" alt="..."></img>
+                                <img src={HomeDepot} className="img-fluid" alt="..."></img>
                                 <input className="inputFile" id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
                             </div>
                         </div>
