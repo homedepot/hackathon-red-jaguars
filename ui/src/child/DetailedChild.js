@@ -192,7 +192,9 @@ const DetailedChild = (props)=>{
                     <div className="row justify-content-end">
                         <div className="col">
                             <div className="text-right">
+                                <div className={role==="manager" ? "visible" : "invisible"} >
                                 <button type="button" className="btn btn-primary btn-large">Save Changes</button> {/*Button does not do anything atm*/}
+                                </div>
                             </div>
                         </div>
                     </div>
