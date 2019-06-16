@@ -1,14 +1,14 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
-//import Beemo from './beemo.jpg'
+import Beemo from './beemo.jpg'
 //import HomeDepot from './homedepot.jpg'
 //import BigPic from './bigpic.jpg'
 //import BigPic2 from './bigpic2.jpg'
 //import ShortVid from './shortvid.mp4'
-//import Alien_Icon from '../images/Alien_Icon.png'
-//import Astronaut_Icon from '../images/Astronaut_Icon.png'
-//import Rocket_Icon from '../images/Rocket_Icon.png'
-//import Telescope_Icon from '../images/Telescope_Icon.png'
+import Alien_Icon from '../images/Alien_Icon.png'
+import Astronaut_Icon from '../images/Astronaut_Icon.png'
+import Rocket_Icon from '../images/Rocket_Icon.png'
+import Telescope_Icon from '../images/Telescope_Icon.png'
 
 const DetailedChild = (props)=>{
     const wish= props.location.state.wish;
@@ -49,7 +49,7 @@ const DetailedChild = (props)=>{
             <div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-3">
+                        <div className="col-4">
                             <div align="center">
                                 <button type="button" className="btn btn-primary btn-large btn-block"  onClick={goBack}>Go Back To Dashboard</button>
                             </div>
@@ -66,23 +66,31 @@ const DetailedChild = (props)=>{
                         <h1>{/*empty*/}</h1>
                     </div>
                     <div className="row">
-                        <div className="col-3">
-                            <div className="card">
-                                {/*<img src={Beemo} className="img-fluid rounded-circle" alt="..."></img>*/}
-                                <div className="card-body">
-                                    <input className={role==="manager" ? "inputFile" : "hidden"} id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
-                                    {/*<img src={Beemo} className="img-fluid rounded-circle" alt="..."></img>*/}
-
-                                    <h5 className="card-title">Child's Picture</h5>
-                                </div>
+                        <div className="col-4">
+                            <div className="text-center">
+                                    <img src={Beemo} className="img-fluid rounded-circle shadow p-0 mb-5 bg-white rounded" alt="..."></img>
+                                    <h5>Child's Picture</h5>
+                                    <input className={role==="manager" ? "inputFile" : "hidden"} align="center" id="file" type="file" onChange={onhandleChange} onClick={resetFile}/>
                             </div>
-                            <div className="card">
-                                {/*<img src={wish.wishType==="GO Somewhere!" ? {Rocket_Icon} : wish.wishType==="MEET Someone!" ? {Alien_Icon} : wish.wishType==="BE Someone!" ? {Astronaut_Icon} : {Telescope_Icon}} className="img-fluid rounded-circle" alt="..."></img>*/}
-                                <div className="card-body">
-                                    {/*<img src={Beemo} className="img-fluid rounded-circle" alt="..."></img>*/}
+                            <div className="row">
+                                <h1>{/*empty*/}</h1>
+                            </div>
+                            <div className="text-center">
+                                <img
+                                    src={
+                                        wish.wishType === 'BE Someone!'
+                                        ? Astronaut_Icon
+                                        : wish.wishType === 'SEE Something!'
+                                        ? Telescope_Icon
+                                        : wish.wishType === 'MEET Someone!'
+                                        ? Alien_Icon
+                                        : Rocket_Icon
+                                    }
 
-                                    <h5 className="card-title">Type of Wish</h5> {wish.wishType}
-                                </div>
+                                    height="50%"
+                                    width="50%"
+                                    className="img-fluid rounded-circle shadow p-0 mb-5 bg-white rounded" alt="wishType"></img>
+                                <h5 className="card-title">Type of Wish</h5> {wish.wishType}
                             </div>
                         </div>
                         <div className="col-5">
@@ -117,7 +125,7 @@ const DetailedChild = (props)=>{
                                 </div> 
                             </div>
                         </div>
-                        <div className="col-4">
+                        <div className="col-3">
                             <div className="card">
                                 <div className="card-body">
                                     <h5>Sponsor Logo</h5>
@@ -127,7 +135,12 @@ const DetailedChild = (props)=>{
                             </div>
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title">Sponsor ID</h5> {wish.orgId}
+                                    <h5 className="card-title">Sponsor ID</h5>
+                                    <form> {/*Figure out how to save sponsor id*/}
+                                    <div class="form-group">
+                                        <input type="string" className={role==="manager" ? "form-control": "hidden"} id="SponsorID" placeholder="Enter Sponsor ID"></input>
+                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
