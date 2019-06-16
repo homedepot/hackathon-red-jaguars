@@ -51,21 +51,19 @@ const DetailedChild = (props)=>{
                     <div className="row">
                         <div className="col-3">
                             <div align="center">
-                            <button type="button" className="btn btn-primary btn-large btn-block"  onClick={goBack}>Go Back To Dashboard</button>
-
+                                <button type="button" className="btn btn-primary btn-large btn-block"  onClick={goBack}>Go Back To Dashboard</button>
                             </div>
                         </div>
                         <div className="col-5">
                             <div className="card" align="center">
                                 <div className="card-body">
-                                <h5 className="card-tite">Date Wished</h5> {wish.wishDate}
-
+                                    <h5 className="card-tite">Date Wished</h5> {wish.wishDate}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="row">
-                        <h1></h1>
+                        <h1>{/*empty*/}</h1>
                     </div>
                     <div className="row">
                         <div className="col-3">
@@ -189,7 +187,7 @@ const DetailedChild = (props)=>{
                         </div>  
                     </div>
                     <div className="row">
-                        <h1></h1>
+                        <h1>{/*empty*/}</h1>
                     </div>
                     <div className="row justify-content-end">
                         <div className="col">
