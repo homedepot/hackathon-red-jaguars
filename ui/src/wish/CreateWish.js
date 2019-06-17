@@ -77,26 +77,30 @@ class CreateWish extends Component {
     switch(name) {
       case 'firstName':
         let first = /^(?=.{3,50}$)[a-z,-]+(?:['_.\s][a-z]+)*$/i.test(value)
-        formErrors.firstName = first ? '' : 'minimum 3 characters required and special character not accepted';
+        formErrors.firstName = first ? '' : 'First name should be minimum 3 characters required and special character not accepted';
         break;
       case 'age':
         //sorry for party rocking
-        formErrors.age = isNaN(value) ? "please provide a number" : value.length < 1 || value.length  > 2 ? "between 1 and 99" : "";
+        formErrors.age = isNaN(value) ? "please provide valid age" : value.length < 1 || value.length  > 2 ? "age should be between 1 and 99  " : "";
+        break;
+      case 'wishtype':
+        formErrors.wishtype = value === 'MEET Someone!' || 'GO Somewhere!' || 'BE Someone!' || 'SEE Something!' ? "" : "please choose your wish type";
         break;
       case 'homeTown':
-          let home = /^(?=.{3,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
-        formErrors.homeTown = home ? "" : 'minimum 3 characters required';
+          let home = /^(?=.{2,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
+        formErrors.homeTown = home ? "" : 'hometown should be minimum 2 characters';
         break;
       case 'gender':
         formErrors.gender = value === 'Boy' || 'Girl' ? "" : "please choose your gender";
         break;
+        
       case 'illness':
           let ill = /^(?=.{3,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
-          formErrors.illness = ill ? "" : 'minimum 4 character required';
+          formErrors.illness = ill ? "" : 'Illness should be minimum 3 characters';
           break;
       case 'wishDetail':
           let wd = /^(?=.{3,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
-          formErrors.wishDetail = wd ? "" : 'minimum 3 characters required';
+          formErrors.wishDetail = wd ? "" : 'Wish detail should be minimum 3 characters';
           break;
       default:
         break;
@@ -152,9 +156,18 @@ class CreateWish extends Component {
     let wish = this.state.wish;
     const { firstName, age, homeTown, wishType, illness, wishDetail} = this.state;
 
-
-    
-
+    if(firstName==="")
+      alert("Please enter first name");
+    else if(age==="")
+      alert("Please enter your age");
+      else  if(homeTown==="" || homeTown === undefined)
+      alert("Please enter you hometown");
+      else  if(wishType==="")
+      alert("Please select your wish type");
+      else  if(illness==="" || illness=== undefined)
+      alert("Please enter your illness");
+      else  if(wishDetail==="" || wishDetail===undefined)
+      alert("Please enter your wish detail");
 
     if(formValid(this.state) && firstName && age && homeTown && wishType && illness && wishDetail) {
      
@@ -250,9 +263,7 @@ class CreateWish extends Component {
                   value={this.state.wish.firstName}  
                   onChange={ this.onChange }
                 />
-                {formErrors.firstName.length > 0 && (
-                  <span className="errorMessage">{formErrors.firstName}</span>
-                )}
+                
 
               <p className="sameLine pullLeft"> and I am </p>
               <input 
@@ -264,10 +275,15 @@ class CreateWish extends Component {
                 value={this.state.wish.age}  
                 onChange={ this.onChange } 
               />
-               {formErrors.age.length > 0 && (
+              {formErrors.age.length > 0 && (
                   <span className="errorMessage">{formErrors.age}</span>
                 )}
+               
               <p className="sameLine"> years old!</p>
+              {formErrors.firstName.length > 0 && (
+                  <div className="errorMessage">{formErrors.firstName}</div>
+                )}
+                
             </td>
           </tr>
 
@@ -318,6 +334,9 @@ class CreateWish extends Component {
                     </button>
                   </span>
                 </div>
+                {formErrors.wishType.length > 0 && (
+                  <div className="errorMessage">{formErrors.firstName}</div>
+                )}
               </div>
             </td>
           </tr>
@@ -334,7 +353,7 @@ class CreateWish extends Component {
                 onChange={ this.onChange }
               />
                 {formErrors.homeTown.length > 0 && (
-                  <span className="errorMessage">{formErrors.homeTown}</span>
+                  <div className="errorMessage">{formErrors.homeTown}</div>
                 )}
               <p>Are you a Boy or a Girl ?</p>
               <label>
@@ -365,7 +384,7 @@ class CreateWish extends Component {
                 onChange={ this.onChange }
               />
               {formErrors.illness.length > 0 && (
-                  <span className="errorMessage">{formErrors.illness}</span>
+                  <div className="errorMessage">{formErrors.illness}</div>
                 )}
               <p>My Wish Details</p>
               <textarea
@@ -377,7 +396,7 @@ class CreateWish extends Component {
               />
               
             {formErrors.wishDetail.length > 0 && (
-                  <span className="errorMessage">{formErrors.wishDetail}</span>
+                  <div className="errorMessage">{formErrors.wishDetail}</div>
                 )}
             </td>
           </tr>
