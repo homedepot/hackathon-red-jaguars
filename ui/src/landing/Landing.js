@@ -1,9 +1,33 @@
-import React, { Component } from 'react'
-import BigPic from './bigpic.jpg'
-import HomeDepot from './homedepot.jpg'
+import React,{useState} from 'react'
+import Axios from 'axios'
 
-export default class Landing extends Component {
-  render () {
+const Landing =(props)=>  {
+  const role = props && props.location && props.location.state && props.location.state.role;
+  const [volunteer,setVolunteer] = useState("");
+  const [sponsor,setSponsor] = useState("");
+  const handleSubmitVolonteer  = (e)=>{
+    const formData = new FormData()
+    if(e==="volunteer")
+    formData.set('photo' , document.getElementById("volunteerfile") && document.getElementById("volunteerfile").files[0]);
+    else
+    formData.set('photo' , document.getElementById("sponsorfile") &&  document.getElementById("sponsorfile").files[0]);
+    formData.append(
+      'fileName', (e==="volunteer" ? e+volunteer : e+sponsor)
+    )
+    let url = 'http://localhost:3002/about/picUpload/'
+    Axios({
+      url: url,
+      method: 'POST',
+      data: formData,
+      config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    })
+      .then(() => {
+        props.history.push('/dashboard', { role: role })
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  }
     return (
       <div>
         <div className = "container">
@@ -59,16 +83,26 @@ export default class Landing extends Component {
               <div className="card">
               <div className="card-body">
                 <h1 className="card-title">Volunteer Opportunities</h1>
+                <div className={(role==="admin" ? "" : "hidden")}>
+                  <input className={"inputFile "} id="volunteerfile" type="file" />
+                  <input type="radio" name="volunteerfile" value="slot1" onChange={x=> setVolunteer(x.currentTarget.value)}/>&nbsp;Slot 1 &nbsp;
+                  <input type="radio" name="volunteerfile" value="slot2" onChange={x=> setVolunteer(x.currentTarget.value)}/> &nbsp;Slot 2 &nbsp;
+                  <input type="radio" name="volunteerfile" value="slot3" onChange={x=> setVolunteer(x.currentTarget.value)}/>&nbsp;Slot 3 &nbsp;
+                  <button className="btn btn-success" onClick={()=>handleSubmitVolonteer("volunteer")}>Upload</button>
 
-                <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+                  <br/>
+                  <br/><br/>
+
+                  </div>
+                <img className="card-top" src="http://localhost:3002/uploads/volunteerslot1.png" height="300" width="780" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
                 <div className="card-body">
-                <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+                <img className="card-top" src="http://localhost:3002/uploads/volunteerslot2.png" height="300" width="780" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
               <div className="card-body">
-              <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+              <img className="card-top" src="http://localhost:3002/uploads/volunteerslot3.png" height="300" width="780" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
             </div>
@@ -78,15 +112,26 @@ export default class Landing extends Component {
             <div className="card">
               <div className="card-body">
               <h1 className="card-title">Sponsors</h1>
-                <img className="card-top" src={HomeDepot} height="200" width="200" alt="Card cap"></img>
+
+                <div className={(role==="admin" ? "" : "hidden")}>
+                  <input className={"inputFile "} id="sponsorfile" type="file" />
+                  <input type="radio" name="sponsorfileslot" value="slot1" onChange={x=> setSponsor(x.currentTarget.value)}/>&nbsp;Slot 1 &nbsp;
+                  <input type="radio" name="sponsorfileslot" value="slot2" onChange={x=> setSponsor(x.currentTarget.value)}/> &nbsp;Slot 2 &nbsp;
+                  <input type="radio" name="sponsorfileslot" value="slot3" onChange={x=> setSponsor(x.currentTarget.value)}/>&nbsp;Slot 3 &nbsp;
+                  <button className="btn btn-success" onClick={()=>handleSubmitVolonteer("sponsor")}>Upload</button>
+
+                  <br/>
+                  <br/><br/>
+                </div>
+                <img className="card-top" src="http://localhost:3002/uploads/sponsorslot1.png" height="200" width="200" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more</a>
               </div>
               <div className="card-body">
-                <img className="card-top" src={HomeDepot} height="200" width="200" alt="Card cap"></img>
+                <img className="card-top" src="http://localhost:3002/uploads/sponsorslot2.png" height="200" width="200" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more</a>
               </div>
               <div className="card-body">
-                <img className="card-top" src={HomeDepot} height="200" width="200" alt="Card cap"></img>
+                <img className="card-top" src="http://localhost:3002/uploads/sponsorslot3.png" height="200" width="200" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more</a>
               </div>
             </div>
@@ -96,5 +141,6 @@ export default class Landing extends Component {
         </div>
       </div>
     )
-  }
 }
+
+export default Landing;

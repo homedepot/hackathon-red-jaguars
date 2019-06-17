@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-import tobe from '../images/Astronaut_Icon.png'
-import tosee from '../images/Telescope_Icon.png'
-import tomeet from '../images/Alien_Icon.png'
-import togo from '../images/Rocket_Icon.png'
+import Alien_Icon from '../images/Alien_Icon.png'
+import Astronaut_Icon from '../images/Astronaut_Icon.png'
+import Rocket_Icon from '../images/Rocket_Icon.png'
+import Telescope_Icon from '../images/Telescope_Icon.png'
 import icn_male from '../images/icn_blue.png'
 import icn_female from '../images/icn_pink.png'
 import moment from 'moment/moment.js'
@@ -23,22 +23,22 @@ const Dashboard = props => {
     {
       label: 'To Go',
       checked: true,
-      value: 'togo'
+      value: 'GO Somewhere!'
     },
     {
       label: 'To Meet',
       checked: true,
-      value: 'tomeet'
+      value: 'MEET Someone!'
     },
     {
       label: 'To Be',
       checked: true,
-      value: 'tobe'
+      value: 'BE Someone!'
     },
     {
       label: 'To See',
       checked: true,
-      value: 'tosee'
+      value: 'SEE Something!'
     }
   ])
 
@@ -48,6 +48,7 @@ const Dashboard = props => {
       .then(response => {
         let wholeData=response.data.sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1);
         let listOfYears= [...(new Set(wholeData.map(x=>x.wishDate.slice(-4))))];
+        debugger;
         if(role==="admin")
           setYearList(listOfYears);
         else
@@ -72,7 +73,7 @@ const Dashboard = props => {
       setFilterData(filteredData.sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1))
     Axios.delete(`http://localhost:3002/wish/delete/${id}`)
       .then(res => {
-        
+
       })
       .catch(err => {
         setApiData(backupData);
@@ -88,30 +89,37 @@ const Dashboard = props => {
     setFilterData(
       apiData.filter(
         x =>
-          (query.includes(' ')
+        {
+          return (query.includes(' ')
             ? query
                 .split(' ')
                 .reduce(
                   (r, z) =>
                     r &&
-                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(z),
+                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).toLowerCase().includes(z),
                   true
                 )
-            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(
+            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).toLowerCase().includes(
                 query
               )) &&
           boxes.filter(
             r =>
-              r.value.toLowerCase() ===
+              r.value.replace(' ', '').toLowerCase() ===
               x.wishType.replace(' ', '').toLowerCase()
           )[0].checked &&
           x.wishDate.includes(passedYear)
+        }
       ).sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1)
     )
   }
   const handleNavToDetailedChild = e => {
     props.history.push('/detailedchild', { wish: e,role:role })
   }
+
+  const handleManageAds = () => {
+    props.history.push('/editlanding', {role:role })
+  }
+  
 
   const handleOnCheckboxes = e => {
     let boxes = checkBoxes.map(z => {
@@ -130,15 +138,15 @@ const Dashboard = props => {
                 .reduce(
                   (r, z) =>
                     r &&
-                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(z),
+                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).toLowerCase().includes(z),
                   true
                 )
-            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(
+            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).toLowerCase().includes(
                 query
               )) &&
           boxes.filter(
             r =>
-              r.value.toLowerCase() ===
+              r.value.replace(' ', '').toLowerCase() ===
               x.wishType.replace(' ', '').toLowerCase()
           )[0].checked &&
           x.wishDate.includes(selectedYear)
@@ -207,10 +215,10 @@ const Dashboard = props => {
         <div className="col-12">
           <div className="row">
             {' '}
-            <div className="col-8"></div>
-            <div className={"col-2 " + role==="admin" ? "" : "hidden"} style={{ textAlign: 'right' }}><CSVLink data={apiData} separator={';'}>
+            <div className="col-8"> <div className={(role==="admin" ? "" : "hidden")} style={{cursor:"pointer",color:"blue"}} onClick={handleManageAds}>Manage Ads</div></div>
+            <div className={"col-2 "} style={{ textAlign: 'right' }}><div className={(role==="admin" ? "" : "hidden")}><CSVLink data={apiData} separator={';'}>
           Download me
-        </CSVLink></div>
+        </CSVLink></div></div>
             <div className="col-2" style={{ textAlign: 'right' }}>
               {yearList.map(z => (
                 <label key={z} style={{ color: 'blue', cursor: 'pointer',padding:"0px 5px 0px 5px" }}
@@ -280,7 +288,9 @@ const Dashboard = props => {
                   >
                     <img
                       style={{borderRadius:"25px"}}
-                      src="https://picsum.photos/75/75"
+                      src={x.photoURL ? 'http://localhost:3002/'+x.photoURL : (x.gender ? "images/guy.png" : "images/gal.png" )}
+                      height="75px"
+                      width="75px"
                       alt="{x.firstName}"
                       key={x._id}
                     ></img>
@@ -297,7 +307,9 @@ const Dashboard = props => {
                     style={{ padding: '1rem 0px 10px 0px' }}
                   >
                     <img
-                      src="https://picsum.photos/60/60"
+                      src={x.sponsorLogoURL ? 'http://localhost:3002/'+x.sponsorLogoURL : "images/blank-logo.jpg"}
+                      height="60"
+                      width={x.sponsorLogoURL ? 60 : 90}
                       alt={x.firstName}
                       key={x._id + 'logo'}
                     ></img>
@@ -308,13 +320,13 @@ const Dashboard = props => {
                   >
                     <img
                       src={
-                        x.wishType === 'tobe'
-                          ? tobe
-                          : x.wishType === 'tosee'
-                          ? tosee
-                          : x.wishType === 'tomeet'
-                          ? tomeet
-                          : togo
+                        x.wishType === 'BE Someone!'
+                          ? Astronaut_Icon
+                          : x.wishType === 'SEE Something!'
+                          ? Telescope_Icon
+                          : x.wishType === 'MEET Someone!'
+                          ? Alien_Icon
+                          : Rocket_Icon
                       }
                       height="60"
                       width="60"
@@ -323,7 +335,7 @@ const Dashboard = props => {
                     ></img>
                   </div>
                   <div
-                    className={"col-1 " + role==="admin" ? "" : "hidden"}
+                    className={"col-1 " + (role==="admin" ? "" : "hidden")}
                     style={{ padding: '1.5rem 0px 10px 0px' }}
                   >
                     <i
