@@ -57,9 +57,6 @@ app.use('/auth', auth)
 app.use('/wish', wish)
 app.use('/about', about)
 
-if (!fs.existsSync('/uploads')) {
-  fs.mkdirSync('/uploads');
-}
 console.log(__dirname)
 app.use('/uploads',express.static( 'uploads'))
 
