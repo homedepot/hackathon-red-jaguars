@@ -12,24 +12,31 @@ class Login extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      firstName: '',
+      lastName: '',
+      role: 'user'
     }
   }
-
+  
   createUser = async e => {
     e.preventDefault()
 
-    const { username, password } = this.state
+    const { username, password, firstName, lastName,role } = this.state
 
     try {
       await axios.post(`${this.expressDomain}/auth/register`, {
         username,
-        password
+        password,
+        firstName,
+        lastName,
+        role
       })
-
+      alert("Thanks for registering!!!")
       this.setState({
         username: '',
-        password: ''
+        password: '',
+        role: ''
       })
     } catch (e) {}
   }
@@ -46,90 +53,82 @@ class Login extends Component {
           username,
           password
         })
-
-      console.log(`User profile is: ${response.body}`)
-
-      this.props.history.push('/landing')
+      if (response.data.role ==="user") 
+        this.props.history.push('/createWish')
+      else 
+        this.props.history.push('/dashboard',{role: response.data.role})
     } catch (e) {}
   }
 
   handleFormFieldChange = (key, { target: { value } }) => {
     this.setState({ [key]: value })
   }
+  handleChecked =(e)=>{
+    this.setState({ role: e.currentTarget.checked ? "curator" : "user" })
+  }
 
   render() {
     return (
       <div>
-        <h1>Welcome to the Make-A-Wish Hackathon starter!!</h1>
-        <div className={'login-container'}>
-          <div>
-            <h2>Register</h2>
-            <form
-              className="registration-form"
-              onSubmit={this.createUser}
-              data-register-form
-            >
-              First Name:
-              <input
-                type="text"
-                data-register-first-name
-                onChange={event =>
-                  this.handleFormFieldChange('firstName', event)
-                }
-              />
-              Last Name:
-              <input
-                type="text"
-                data-register-last-name
-                onChange={event =>
-                  this.handleFormFieldChange('lastName', event)
-                }
-              />
-              Username:
-              <input
-                type="text"
-                data-register-username
-                onChange={event =>
-                  this.handleFormFieldChange('username', event)
-                }
-              />
-              Password:
-              <input
-                type="password"
-                data-register-password
-                onChange={event =>
-                  this.handleFormFieldChange('password', event)
-                }
-              />
-              <input type="submit" value="Submit!" />
+        <div class = "container">
+          <div class = "row">
+            <div class = "col-6">
+            <h3>Register</h3>
+            <form onSubmit={this.createUser} data-register-form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">First Name</label>
+                <input type="string" class="form-control"                 
+                  onChange={event => this.handleFormFieldChange('firstName', event)
+                } data-register-first-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter First Name"></input>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Last Name</label>
+                <input type="string" class="form-control"
+                  onChange={event => this.handleFormFieldChange('lastName', event)
+                } data-register-last-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Last Name"></input>
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="string" class="form-control" id="exampleInputEmail1"                 
+                  onChange={event => this.handleFormFieldChange('username', event)
+                } data-register-username aria-describedby="emailHelp" placeholder="Enter Username"></input>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" 
+                  onChange={event => this.handleFormFieldChange('password', event)
+                } data-register-password id="exampleInputPassword1" placeholder="Enter Password"></input>
+              </div>
+              <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="curator" id="role" data-register-role  onChange={event => this.handleChecked( event)} />
+                <label class="form-check-label" for="role">
+                Please check if you are a curator
+                </label>
+              </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-          </div>
-
-          <div>
-            <h2>Login</h2>
-            <form
-              className="login-form"
-              onSubmit={this.loginUser}
-              data-login-form
-            >
-              Username:{' '}
-              <input
-                type="text"
-                data-login-username
-                onChange={event =>
-                  this.handleFormFieldChange('username', event)
-                }
-              />
-              Password:{' '}
-              <input
-                type="password"
-                data-login-password
-                onChange={event =>
-                  this.handleFormFieldChange('password', event)
-                }
-              />
-              <input type="submit" value="Submit!" />
+            </div>
+            <div class = "col-6">
+            <h3>Login</h3>
+            <form onSubmit={this.loginUser} data-login-form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="string" class="form-control"                 
+                  onChange={event => this.handleFormFieldChange('username', event)
+                } data-login-username id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username"></input>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control"  
+                  onChange={event => this.handleFormFieldChange('password', event)
+                } data-login-password id="exampleInputPassword1" placeholder="Enter Password"></input>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            </div>
           </div>
         </div>
       </div>
