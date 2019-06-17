@@ -36,15 +36,17 @@ let Wish = mongoose.model('Wish', ChildWish, 'wish')
 router.post('/create', upload.single('photo'),function(req, res, next) {
   console.log('creating wish')
   
-  let fileName= "uploads/" + new Date().getTime() + req.file.originalname;
-  fs.writeFile(fileName, req.file.buffer, function (err) {
-    if (err) {
-      console.log("in err")
-      return console.log(err);
-    }
-    console.log("The file was saved!");
-  });
-
+  let fileName= "uploads/" + new Date().getTime() + (req.file && req.file.originalname);
+  if(req.file)
+  {
+    fs.writeFile(fileName, req.file.buffer, function (err) {
+      if (err) {
+        console.log("in err")
+        return console.log(err);
+      }
+      console.log("The file was saved!");
+    });
+  }
   const { age, firstName, homeTown, wishType, gender, wishDate, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
   let newWish = new Wish({
     firstName: firstName,
@@ -59,7 +61,7 @@ router.post('/create', upload.single('photo'),function(req, res, next) {
     userId: userId,
     audio: audio,
     video: video,
-    photoURL: fileName
+    photoURL: req.file ? fileName : ""
   })
   console.log(newWish)
   newWish.save()
@@ -163,9 +165,8 @@ router.delete('/delete/:id', function(req, res) {
 })
 
 
-router.put('/update/:id', function(req, res) {
+router.put('/update/:id',upload.single('sponsorLogo'), function(req, res) {
   console.log('Updating a wish');
-  console.log(req.body)
   let id = req.params.id;
   if (!req.body) {
     return res.status(400).send({
@@ -173,21 +174,23 @@ router.put('/update/:id', function(req, res) {
     });
   }
 
+  let fileName= "uploads/" + new Date().getTime() + (req.file && req.file.originalname);
+  if(req.file)
+  {
+    fs.writeFile(fileName, req.file.buffer, function (err) {
+      if (err) {
+        console.log("in err")
+        return console.log(err);
+      }
+      console.log("The file was saved!");
+    });
+  }
+  
   Wish.findOneAndUpdate({_id: id }, { $set:{
-    firstName: req.body.firstName,
-    age: req.body.age,
-    homeTown: req.body.homeTown,
-    wishType: req.body.wishType,
-    wishDate: req.body.wishDate,
-    gender: req.body.gender,
-    illness: req.body.illness,
-    wishDetail: req.body.wishDetail,
     orgId: req.body.orgId,
-    userId: req.body.userId,
     audio: req.body.audio,
     video: req.body.video,
-    photo: req.body.photo
-
+    sponsorLogoURL:req.file ? fileName : ""
   }}, {new: true})
     .then(wish => {
       if (!wish) {

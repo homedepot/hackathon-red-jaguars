@@ -283,7 +283,7 @@ const Dashboard = props => {
                   >
                     <img
                       style={{borderRadius:"25px"}}
-                      src={'http://localhost:3002/'+x.photoURL}
+                      src={x.photoURL ? 'http://localhost:3002/'+x.photoURL : (x.gender ? "images/guy.png" : "images/gal.png" )}
                       height="75px"
                       width="75px"
                       alt="{x.firstName}"
@@ -302,7 +302,9 @@ const Dashboard = props => {
                     style={{ padding: '1rem 0px 10px 0px' }}
                   >
                     <img
-                      src="https://picsum.photos/60/60"
+                      src={x.sponsorLogoURL ? 'http://localhost:3002/'+x.sponsorLogoURL : "images/blank-logo.jpg"}
+                      height="60"
+                      width={x.sponsorLogoURL ? 60 : 90}
                       alt={x.firstName}
                       key={x._id + 'logo'}
                     ></img>
