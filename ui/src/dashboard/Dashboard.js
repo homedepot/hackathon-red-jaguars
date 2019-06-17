@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-import tobe from '../images/Astronaut_Icon.png'
-import tosee from '../images/Telescope_Icon.png'
-import tomeet from '../images/Alien_Icon.png'
-import togo from '../images/Rocket_Icon.png'
+import Alien_Icon from '../images/Alien_Icon.png'
+import Astronaut_Icon from '../images/Astronaut_Icon.png'
+import Rocket_Icon from '../images/Rocket_Icon.png'
+import Telescope_Icon from '../images/Telescope_Icon.png'
 import icn_male from '../images/icn_blue.png'
 import icn_female from '../images/icn_pink.png'
 import moment from 'moment/moment.js'
@@ -308,13 +308,13 @@ const Dashboard = props => {
                   >
                     <img
                       src={
-                        x.wishType === 'tobe'
-                          ? tobe
-                          : x.wishType === 'tosee'
-                          ? tosee
-                          : x.wishType === 'tomeet'
-                          ? tomeet
-                          : togo
+                        x.wishType === 'BE Someone!'
+                          ? Astronaut_Icon
+                          : x.wishType === 'SEE Something!'
+                          ? Telescope_Icon
+                          : x.wishType === 'MEET Someone!'
+                          ? Alien_Icon
+                          : Rocket_Icon
                       }
                       height="60"
                       width="60"
