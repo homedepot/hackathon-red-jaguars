@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import './Wish.css';
-import Astronaut from '../../images/Astronaut_Icon.png';
-import Telescope from '../../images/Telescope_Icon.png';
-import Alien from '../../images/Alien_Icon.png';
-import Rocket from '../../images/Rocket_Icon.png';
-import Galaxy from '../../images/Galaxy_Color.png';
+import Astronaut from '../images/Astronaut_Icon.png';
+import Telescope from '../images/Telescope_Icon.png';
+import Alien from '../images/Alien_Icon.png';
+import Rocket from '../images/Rocket_Icon.png';
+import Galaxy from '../images/Galaxy_Color.png';
+import MakeAWish from '../images/MakeAWishLogo.png';
 
 import Axios from "axios";
 
@@ -37,19 +38,19 @@ class CreateWish extends Component {
       video: '',
       age: '',
       wish: {
-      "firstName": "",
-      "age": "",
-      "homeTown": "",
-      "wishType": "",
-      "gender": "",
-      "wishDate": "",
-      "illness": "",
-      "wishDetail": "",
-      "orgId": "",
-      "userId": "",
-      "audio": "",
-      "video": "",
-      "photo": ""
+        "firstName": "",
+        "age": "",
+        "homeTown": "",
+        "wishType": "",
+        "gender": "",
+        "wishDate": "",
+        "illness": "",
+        "wishDetail": "",
+        "orgId": "",
+        "userId": "",
+        "audio": "",
+        "video": "",
+        "photo": ""
       },
       formErrors: {
         firstName: "",
@@ -122,7 +123,7 @@ class CreateWish extends Component {
   toggleGender = (e) => {
     this.setState ({gender : e.target.value },
       () =>
-    console.log(this.state.gender))
+        console.log(this.state.gender))
   }
 
   onhandleChange = (e) => {
@@ -156,9 +157,9 @@ class CreateWish extends Component {
     Axios.post('http://localhost:3002/wish/create', {
       firstName: this.state.wish.firstName,
       age: this.state.wish.age,
-      homeTown: this.state.homeTown,
+      homeTown: this.state.wish.homeTown,
       wishType: this.state.wishType,
-      wishDate: new Date(),
+      wishDate: new Date().toLocaleDateString(),
       gender: this.state.gender,
       illness: this.state.wish.illness,
       wishDetail: this.state.wish.wishDetail,
@@ -172,8 +173,8 @@ class CreateWish extends Component {
           this.setState({
             wish: wish,
           })
-        console.log(this.state.wish)
-        this.props.history.push('/postWish');
+          console.log(this.state.wish)
+          this.props.history.push('/postWish');
         }
       )
       .catch(function(error) {
@@ -189,16 +190,35 @@ class CreateWish extends Component {
     const { formErrors } = this.state;
     return (
       <div className="wishBackground">
-        <table>
+        <table style={{width:"100%"}}>
           <tbody>
           <tr>
+<<<<<<< HEAD:ui/src/app/wish/CreateWish.js
             <td>
             <div className="sameLine">
               <p style={{fontSize: '45px', marginRight: '100px'}} className="head">Hello!  Make A Wish</p>
             </div>
+=======
+            <td colSpan="2">
+              <br/>
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-3" style={{paddingLeft:"0px"}}>
+                    <label style={{fontSize: '75px', fontWeight:"800",color:"darkblue", marginRight: '0px',lineHeight:"60px"}} className=""> &nbsp;<br/>Hello! </label>
+                  </div>
+                  <div className="col-4 ">
+                    <span className="sameLine " style={{ marginRight: '50px'}}><img className="" height="125" src={MakeAWish} alt="Make a wish"/></span>
+                  </div>
+                  <div className="col-4 ">
+                    <span className="sameLine pullRight" style={{textAlign:"right"}}><img className="" height="125" src={Galaxy} alt="Galaxy"/></span>
+                  </div>
+                </div>
+                <br/><br/>
+              </div>
+>>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/CreateWish.js
             </td>
           </tr>
-          
+
           <tr>
             <td>
               <p className="sameLine pullLeft">My name is</p>
@@ -239,6 +259,7 @@ class CreateWish extends Component {
                 <p>I wish to:</p>
                 <div className="wishTo">
                   <span className="spacing">
+<<<<<<< HEAD:ui/src/app/wish/CreateWish.js
                     <button className="spacing " name="GoSomewhere">
 
                       <img 
@@ -258,9 +279,16 @@ class CreateWish extends Component {
                       />
 
                     </button>
+=======
+                    <button className={'spacing bgYellow '+ (this.state.wishType==='GO Somewhere!' ? 'selectedTo': '')} ><img src={Rocket} alt="GO Somewhere!" onClick={this.onClick} /></button>
+                  </span>
+                  <span className="spacing">
+                    <button className={"spacing bgYellow "+ (this.state.wishType==="MEET Someone!" ? "selectedTo" : "")}><img  src={Alien} alt="MEET Someone!" onClick={this.onClick} /></button>
+>>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/CreateWish.js
                   </span>
                   
                   <span className="spacing">
+<<<<<<< HEAD:ui/src/app/wish/CreateWish.js
                     <button className="spacing">
                       <img 
                         src={Astronaut} 
@@ -268,9 +296,13 @@ class CreateWish extends Component {
                         onClick={this.onClick} 
                       />
                     </button>
+=======
+                    <button className={"spacing bgYellow "+ (this.state.wishType==="BE Someone!" ? "selectedTo" : "")}><img src={Astronaut} alt="BE Someone!" onClick={this.onClick} /></button>
+>>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/CreateWish.js
                   </span>
 
                   <span className="spacing">
+<<<<<<< HEAD:ui/src/app/wish/CreateWish.js
                     <button className="spacing ">
                       <img 
                         src={Telescope} 
@@ -278,6 +310,9 @@ class CreateWish extends Component {
                         onClick={this.onClick} 
                       />
                     </button>
+=======
+                    <button className={"spacing bgYellow "+ (this.state.wishType==="SEE Something!" ? "selectedTo" : "")}><img  src={Telescope} alt="SEE Something!" onClick={this.onClick} /></button>
+>>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/CreateWish.js
                   </span>
                 </div>
               </div>
@@ -299,31 +334,25 @@ class CreateWish extends Component {
                   <span className="errorMessage">{formErrors.homeTown}</span>
                 )}
               <p>Are you a Boy or a Girl ?</p>
-              <ul>
-                <li key="1">
-                  <label>
-                    <input
-                      name="check"
-                      type="radio"
-                      value="Boy"
-                      onChange={this.toggleGender}
-                    />
-                    Boy
-                  </label>
-                </li>
+              <label>
+                <input
+                  name="check"
+                  type="radio"
+                  value="Boy"
+                  onChange={this.toggleGender}
+                />
+                <span style={{paddingLeft:"5px"}}>Boy</span>
+              </label><br/>
 
-                <li>
-                  <label key="2">
-                    <input
-                      name="check"
-                      type="radio"
-                      value="Girl"
-                      onChange={this.toggleGender}
-                    />
-                    Girl
-                  </label>
-                </li>
-              </ul>
+              <label key="2">
+                <input
+                  name="check"
+                  type="radio"
+                  value="Girl"
+                  onChange={this.toggleGender}
+                />
+                <span style={{paddingLeft:"5px"}}>Girl</span>
+              </label>
               <p>I'm Suffering from</p>
               <input 
                 className="sameLine wideWidth" 
@@ -379,11 +408,13 @@ class CreateWish extends Component {
             </td>
           </tr>
 
-          <tr className="topSpace">
+          <tr className="topSpace" >
             <td>
+              <br/>
               <button className="sameLine fancyButtons largeButton" onClick={this.saveWish}>Submit My Wish</button>
             </td>
             <td className="sameLine">
+              <br/>
               <button className="fancyButtons"  onClick={this.goBack}>Go Back</button>
             </td>
           </tr>

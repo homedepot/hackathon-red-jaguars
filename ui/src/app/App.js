@@ -6,8 +6,8 @@ import Dashboard from '../dashboard/Dashboard'
 import Landing from '../landing/Landing'
 import WatchAuth from '../auth/WatchAuth'
 import NotFound from '../common/NotFound'
-import CreateWish from './wish/CreateWish'
-import PostCreate from './wish/PostCreate'
+import CreateWish from '../wish/CreateWish'
+import PostCreate from '../wish/PostCreate'
 import DetailedChild from '../child/DetailedChild'
 
 function App() {

@@ -11,7 +11,8 @@ import { CSVLink } from "react-csv"
 
 
 const Dashboard = (props) => {
-  const expressDomain = process.env.REACT_APP_expressDomain || 'http://localhost:3002'
+  process.env.REACT_APP_expressDomain || 'http://localhost:3002'
+
   const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
@@ -278,7 +279,7 @@ const Dashboard = (props) => {
                     key={x._id}
                   ></img>
                 </div>
-                <div className="col-6" style={{ padding: '1rem 0px 10px 0px' }}>
+                <div className="col-7" style={{ padding: '1rem 0px 10px 0px' }}>
                   {x.firstName} - Age {x.age} from {x.homeTown}, GA <br />{' '}
                   {x.firstName} wishes {x.wishType} {x.wishDetail}
                 </div>
@@ -310,8 +311,8 @@ const Dashboard = (props) => {
                   <i className="material-icons" style={{ fontSize: '3rem',cursor:"pointer" }} onClick={()=>handleNav(x._id)}>
                     chevron_right
                   </i>
-                <button onClick={() => deleteUser(x._id)} type="button" class="btn btn-danger">Delete</button>
                 </div>
+                <button onClick={() => deleteUser(x._id)} type="button" class="btn btn-danger">Delete</button>
 
               </div>
            

@@ -3,12 +3,17 @@
 }
 .wishBackground {
     padding: 50px;
+<<<<<<< HEAD:ui/src/app/wish/Wish.css
     background-color: #258EA6;
     display: flex;
     align-items: center;
 }
 .errorMessage {
     color: red;
+=======
+    padding-top: 0px;
+    background-color: #56807d;
+>>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/Wish.css
 }
 #goSomewhere {
     background-image: url("/ui/src/images/Rocket_Icon.png");
@@ -20,10 +25,13 @@
 }
 
 .spacing {
-    padding-left: 30px;
-    padding-right: 50px;
+    margin-right:2rem;
+    margin-left: 2rem;
 }
 
+.selectedTo {
+    box-shadow: 10px 10px 4px blue;
+}
 .bgYellow {
     background-color: #fffa2f;
 }
@@ -47,13 +55,13 @@
     box-sizing: border-box;
 }
 
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+.wishBackground ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color: #ee29da;
     font-weight: bold;
     font-size: 16px;
     padding: 0px 20px;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+.wishBackground :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color:    #ee29da;
     opacity:  1;
     font-weight: bold;
@@ -61,7 +69,7 @@
     padding: 0px 20px;
     text-align: center;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+.wishBackground ::-moz-placeholder { /* Mozilla Firefox 19+ */
     color:    #ee29da;
     opacity:  1;
     font-weight: bold;
@@ -69,14 +77,14 @@
     padding: 0px 20px;
     text-align: center;
 }
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+.wishBackground :-ms-input-placeholder { /* Internet Explorer 10-11 */
     color:    #ee29da;
     font-weight: bold;
     font-size: 16px;
     padding: 0px 20px;
     text-align: center;
 }
-::-ms-input-placeholder { /* Microsoft Edge */
+.wishBackground ::-ms-input-placeholder { /* Microsoft Edge */
     color:    #ee29da;
     font-weight: bold;
     font-size: 16px;
@@ -84,7 +92,7 @@
     text-align: center;
 }
 
-::placeholder { /* Most modern browsers support this now. */
+.wishBackground ::placeholder { /* Most modern browsers support this now. */
     color:    #ee29da;
     font-weight: bold;
     font-size: 16px;
@@ -130,7 +138,6 @@
 }
 
 .imageBanner {
-    width: 300px;
     height: 200px ;
     float: right;
 }
@@ -140,7 +147,7 @@
 }
 
 .pullRight {
-    align-items: right;
+    float: right;
 }
 
 .head {

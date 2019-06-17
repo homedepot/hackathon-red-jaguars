@@ -32,7 +32,7 @@ class Login extends Component {
         lastName,
         role
       })
-
+      alert("Thanks for registering!!!")
       this.setState({
         username: '',
         password: '',
@@ -56,7 +56,6 @@ class Login extends Component {
       if (response.data.role ==="user") 
         this.props.history.push('/createWish')
       else 
-      if(response.data.role ==="curator") 
         this.props.history.push('/dashboard',{role: response.data.role})
     } catch (e) {}
   }
@@ -80,29 +79,26 @@ class Login extends Component {
                 <label for="exampleInputEmail1">First Name</label>
                 <input type="string" class="form-control"                 
                   onChange={event => this.handleFormFieldChange('firstName', event)
-                } data-register-first-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                } data-register-first-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter First Name"></input>
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Last Name</label>
                 <input type="string" class="form-control"
                   onChange={event => this.handleFormFieldChange('lastName', event)
-                } data-register-last-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                } data-register-last-name id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Last Name"></input>
               </div>
               
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input type="string" class="form-control" id="exampleInputEmail1"                 
                   onChange={event => this.handleFormFieldChange('username', event)
-                } data-register-username aria-describedby="emailHelp" placeholder="Enter email"></input>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                } data-register-username aria-describedby="emailHelp" placeholder="Enter Username"></input>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" 
                   onChange={event => this.handleFormFieldChange('password', event)
-                } data-register-password id="exampleInputPassword1" placeholder="Password"></input>
+                } data-register-password id="exampleInputPassword1" placeholder="Enter Password"></input>
               </div>
               <div class="form-group">
               <div class="form-check">
@@ -122,14 +118,13 @@ class Login extends Component {
                 <label for="exampleInputEmail1">Username</label>
                 <input type="string" class="form-control"                 
                   onChange={event => this.handleFormFieldChange('username', event)
-                } data-login-username id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                } data-login-username id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username"></input>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" 
+                <input type="password" class="form-control"  
                   onChange={event => this.handleFormFieldChange('password', event)
-                } data-login-password id="exampleInputPassword1" placeholder="Password"></input>
+                } data-login-password id="exampleInputPassword1" placeholder="Enter Password"></input>
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>

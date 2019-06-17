@@ -4,7 +4,7 @@ import './Wish.css';
 class PostCreate extends Component {
   goBack = (e) => {
     e.preventDefault();
-    this.props.history.push("/landing");
+    this.props.history.push("/");
   }
 
   render() {
@@ -15,6 +15,7 @@ class PostCreate extends Component {
         <h2>
           Your wish will be fulfilled soon.
         </h2>
+        <br/><br/>
         <button className="leftSpace fancyButtons"  onClick={this.goBack}>Go To Home Screen</button>
       </div>
     )

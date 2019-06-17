@@ -1,3 +1,12 @@
+
+* {
+  font-family: 'Arial Rounded MT Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Arial Rounded MT Bold'), url('App.woff') format('woff');
+  }
+
+
 .lds-roller {
     display: inline-block;
     position: relative;
@@ -92,3 +101,9 @@
     text-decoration: underline;
     color: orange;
   }
+
+  :placeholder{
+    text-align: left;
+  }
+
+  
