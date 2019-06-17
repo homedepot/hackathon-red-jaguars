@@ -210,9 +210,9 @@ const Dashboard = props => {
           <div className="row">
             {' '}
             <div className="col-8"></div>
-            <div className={"col-2 " + (role==="admin" ? "" : "hidden")} style={{ textAlign: 'right' }}><CSVLink data={apiData} separator={';'}>
+            <div className={"col-2 "} style={{ textAlign: 'right' }}><div className={(role==="admin" ? "" : "hidden")}><CSVLink data={apiData} separator={';'}>
           Download me
-        </CSVLink></div>
+        </CSVLink></div></div>
             <div className="col-2" style={{ textAlign: 'right' }}>
               {yearList.map(z => (
                 <label key={z} style={{ color: 'blue', cursor: 'pointer',padding:"0px 5px 0px 5px" }}

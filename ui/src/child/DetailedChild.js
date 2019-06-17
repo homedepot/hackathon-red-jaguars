@@ -58,7 +58,7 @@ const DetailedChild = (props)=>{
 
     const goBack = (e) => {
         e.preventDefault();
-        props.history.push("/dashboard");
+        props.history.push("/dashboard",{role: role});
     }
 
     const resetFile = e => {
