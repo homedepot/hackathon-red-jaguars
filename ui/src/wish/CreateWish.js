@@ -4,8 +4,8 @@ import Astronaut from '../images/Astronaut_Icon.png';
 import Telescope from '../images/Telescope_Icon.png';
 import Alien from '../images/Alien_Icon.png';
 import Rocket from '../images/Rocket_Icon.png';
-import Galaxy from '../images/Galaxy_Color.png';
-import MakeAWish from '../images/MakeAWishLogo.png';
+//import Galaxy from '../images/Galaxy_Color.png';
+//import MakeAWish from '../images/MakeAWishLogo.png';
 
 import Axios from "axios";
 
@@ -193,29 +193,10 @@ class CreateWish extends Component {
         <table style={{width:"100%"}}>
           <tbody>
           <tr>
-<<<<<<< HEAD:ui/src/app/wish/CreateWish.js
             <td>
             <div className="sameLine">
               <p style={{fontSize: '45px', marginRight: '100px'}} className="head">Hello!  Make A Wish</p>
             </div>
-=======
-            <td colSpan="2">
-              <br/>
-              <div className="container-fluid">
-                <div className="row">
-                  <div className="col-3" style={{paddingLeft:"0px"}}>
-                    <label style={{fontSize: '75px', fontWeight:"800",color:"darkblue", marginRight: '0px',lineHeight:"60px"}} className=""> &nbsp;<br/>Hello! </label>
-                  </div>
-                  <div className="col-4 ">
-                    <span className="sameLine " style={{ marginRight: '50px'}}><img className="" height="125" src={MakeAWish} alt="Make a wish"/></span>
-                  </div>
-                  <div className="col-4 ">
-                    <span className="sameLine pullRight" style={{textAlign:"right"}}><img className="" height="125" src={Galaxy} alt="Galaxy"/></span>
-                  </div>
-                </div>
-                <br/><br/>
-              </div>
->>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/CreateWish.js
             </td>
           </tr>
 
@@ -259,8 +240,7 @@ class CreateWish extends Component {
                 <p>I wish to:</p>
                 <div className="wishTo">
                   <span className="spacing">
-<<<<<<< HEAD:ui/src/app/wish/CreateWish.js
-                    <button className="spacing " name="GoSomewhere">
+                    <button className={'rounded spacing bgYellow '+ (this.state.wishType==='GO Somewhere!' ? 'selectedTo': '')} name="GoSomewhere">
 
                       <img 
                         src={Rocket} alt="GO Somewhere!" 
@@ -270,7 +250,7 @@ class CreateWish extends Component {
 
                   </span>
                   <span className="spacing">
-                    <button className="spacing">
+                    <button className={'rounded spacing bgYellow '+ (this.state.wishType==='MEET Someone!' ? 'selectedTo': '')}>
 
                       <img  
                         src={Alien} 
@@ -279,40 +259,26 @@ class CreateWish extends Component {
                       />
 
                     </button>
-=======
-                    <button className={'spacing bgYellow '+ (this.state.wishType==='GO Somewhere!' ? 'selectedTo': '')} ><img src={Rocket} alt="GO Somewhere!" onClick={this.onClick} /></button>
-                  </span>
-                  <span className="spacing">
-                    <button className={"spacing bgYellow "+ (this.state.wishType==="MEET Someone!" ? "selectedTo" : "")}><img  src={Alien} alt="MEET Someone!" onClick={this.onClick} /></button>
->>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/CreateWish.js
                   </span>
                   
                   <span className="spacing">
-<<<<<<< HEAD:ui/src/app/wish/CreateWish.js
-                    <button className="spacing">
+                    <button className={'rounded spacing bgYellow '+ (this.state.wishType==='BE Someone!' ? 'selectedTo': '')}>
                       <img 
                         src={Astronaut} 
                         alt="BE Someone!" 
                         onClick={this.onClick} 
                       />
                     </button>
-=======
-                    <button className={"spacing bgYellow "+ (this.state.wishType==="BE Someone!" ? "selectedTo" : "")}><img src={Astronaut} alt="BE Someone!" onClick={this.onClick} /></button>
->>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/CreateWish.js
                   </span>
 
                   <span className="spacing">
-<<<<<<< HEAD:ui/src/app/wish/CreateWish.js
-                    <button className="spacing ">
+                    <button className={'rounded spacing bgYellow '+ (this.state.wishType==='SEE Something!' ? 'selectedTo': '')}>
                       <img 
                         src={Telescope} 
                         alt="SEE Something!" 
                         onClick={this.onClick} 
                       />
                     </button>
-=======
-                    <button className={"spacing bgYellow "+ (this.state.wishType==="SEE Something!" ? "selectedTo" : "")}><img  src={Telescope} alt="SEE Something!" onClick={this.onClick} /></button>
->>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/CreateWish.js
                   </span>
                 </div>
               </div>
@@ -400,14 +366,12 @@ class CreateWish extends Component {
               {/*<img src={this.state.audio} alt=""/>*/}
             </td>
           </tr>
-
           <tr className="bottomSpace">
             <td>
               <p>Upload supporting videos .!!</p>
               <input className="inputFile"  id="file" type="file" onChange={this.onVideoUpload} onClick={this.resetFile}/>
             </td>
           </tr>
-
           <tr className="topSpace" >
             <td>
               <br/>
@@ -424,5 +388,4 @@ class CreateWish extends Component {
     )
   }
 }
-
 export default CreateWish;

@@ -3,17 +3,8 @@
 }
 .wishBackground {
     padding: 50px;
-<<<<<<< HEAD:ui/src/app/wish/Wish.css
-    background-color: #258EA6;
-    display: flex;
-    align-items: center;
-}
-.errorMessage {
-    color: red;
-=======
     padding-top: 0px;
-    background-color: #56807d;
->>>>>>> b1a307b1b9c542bd319220eace8d836da4058f18:ui/src/wish/Wish.css
+    background-color: #0199FE;
 }
 #goSomewhere {
     background-image: url("/ui/src/images/Rocket_Icon.png");
@@ -30,16 +21,16 @@
 }
 
 .selectedTo {
-    box-shadow: 10px 10px 4px blue;
+    box-shadow: 10px 10px 4px #3EBBFA;
 }
 .bgYellow {
-    background-color: #fffa2f;
+    background-color: #FEFA70;
 }
 
 .wishBackground p {
     font-size: xx-large;
     font-weight: bold;
-    color: #FFC6C2;
+    color: #FEFEFE;
 }
 
 .sameLine {
@@ -50,19 +41,19 @@
     width: 200px;
     height: 50px;
     margin: 20px 20px;
-    border: 3px solid #090d90;
+    border: 3px solid #3EBBFA;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
 .wishBackground ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: #ee29da;
+    color: #040404;
     font-weight: bold;
     font-size: 16px;
     padding: 0px 20px;
 }
 .wishBackground :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:    #ee29da;
+    color:    #040404;
     opacity:  1;
     font-weight: bold;
     font-size: 16px;
@@ -70,7 +61,7 @@
     text-align: center;
 }
 .wishBackground ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color:    #ee29da;
+    color:    #040404;
     opacity:  1;
     font-weight: bold;
     font-size: 16px;
@@ -78,14 +69,14 @@
     text-align: center;
 }
 .wishBackground :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color:    #ee29da;
+    color:    #040404;
     font-weight: bold;
     font-size: 16px;
     padding: 0px 20px;
     text-align: center;
 }
 .wishBackground ::-ms-input-placeholder { /* Microsoft Edge */
-    color:    #ee29da;
+    color:    #040404;
     font-weight: bold;
     font-size: 16px;
     padding: 0px 20px;
@@ -93,7 +84,7 @@
 }
 
 .wishBackground ::placeholder { /* Most modern browsers support this now. */
-    color:    #ee29da;
+    color:    #040404;
     font-weight: bold;
     font-size: 16px;
     padding: 0px 20px;
@@ -116,8 +107,8 @@
     height: 40px;
     font-size: large;
     font-weight: bold;
-    color: darkblue;
-    background-color: violet;
+    color: #0B50B9;
+    background-color: #70FE70;
 }
 
 .surroundSpace {
