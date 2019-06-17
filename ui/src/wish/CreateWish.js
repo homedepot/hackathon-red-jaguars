@@ -4,8 +4,8 @@ import Astronaut from '../images/Astronaut_Icon.png';
 import Telescope from '../images/Telescope_Icon.png';
 import Alien from '../images/Alien_Icon.png';
 import Rocket from '../images/Rocket_Icon.png';
-import Galaxy from '../images/Galaxy_Color.png';
-import MakeAWish from '../images/MakeAWishLogo.png';
+//import Galaxy from '../images/Galaxy_Color.png';
+//import MakeAWish from '../images/MakeAWishLogo.png';
 
 import Axios from "axios";
 
@@ -240,7 +240,7 @@ class CreateWish extends Component {
                 <p>I wish to:</p>
                 <div className="wishTo">
                   <span className="spacing">
-                    <button className="spacing " name="GoSomewhere">
+                    <button className={'rounded spacing bgYellow '+ (this.state.wishType==='GO Somewhere!' ? 'selectedTo': '')} name="GoSomewhere">
 
                       <img 
                         src={Rocket} alt="GO Somewhere!" 
@@ -250,7 +250,7 @@ class CreateWish extends Component {
 
                   </span>
                   <span className="spacing">
-                    <button className="spacing">
+                    <button className={'rounded spacing bgYellow '+ (this.state.wishType==='MEET Someone!' ? 'selectedTo': '')}>
 
                       <img  
                         src={Alien} 
@@ -262,7 +262,7 @@ class CreateWish extends Component {
                   </span>
                   
                   <span className="spacing">
-                    <button className="spacing">
+                    <button className={'rounded spacing bgYellow '+ (this.state.wishType==='BE Someone!' ? 'selectedTo': '')}>
                       <img 
                         src={Astronaut} 
                         alt="BE Someone!" 
@@ -272,7 +272,7 @@ class CreateWish extends Component {
                   </span>
 
                   <span className="spacing">
-                    <button className="spacing ">
+                    <button className={'rounded spacing bgYellow '+ (this.state.wishType==='SEE Something!' ? 'selectedTo': '')}>
                       <img 
                         src={Telescope} 
                         alt="SEE Something!" 
