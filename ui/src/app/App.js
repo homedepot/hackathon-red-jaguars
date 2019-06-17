@@ -21,6 +21,7 @@ function App() {
           <Route exact path="/detailedChild" component={DetailedChild} />
           <Route exact path="/createWish" component={CreateWish} />
           <Route exact path="/postWish" component={PostCreate} />
+          <Route exact path="/editlanding" component={Landing} />
           <Route exact path="/" component={Login} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="/not-found"> </Redirect>
