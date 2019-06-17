@@ -10,7 +10,6 @@ import moment from 'moment/moment.js'
 import { CSVLink } from 'react-csv'
 
 const Dashboard = props => {
-  debugger;
   const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
@@ -282,7 +281,9 @@ const Dashboard = props => {
                   >
                     <img
                       style={{borderRadius:"25px"}}
-                      src="https://picsum.photos/75/75"
+                      src={'http://localhost:3002/'+x.photoURL}
+                      height="75px"
+                      width="75px"
                       alt="{x.firstName}"
                       key={x._id}
                     ></img>

@@ -1,5 +1,9 @@
 const router = require('express').Router()
 const mongoose = require('mongoose')
+var multer = require('multer');
+var fs = require('fs');
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
 
 const Schema = mongoose.Schema
 let ChildWish = mongoose.Schema({
@@ -15,14 +19,32 @@ let ChildWish = mongoose.Schema({
   userId: String,
   audio: Object,
   video: Object,
+  photoURL: String,
   photo: Object,
-  companyLogo: Object
+  sponsorLogo: Object,
+  sponsorLogoURL: String,
+  sponsorPhoto1URL: String,
+  sponsorPhoto2URL: String,
+  sponsorPhoto1: Object,
+  sponsorPhoto2: Object,
+  sponsorVideo: Object,
 })
 
 let Wish = mongoose.model('Wish', ChildWish, 'wish')
 
-router.post('/create', function(req, res, next) {
+
+router.post('/create', upload.single('photo'),function(req, res, next) {
   console.log('creating wish')
+  
+  let fileName= "uploads/" + new Date().getTime() + req.file.originalname;
+  fs.writeFile(fileName, req.file.buffer, function (err) {
+    if (err) {
+      console.log("in err")
+      return console.log(err);
+    }
+    console.log("The file was saved!");
+  });
+
   const { age, firstName, homeTown, wishType, gender, wishDate, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
   let newWish = new Wish({
     firstName: firstName,
@@ -37,8 +59,9 @@ router.post('/create', function(req, res, next) {
     userId: userId,
     audio: audio,
     video: video,
-    photo: photo
+    photoURL: fileName
   })
+  console.log(newWish)
   newWish.save()
     .then(data => {
       console.log('creating')
@@ -50,10 +73,40 @@ router.post('/create', function(req, res, next) {
   });
 })
 
+// router.post('/createxxx',function(req, res, next) {
+//   console.log('creating wish')
+//   const { age, firstName, homeTown, wishType, gender, wishDate, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
+//   let newWish = new Wish({
+//     firstName: firstName,
+//     age: age,
+//     homeTown: homeTown,
+//     wishType: wishType,
+//     gender: gender,
+//     wishDate: wishDate,
+//     illness: illness,
+//     wishDetail: wishDetail,
+//     orgId: orgId,
+//     userId: userId,
+//     audio: audio,
+//     video: video,
+//     photo: photo
+//   })
+//   newWish.save()
+//     .then(data => {
+//       console.log('creating')
+//       res.send(data);
+//     }).catch(err => {
+//       res.status(500).send({
+//         message: err.message || "Error occurred while creating the wish."
+//   });
+//   });
+// })
+
 router.get('/findAll', function(req, res, next) {
   console.log('fetching wishes')
   Wish.find()
     .then(wishes => {
+      console.log("fetched")
       res.send(wishes);
     }).catch( err => {
       res.status(500).send({

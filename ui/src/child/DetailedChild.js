@@ -90,7 +90,7 @@ const DetailedChild = (props)=>{
                     <div className="row">
                         <div className="col-4">
                             <div className="text-center">
-                                    <img src={Beemo} className="img-fluid rounded-circle shadow p-0 mb-5 bg-white rounded" alt="..."></img>
+                                    <img src={wish.photoURL ? ('http://localhost:3002/'+wish.photoURL) : Beemo} className="img-fluid rounded-circle shadow p-0 mb-5 bg-white rounded" alt="..."></img>
                                     <h5>Child's Picture</h5>
                                     <input className={role==="manager" ? "inputFile" : "hidden"} align="center" id="file" type="file" onChange={(x)=>setPhoto(x.currentTarget.value)} onClick={resetFile}/>
                             </div>

@@ -95,8 +95,8 @@ class CreateWish extends Component {
           formErrors.illness = ill ? "" : 'minimum 4 character required';
           break;
       case 'wishDetail':
-          let wd = /^(?=.{10,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
-          formErrors.wishDetail = wd ? "" : 'minimum 10 characters required';
+          let wd = /^(?=.{3,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
+          formErrors.wishDetail = wd ? "" : 'minimum 3 characters required';
           break;
       default:
         break;
@@ -151,40 +151,77 @@ class CreateWish extends Component {
   saveWish = () => {
     let wish = this.state.wish;
     const { firstName, age, homeTown, wishType, illness, wishDetail} = this.state;
+
+
+    
+
+
     if(formValid(this.state) && firstName && age && homeTown && wishType && illness && wishDetail) {
      
       console.log(`submitting wish`);
-    Axios.post('http://localhost:3002/wish/create', {
-      firstName: this.state.wish.firstName,
-      age: this.state.wish.age,
-      homeTown: this.state.wish.homeTown,
-      wishType: this.state.wishType,
-      wishDate: new Date().toLocaleDateString(),
-      gender: this.state.gender,
-      illness: this.state.wish.illness,
-      wishDetail: this.state.wish.wishDetail,
-      orgId: this.state.wish.orgId,
-      userId: this.state.wish.userId,
-      audio: this.state.audio,
-      video: this.state.video,
-      photo: this.state.photo
-    })
-      .then( () => {
-          this.setState({
-            wish: wish,
-          })
-          console.log(this.state.wish)
-          this.props.history.push('/postWish');
-        }
-      )
-      .catch(function(error) {
-        console.log(error);
-      });
-    } else {
-      console.error("invalid form")
-    }
+      const formData = new FormData();
+
+      formData.set('firstName' , firstName);
+      formData.append('age' , age);
+      formData.append('homeTown' , homeTown);
+      formData.append('wishType' , wishType);
+      formData.append('wishDate', new Date().toLocaleDateString());
+      formData.append('gender' , this.state.gender);
+      formData.append('illness' , illness);
+      formData.append('wishDetail' , wishDetail);
+      formData.append('audio' , this.state.audio);
+      formData.append('video' , this.state.video);
+      formData.append('photo' , document.getElementById("photofile").files[0]);
+      Axios({
+        url: 'http://localhost:3002/wish/create',
+        method: 'POST',
+        data: formData,
+        config: { headers: {'Content-Type': 'multipart/form-data' }}
+      }).then( () => {
+            this.setState({
+              wish: wish,
+            })
+            console.log(this.state.wish)
+            this.props.history.push('/postWish');
+          }
+        )
+        .catch(function(error) {
+          console.log(error);
+        });
+
+
+
+    // Axios.post('http://localhost:3002/wish/create', {
+    //   firstName: this.state.wish.firstName,
+    //   age: this.state.wish.age,
+    //   homeTown: this.state.wish.homeTown,
+    //   wishType: this.state.wishType,
+    //   wishDate: new Date().toLocaleDateString(),
+    //   gender: this.state.gender,
+    //   illness: this.state.wish.illness,
+    //   wishDetail: this.state.wish.wishDetail,
+    //   orgId: this.state.wish.orgId,
+    //   userId: this.state.wish.userId,
+    //   audio: this.state.audio,
+    //   video: this.state.video,
+    //   photo: this.state.photo
+    // })
+    //   .then( () => {
+    //       this.setState({
+    //         wish: wish,
+    //       })
+    //       console.log(this.state.wish)
+    //       this.props.history.push('/postWish');
+    //     }
+    //   )
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
+    // } else {
+    //   console.error("invalid form")
+    // }
      
-  }
+  }}
 
   render() {
     const { formErrors } = this.state;
@@ -347,7 +384,7 @@ class CreateWish extends Component {
           <tr>
             <td>
               <p>Upload your Favorite photo .!!</p>
-              <input className="inputFile" id="file" type="file" onChange={this.onhandleChange} onClick={this.resetFile}/>
+              <input className="inputFile" id="photofile" type="file" onChange={this.onhandleChange} onClick={this.resetFile}/>
             </td>
           </tr>
           <tr>
