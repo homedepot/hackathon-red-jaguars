@@ -21,7 +21,7 @@ const DetailedChild = (props)=>{
     const [ video ,setVideo]= useState("")
     const [ photo , setPhoto]= useState("")
     const[companyLogo, setCompanyLogo]=useState("")
-    //const role = manager";
+    //const role = "manager";
 
 
     const updateWish = () => {
