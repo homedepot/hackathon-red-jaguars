@@ -116,6 +116,11 @@ const Dashboard = props => {
     props.history.push('/detailedchild', { wish: e,role:role })
   }
 
+  const handleManageAds = () => {
+    props.history.push('/editlanding', {role:role })
+  }
+  
+
   const handleOnCheckboxes = e => {
     let boxes = checkBoxes.map(z => {
       if (z.value === e) {
@@ -210,7 +215,7 @@ const Dashboard = props => {
         <div className="col-12">
           <div className="row">
             {' '}
-            <div className="col-8"></div>
+            <div className="col-8"> <div style={{cursor:"pointer",color:"blue"}} onClick={handleManageAds}>Manage Ads</div></div>
             <div className={"col-2 "} style={{ textAlign: 'right' }}><div className={(role==="admin" ? "" : "hidden")}><CSVLink data={apiData} separator={';'}>
           Download me
         </CSVLink></div></div>

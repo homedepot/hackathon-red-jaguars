@@ -1,9 +1,30 @@
-import React, { Component } from 'react'
-import BigPic from './bigpic.jpg'
+import React,{useState} from 'react'
 import HomeDepot from './homedepot.jpg'
+import Axios from 'axios'
 
-export default class Landing extends Component {
-  render () {
+const Landing =(props)=>  {
+  const role = props && props.location && props.location.state && props.location.state.role;
+  const [volunteer,setVolunteer] = useState("");
+  const handleSubmitVolonteer  = ()=>{
+    const formData = new FormData()
+    formData.set('photo' ,  document.getElementById("volunteerfile").files[0]);
+    formData.append(
+      'fileName', "volunteer"+volunteer
+    )
+    let url = 'http://localhost:3002/about/picUpload/'
+    Axios({
+      url: url,
+      method: 'POST',
+      data: formData,
+      config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    })
+      .then(() => {
+        props.history.push('/dashboard', { role: role })
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
+  }
     return (
       <div>
         <div className = "container">
@@ -59,16 +80,26 @@ export default class Landing extends Component {
               <div className="card">
               <div className="card-body">
                 <h1 className="card-title">Volunteer Opportunities</h1>
+                <div className={(role==="admin" ? "" : "hidden")}>
+                  <input className={"inputFile "} id="volunteerfile" type="file" />
+                  <input type="radio" name="volunteerfile" value="slot1" onChange={x=> setVolunteer(x.currentTarget.value)}/>&nbsp;Slot 1 &nbsp;
+                  <input type="radio" name="volunteerfile" value="slot2" onChange={x=> setVolunteer(x.currentTarget.value)}/> &nbsp;Slot 2 &nbsp;
+                  <input type="radio" name="volunteerfile" value="slot3" onChange={x=> setVolunteer(x.currentTarget.value)}/>&nbsp;Slot 3 &nbsp;
+                  <button className="btn btn-success" onClick={handleSubmitVolonteer}>Upload</button>
 
-                <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+                  <br/>
+                  <br/><br/>
+
+                  </div>
+                <img className="card-top" src="http://localhost:3002/uploads/volunteerslot1.png" height="300" width="780" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
                 <div className="card-body">
-                <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+                <img className="card-top" src="http://localhost:3002/uploads/volunteerslot2.png" height="300" width="780" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
               <div className="card-body">
-              <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
+              <img className="card-top" src="http://localhost:3002/uploads/volunteerslot3.png" height="300" width="780" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more information</a>
               </div>
             </div>
@@ -96,5 +127,6 @@ export default class Landing extends Component {
         </div>
       </div>
     )
-  }
 }
+
+export default Landing;

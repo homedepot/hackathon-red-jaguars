@@ -157,6 +157,14 @@ const DetailedChild = props => {
             <div className="card">
               <div className="card-body">
                 <h5>Sponsor Logo</h5>
+                <img 
+                    className={'img-fluid ' + ((wish.sponsorLogoURL && !companyLogo) ? '' : 'hidden')}
+                  height="200"
+                  width="200"
+                  src={"http://localhost:3002/" + wish.sponsorLogoURL}
+                  alt="sponsor logo"
+                  >
+                </img>
                 <img
                   className={'img-fluid ' + (companyLogo ? '' : 'hidden')}
                   height="200"
