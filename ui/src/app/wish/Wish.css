@@ -1,14 +1,22 @@
+.wishTo {
+    display: block;
+}
 .wishBackground {
     padding: 50px;
-    background-color: #56807d;
+    background-color: #258EA6;
+    display: flex;
+    align-items: center;
 }
-
+.errorMessage {
+    color: red;
+}
 #goSomewhere {
     background-image: url("/ui/src/images/Rocket_Icon.png");
 }
 
 .wishBackground button {
     cursor: pointer;
+    text-align: center;
 }
 
 .spacing {
@@ -23,7 +31,7 @@
 .wishBackground p {
     font-size: xx-large;
     font-weight: bold;
-    color: darkblue;
+    color: #FFC6C2;
 }
 
 .sameLine {
@@ -98,11 +106,10 @@
 .fancyButtons {
     width: 250px;
     height: 40px;
-    border: 2px solid blue;
     font-size: large;
     font-weight: bold;
     color: darkblue;
-    background-color: indianred;
+    background-color: violet;
 }
 
 .surroundSpace {

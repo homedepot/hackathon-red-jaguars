@@ -8,6 +8,23 @@ import Galaxy from '../../images/Galaxy_Color.png';
 
 import Axios from "axios";
 
+
+
+const formValid = ({ formErrors, ...rest }) => {
+  let valid = true;
+
+  // validate form errors being empty
+  Object.values(formErrors).forEach(val => {
+    val.length > 0 && (valid = false);
+  });
+
+  // validate the form was filled out
+
+
+  return valid;
+};
+
+
 class CreateWish extends Component {
   constructor() {
     super();
@@ -34,12 +51,56 @@ class CreateWish extends Component {
       "video": "",
       "photo": ""
       },
+      formErrors: {
+        firstName: "",
+        age: "",
+        homeTown: "",
+        gender: "",
+        illness: "",
+        wishType: "",
+        wishDetail: ""
+      }
     };
     this.toggleGender = this.toggleGender.bind(this);
   }
 
-  onChange = (e) => {
+
+
+  onChange = e => {
+    e.preventDefault();
+    console.log(this.state.formErrors);
     let temp = JSON.parse(JSON.stringify(this.state.wish));
+    const { name, value } = e.target;
+    let formErrors = this.state.formErrors;
+
+    switch(name) {
+      case 'firstName':
+        let first = /^(?=.{3,50}$)[a-z,-]+(?:['_.\s][a-z]+)*$/i.test(value)
+        formErrors.firstName = first ? '' : 'minimum 3 characters required and special character not accepted';
+        break;
+      case 'age':
+        //sorry for party rocking
+        formErrors.age = isNaN(value) ? "please provide a number" : value.length < 1 || value.length  > 2 ? "between 1 and 99" : "";
+        break;
+      case 'homeTown':
+          let home = /^(?=.{3,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
+        formErrors.homeTown = home ? "" : 'minimum 3 characters required';
+        break;
+      case 'gender':
+        formErrors.gender = value === 'Boy' || 'Girl' ? "" : "please choose your gender";
+        break;
+      case 'illness':
+          let ill = /^(?=.{3,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
+          formErrors.illness = ill ? "" : 'minimum 4 character required';
+          break;
+      case 'wishDetail':
+          let wd = /^(?=.{10,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(value)
+          formErrors.wishDetail = wd ? "" : 'minimum 10 characters required';
+          break;
+      default:
+        break;
+    }
+    this.setState({formErrors, [name]: value}, () => console.log(this.state))
     temp[e.target.name] = e.target.value;
     this.setState({
       wish: temp,
@@ -88,6 +149,10 @@ class CreateWish extends Component {
 
   saveWish = () => {
     let wish = this.state.wish;
+    const { firstName, age, homeTown, wishType, illness, wishDetail} = this.state;
+    if(formValid(this.state) && firstName && age && homeTown && wishType && illness && wishDetail) {
+     
+      console.log(`submitting wish`);
     Axios.post('http://localhost:3002/wish/create', {
       firstName: this.state.wish.firstName,
       age: this.state.wish.age,
@@ -114,9 +179,14 @@ class CreateWish extends Component {
       .catch(function(error) {
         console.log(error);
       });
+    } else {
+      console.error("invalid form")
+    }
+     
   }
 
   render() {
+    const { formErrors } = this.state;
     return (
       <div className="wishBackground">
         <table>
@@ -126,16 +196,39 @@ class CreateWish extends Component {
             <div className="sameLine">
               <p style={{fontSize: '45px', marginRight: '100px'}} className="head">Hello!  Make A Wish</p>
             </div>
-              <span className="sameLine pullRight"><img className="imageBanner" src={Galaxy} alt="MEET Someone!"/></span>
             </td>
           </tr>
           
           <tr>
             <td>
               <p className="sameLine pullLeft">My name is</p>
-              <input className="sameLine surroundSpace" type="text" name="firstName" placeholder="enter your name" value={this.state.wish.firstName}  onChange={ this.onChange }/>
+              
+                <input 
+                  noValidate
+                  className="sameLine surroundSpace firstName" 
+                  type="text" 
+                  name="firstName"
+                  placeholder="enter your name" 
+                  value={this.state.wish.firstName}  
+                  onChange={ this.onChange }
+                />
+                {formErrors.firstName.length > 0 && (
+                  <span className="errorMessage">{formErrors.firstName}</span>
+                )}
+
               <p className="sameLine pullLeft"> and I am </p>
-              <input className="sameLine surroundSpace" type="text" name="age" placeholder="your age" value={this.state.wish.age}  onChange={ this.onChange }/>
+              <input 
+                noValidate
+                className="sameLine surroundSpace age"
+                type="text" 
+                name="age" 
+                placeholder="your age" 
+                value={this.state.wish.age}  
+                onChange={ this.onChange } 
+              />
+               {formErrors.age.length > 0 && (
+                  <span className="errorMessage">{formErrors.age}</span>
+                )}
               <p className="sameLine"> years old!</p>
             </td>
           </tr>
@@ -144,18 +237,47 @@ class CreateWish extends Component {
             <td>
               <div>
                 <p>I wish to:</p>
-                <div>
+                <div className="wishTo">
                   <span className="spacing">
-                    <button className="spacing bgYellow" name="GoSomewhere"><img src={Rocket} alt="GO Somewhere!" onClick={this.onClick} /></button>
+                    <button className="spacing " name="GoSomewhere">
+
+                      <img 
+                        src={Rocket} alt="GO Somewhere!" 
+                        onClick={this.onClick} 
+                      />
+                    </button>
+
                   </span>
                   <span className="spacing">
-                    <button className="spacing bgYellow"><img  src={Alien} alt="MEET Someone!" onClick={this.onClick} /></button>
+                    <button className="spacing">
+
+                      <img  
+                        src={Alien} 
+                        alt="MEET Someone!" 
+                        onClick={this.onClick} 
+                      />
+
+                    </button>
                   </span>
+                  
                   <span className="spacing">
-                    <button className="spacing bgYellow"><img src={Astronaut} alt="BE Someone!" onClick={this.onClick} /></button>
+                    <button className="spacing">
+                      <img 
+                        src={Astronaut} 
+                        alt="BE Someone!" 
+                        onClick={this.onClick} 
+                      />
+                    </button>
                   </span>
+
                   <span className="spacing">
-                    <button className="spacing bgYellow"><img src={Telescope} alt="SEE Something!" onClick={this.onClick} /></button>
+                    <button className="spacing ">
+                      <img 
+                        src={Telescope} 
+                        alt="SEE Something!" 
+                        onClick={this.onClick} 
+                      />
+                    </button>
                   </span>
                 </div>
               </div>
@@ -164,7 +286,18 @@ class CreateWish extends Component {
           <tr>
             <td>
               <p>Your Home Town: </p>
-              <input className="sameLine wideWidth" type="text" name="homeTown" placeholder="your home town" value={this.state.wish.homeTown}  onChange={ this.onChange }/>
+
+              <input 
+                className="sameLine wideWidth" 
+                type="text" 
+                name="homeTown" 
+                placeholder="your home town" 
+                value={this.state.wish.homeTown}  
+                onChange={ this.onChange }
+              />
+                {formErrors.homeTown.length > 0 && (
+                  <span className="errorMessage">{formErrors.homeTown}</span>
+                )}
               <p>Are you a Boy or a Girl ?</p>
               <ul>
                 <li key="1">
@@ -192,7 +325,16 @@ class CreateWish extends Component {
                 </li>
               </ul>
               <p>I'm Suffering from</p>
-              <input className="sameLine wideWidth" type="text" name="illness" placeholder="my illness" value={this.state.wish.illness}  onChange={ this.onChange }/>
+              <input 
+                className="sameLine wideWidth" 
+                type="text" name="illness" 
+                placeholder="my illness" 
+                value={this.state.wish.illness}  
+                onChange={ this.onChange }
+              />
+              {formErrors.illness.length > 0 && (
+                  <span className="errorMessage">{formErrors.illness}</span>
+                )}
               <p>My Wish Details</p>
               <textarea
                 name="wishDetail"
@@ -201,11 +343,15 @@ class CreateWish extends Component {
                 value={this.state.wish.wishDetail}
                 onChange={this.onChange}
               />
+              
+            {formErrors.wishDetail.length > 0 && (
+                  <span className="errorMessage">{formErrors.wishDetail}</span>
+                )}
             </td>
           </tr>
           <tr>
             <td>
-              <p>Upload your Favourite photo .!!</p>
+              <p>Upload your Favorite photo .!!</p>
               <input className="inputFile" id="file" type="file" onChange={this.onhandleChange} onClick={this.resetFile}/>
             </td>
           </tr>
