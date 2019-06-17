@@ -1,7 +1,38 @@
 const router = require('express').Router()
 const mongoose = require('mongoose')
+const multer = require('multer');
 
-const Schema = mongoose.Schema
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    console.log('hhhee-->>' ,file);
+    cb(null, "wish"+ file.originalName);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimeType === 'image/jpeg' || file.mimeType === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+
+};
+
+const upload = multer({storage: storage, limits: {
+  storage: storage,
+    limits: {
+    fileSize: 1024 * 1024 * 10
+    },
+    fileFilter: fileFilter
+  }});
+
+
+const Schema = mongoose.Schema;
+
 let ChildWish = mongoose.Schema({
   firstName: String,
   age: String,
@@ -15,30 +46,44 @@ let ChildWish = mongoose.Schema({
   userId: String,
   audio: Object,
   video: Object,
-  photo: Object,
+  photo: {type: String, required: false },
   companyLogo: Object
-})
+});
 
 let Wish = mongoose.model('Wish', ChildWish, 'wish')
 
-router.post('/create', function(req, res, next) {
-  console.log('creating wish')
-  const { age, firstName, homeTown, wishType, gender, wishDate, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
+router.post('/create', upload.single('photo'), function(req, res, next) {
+
+  debugger;
+  console.log('creating wish');
+  console.log('sandy -- >>', req.body.photo)
+  // const { age, firstName, homeTown, wishType, gender, wishDate, illness, wishDetail, orgId, userId, audio, photo, video } = req.body
   let newWish = new Wish({
-    firstName: firstName,
-    age: age,
-    homeTown: homeTown,
-    wishType: wishType,
-    gender: gender,
-    wishDate: wishDate,
-    illness: illness,
-    wishDetail: wishDetail,
-    orgId: orgId,
-    userId: userId,
-    audio: audio,
-    video: video,
-    photo: photo
-  })
+    firstName: req.body.firstName,
+    age: req.body.age,
+    homeTown: req.body.homeTown,
+    wishType: req.body.wishType,
+    gender: req.body.gender,
+    wishDate: req.body.wishDate,
+    illness: req.body.illness,
+    wishDetail: req.body.wishDetail,
+    orgId: req.body.orgId,
+    userId: req.body.userId,
+    audio: req.body.audio,
+    video: req.body.video,
+    photo: req.file.path
+  });
+
+  // let form_data = new FormData();
+  //
+  // for (let key in newWish) {
+  //   form_data.append(key, newWish[key]);
+  // }
+  //
+  // $.ajax({
+  //
+  // })
+
   newWish.save()
     .then(data => {
       console.log('creating')
