@@ -215,7 +215,7 @@ const Dashboard = props => {
         <div className="col-12">
           <div className="row">
             {' '}
-            <div className="col-8"> <div style={{cursor:"pointer",color:"blue"}} onClick={handleManageAds}>Manage Ads</div></div>
+            <div className="col-8"> <div className={(role==="admin" ? "" : "hidden")} style={{cursor:"pointer",color:"blue"}} onClick={handleManageAds}>Manage Ads</div></div>
             <div className={"col-2 "} style={{ textAlign: 'right' }}><div className={(role==="admin" ? "" : "hidden")}><CSVLink data={apiData} separator={';'}>
           Download me
         </CSVLink></div></div>
