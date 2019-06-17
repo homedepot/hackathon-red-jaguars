@@ -7,10 +7,12 @@ const compression = require('compression')
 const errorHandler = require('api-error-handler')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+var fs = require('fs');
 
 const index = require('./routes')
 const auth = require('./routes/auth')
 const wish = require('./routes/wish')
+const about = require('./routes/about')
 const cors = require('cors')
 
 const app = express()
@@ -53,6 +55,10 @@ require('./db/bootstrap-mongoose')
 app.use('/', index)
 app.use('/auth', auth)
 app.use('/wish', wish)
+app.use('/about', about)
+
+console.log(__dirname)
+app.use('/uploads',express.static( 'uploads'))
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -70,5 +76,24 @@ if (process.env.NODE_ENV !== 'test') {
     console.log('Express server listening on port ' + server.address().port)
   })
 }
+
+
+let fetch = require('node-fetch');
+
+fetch('http://localhost:3002/auth/register', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: '{"username":"manager","password":"manager","lastName":"manager","role":"manager"}'
+}).then(response => {
+  console.log("manager created")
+}).catch(err => {console.log(err);});
+
+fetch('http://localhost:3002/auth/register', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: '{"username":"admin","password":"admin","lastName":"admin","role":"admin"}'
+}).then(response => {
+  console.log("admin created")
+}).catch(err => {console.log(err);});
 
 module.exports = app
