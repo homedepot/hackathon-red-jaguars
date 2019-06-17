@@ -10,6 +10,7 @@ import moment from 'moment/moment.js'
 import { CSVLink } from 'react-csv'
 
 const Dashboard = props => {
+  debugger;
   const year = moment().format('YYYY')
   const [isLoading, setIsLoading] = useState(true)
   const [apiData, setApiData] = useState([])
@@ -23,22 +24,22 @@ const Dashboard = props => {
     {
       label: 'To Go',
       checked: true,
-      value: 'togo'
+      value: 'GO Somewhere!'
     },
     {
       label: 'To Meet',
       checked: true,
-      value: 'tomeet'
+      value: 'MEET Someone!'
     },
     {
       label: 'To Be',
       checked: true,
-      value: 'tobe'
+      value: 'BE Someone!'
     },
     {
       label: 'To See',
       checked: true,
-      value: 'tosee'
+      value: 'SEE Something!'
     }
   ])
 
@@ -48,6 +49,7 @@ const Dashboard = props => {
       .then(response => {
         let wholeData=response.data.sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1);
         let listOfYears= [...(new Set(wholeData.map(x=>x.wishDate.slice(-4))))];
+        debugger;
         if(role==="admin")
           setYearList(listOfYears);
         else
@@ -102,7 +104,7 @@ const Dashboard = props => {
               )) &&
           boxes.filter(
             r =>
-              r.value.toLowerCase() ===
+              r.value.replace(' ', '').toLowerCase() ===
               x.wishType.replace(' ', '').toLowerCase()
           )[0].checked &&
           x.wishDate.includes(passedYear)
@@ -138,7 +140,7 @@ const Dashboard = props => {
               )) &&
           boxes.filter(
             r =>
-              r.value.toLowerCase() ===
+              r.value.replace(' ', '').toLowerCase() ===
               x.wishType.replace(' ', '').toLowerCase()
           )[0].checked &&
           x.wishDate.includes(selectedYear)
@@ -208,7 +210,7 @@ const Dashboard = props => {
           <div className="row">
             {' '}
             <div className="col-8"></div>
-            <div className={"col-2 " + role==="admin" ? "" : "hidden"} style={{ textAlign: 'right' }}><CSVLink data={apiData} separator={';'}>
+            <div className={"col-2 " + (role==="admin" ? "" : "hidden")} style={{ textAlign: 'right' }}><CSVLink data={apiData} separator={';'}>
           Download me
         </CSVLink></div>
             <div className="col-2" style={{ textAlign: 'right' }}>
@@ -323,7 +325,7 @@ const Dashboard = props => {
                     ></img>
                   </div>
                   <div
-                    className={"col-1 " + role==="admin" ? "" : "hidden"}
+                    className={"col-1 " + (role==="admin" ? "" : "hidden")}
                     style={{ padding: '1.5rem 0px 10px 0px' }}
                   >
                     <i
