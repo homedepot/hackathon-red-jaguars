@@ -73,7 +73,7 @@ const Dashboard = props => {
       setFilterData(filteredData.sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1))
     Axios.delete(`http://localhost:3002/wish/delete/${id}`)
       .then(res => {
-        
+
       })
       .catch(err => {
         setApiData(backupData);
@@ -89,16 +89,17 @@ const Dashboard = props => {
     setFilterData(
       apiData.filter(
         x =>
-          (query.includes(' ')
+        {
+          return (query.includes(' ')
             ? query
                 .split(' ')
                 .reduce(
                   (r, z) =>
                     r &&
-                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(z),
+                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).toLowerCase().includes(z),
                   true
                 )
-            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(
+            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).toLowerCase().includes(
                 query
               )) &&
           boxes.filter(
@@ -107,6 +108,7 @@ const Dashboard = props => {
               x.wishType.replace(' ', '').toLowerCase()
           )[0].checked &&
           x.wishDate.includes(passedYear)
+        }
       ).sort((x,y)=>x.wishDate.slice(-4)>y.wishDate.slice(-4) ? 1 : -1)
     )
   }
@@ -131,10 +133,10 @@ const Dashboard = props => {
                 .reduce(
                   (r, z) =>
                     r &&
-                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(z),
+                    ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).toLowerCase().includes(z),
                   true
                 )
-            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).includes(
+            : ((x.firstName && x.firstName) + (x.sponsor&&  x.sponsor) + (x.homeTown && x.homeTown) + (x.wishDate&& x.wishDate)).toLowerCase().includes(
                 query
               )) &&
           boxes.filter(
