@@ -3,10 +3,9 @@ import BigPic from './bigpic.jpg'
 import HomeDepot from './homedepot.jpg'
 
 export default class Landing extends Component {
-  render() {
+  render () {
     return (
       <div>
-        <body>
         <div className = "container">
           <nav className="navbar navbar-expand-lg navbar-dark bg-light fixed-top" id="mainNav" padding = "400">
             <img src="images/MakeAWishLogo.png" width= "12%" height= "auto" className = "img-responsive" alt=""></img>
@@ -21,7 +20,10 @@ export default class Landing extends Component {
         <div className = "container">
           <div className = "row">
             <div className = "col-9">
-              <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+              <div className = "card">
+                <div className= "card-body">
+                <h1 className = "card-title">Celebrations</h1>
+                <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                 <ol className="carousel-indicators">
                   <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                   <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -33,6 +35,8 @@ export default class Landing extends Component {
                   </div>
                   <div className="carousel-item">
                     <img className="d-block w-100" src="images/Galaxy.png" height="300" width="200" alt="Second slide"></img>
+                    <div className="text-center">
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img className="d-block w-100" src="images/MakeAWishLogo.png" height="300" width="200" alt="Third slide"></img>
@@ -47,9 +51,14 @@ export default class Landing extends Component {
                   <span className="sr-only">Next</span>
                 </a>
               </div>
+              </div>
+              </div>
+              <div>
+                <h1>{/*empty*/}</h1>
+              </div>
               <div className="card">
               <div className="card-body">
-                <h1 className="card-title">Celebrations</h1>
+                <h1 className="card-title">Volunteer Opportunities</h1>
 
                 <img className="card-top" src={BigPic} height="300" width="780" alt="Card cap"></img>
                 <a href="/" className="btn btn-primary">Learn more information</a>
@@ -85,7 +94,6 @@ export default class Landing extends Component {
           </div>
           </div>
         </div>
-        </body>
       </div>
     )
   }

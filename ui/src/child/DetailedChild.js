@@ -16,10 +16,10 @@ const DetailedChild = (props)=>{
     const wish= props.location.state.wish;
     const role = props.location.state.role;
 
-       const [orgId ,setOrgId] = useState("")
-        const [ audio , setAudio]= useState("")
-        const [ video ,setVideo]= useState("")
-        const [ photo , setPhoto]= useState("")
+    const [orgId ,setOrgId] = useState("")
+    const [ audio , setAudio]= useState("")
+    const [ video ,setVideo]= useState("")
+    const [ photo , setPhoto]= useState("")
     const[companyLogo, setCompanyLogo]=useState("")
     //const role = manager";
 
